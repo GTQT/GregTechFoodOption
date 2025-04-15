@@ -2,7 +2,9 @@ package gregtechfoodoption;
 
 import crazypants.enderio.api.farm.IFarmerJoe;
 import crazypants.enderio.base.farming.farmers.CustomSeedFarmer;
+import gregtech.api.GregTechAPI;
 import gregtech.api.block.VariantItemBlock;
+import gregtech.api.metatileentity.registry.MTEManager;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
@@ -90,6 +92,11 @@ public class CommonProxy {
         GTFORecipeRemoval.init();
     }
 
+    @SubscribeEvent
+    public static void registerMTERegistry(MTEManager.MTERegistryEvent event) {
+        GregTechAPI.mteManager.createRegistry(GTFOValues.MODID);
+    }
+    
     @SubscribeEvent
     public static void syncConfigValues(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals(GregTechFoodOption.MODID)) {

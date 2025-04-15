@@ -132,7 +132,7 @@ public class MetaTileEntityKitchen extends MultiblockWithDisplayBase {
     }
 
     @Override
-    public void clearMachineInventory(NonNullList<ItemStack> itemBuffer) {
+    public void clearMachineInventory(List<ItemStack> itemBuffer) {
         super.clearMachineInventory(itemBuffer);
         itemBuffer.add(recipeHolder.getStackInSlot(0));
     }

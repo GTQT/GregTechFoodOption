@@ -8,7 +8,6 @@ import gregtechfoodoption.client.GTFOClientHandler;
 import gregtechfoodoption.covers.GTFOCoverBehaviors;
 import gregtechfoodoption.entity.GTFOEntities;
 import gregtechfoodoption.integration.applecore.GTFOAppleCoreCompat;
-import gregtechfoodoption.integration.tfc.GTFOTFCCompatibility;
 import gregtechfoodoption.integration.top.GTFOTOPCompatibility;
 import gregtechfoodoption.machines.GTFOTileEntities;
 import gregtechfoodoption.machines.farmer.FarmerModeRegistry;
@@ -73,9 +72,6 @@ public class GregTechFoodOption {
         }
         if (Loader.isModLoaded(Mods.Names.THE_ONE_PROBE)) {
             GTFOTOPCompatibility.registerCompatibility();
-        }
-        if (Loader.isModLoaded(GTFOValues.MODID_GF) && Loader.isModLoaded(GTFOValues.MODID_TFC)) {
-            GTFOTFCCompatibility.init();
         }
         GTFOCoverBehaviors.init();
         GameRegistry.registerWorldGenerator(GTFOWorldGenerator.INSTANCE, 1);

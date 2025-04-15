@@ -8,7 +8,6 @@ import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.metatileentity.MTETrait;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.WorkableTieredMetaTileEntity;
-import gregtech.api.metatileentity.multiblock.IMaintenance;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.ingredients.GTRecipeFluidInput;
@@ -21,7 +20,6 @@ import gregtech.common.ConfigHolder;
 import gregtechfoodoption.GTFOMaterialHandler;
 import gregtechfoodoption.GTFOValues;
 import gregtechfoodoption.materials.CleanerProperty;
-import gregtechfoodoption.materials.FertilizerProperty;
 import gregtechfoodoption.utils.GTFOLog;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.item.ItemStack;
@@ -198,7 +196,7 @@ public class KitchenLogic extends MTETrait implements IControllable {
     }
 
     public void cleanSelf() {
-        for (IMultipleTankHandler.MultiFluidTankEntry tank : this.getMetaTileEntity().getInputFluidInventory().getFluidTanks()) {
+        for (IMultipleTankHandler.ITankEntry tank : this.getMetaTileEntity().getInputFluidInventory().getFluidTanks()) {
             if (dirtiness <= 0)
                 continue;
             FluidStack fluid = tank.getFluid();

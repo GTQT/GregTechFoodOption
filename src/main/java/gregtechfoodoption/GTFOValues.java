@@ -1,7 +1,7 @@
 package gregtechfoodoption;
 
+import gregtech.api.creativetab.BaseCreativeTab;
 import gregtech.api.unification.material.info.MaterialIconSet;
-import gregtech.api.util.BaseCreativeTab;
 import gregtechfoodoption.item.GTFOMetaItem;
 
 import java.util.Random;
@@ -11,15 +11,9 @@ import static gregtech.api.capability.GregtechDataCodes.assignId;
 public class GTFOValues {
     public static final String MODID = "gregtechfoodoption",
             MODID_GCYS = "gcys",
-            MODID_AA = "actuallyadditions",
-            MODID_NC = "nuclearcraft",
-            MODID_GF = "gregification",
-            MODID_TFC = "tfc",
-            MODID_AC = "agricraft",
             MODID_AP = "applecore",
             MODID_NU = "nutrition",
             MODID_NUGT = "nutrition_gtceu",
-            MODID_SS = "sereneseasons",
             MODID_EIO = "enderio";
 
     public static final String craftingToolRollingPin = "craftingToolRollingPin";

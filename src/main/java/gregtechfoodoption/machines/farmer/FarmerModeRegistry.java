@@ -1,6 +1,5 @@
 package gregtechfoodoption.machines.farmer;
 
-import gregtechfoodoption.integration.agricraft.GTFOAgriCraftFarmerMode;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -10,12 +9,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Loader;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static gregtechfoodoption.GTFOValues.MODID_AC;
 
 public class FarmerModeRegistry {
     private static final List<FarmerMode> farmerModes = new ArrayList<>();
@@ -80,7 +75,5 @@ public class FarmerModeRegistry {
         registerFarmerMode(new GTFORootCropFarmerMode());
         registerFarmerMode(new GTFOBerryFarmerMode());
         registerFarmerMode(new GTFOCropFarmerMode());
-        if (Loader.isModLoaded(MODID_AC))
-            registerFarmerMode(new GTFOAgriCraftFarmerMode());
     }
 }

@@ -1,5 +1,8 @@
 package gregtechfoodoption.machines.multiblock;
 
+import com.cleanroommc.modularui.factory.PosGuiData;
+import com.cleanroommc.modularui.screen.ModularPanel;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.resources.TextureArea;
@@ -268,5 +271,10 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
     @Override
     public boolean getIsWeatherOrTerrainResistant() {
         return true;
+    }
+
+    @Override
+    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager) {
+        return null;
     }
 }

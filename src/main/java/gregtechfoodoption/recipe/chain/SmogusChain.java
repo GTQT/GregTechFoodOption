@@ -8,13 +8,10 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
 import gregtechfoodoption.GTFOConfig;
 import gregtechfoodoption.GTFOMaterialHandler;
-import gregtechfoodoption.GTFOValues;
-import gregtechfoodoption.integration.nc.GTFONCRecipeHandler;
 import gregtechfoodoption.utils.GTFOUtils;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.Loader;
 
 import static gregtech.api.recipes.GTRecipeHandler.removeRecipesByInputs;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -26,9 +23,6 @@ import static gregtechfoodoption.recipe.GTFORecipeMaps.MICROWAVE_RECIPES;
 
 public class SmogusChain {
     public static void init() {
-        if (Loader.isModLoaded(GTFOValues.MODID_NC)) {
-            GTFONCRecipeHandler.initSmingotRemoval();
-        }
         removeRecipesByInputs(MACERATOR_RECIPES, new ItemStack(Items.DYE, 1, 3));
 
         ItemStack[] smoresout = {

@@ -1,8 +1,5 @@
 package gregtechfoodoption.recipe.chain;
 
-import de.ellpeck.actuallyadditions.mod.blocks.InitBlocks;
-import de.ellpeck.actuallyadditions.mod.items.InitItems;
-import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.Materials;
 import gregtech.common.items.MetaItems;
 import gregtechfoodoption.GTFOConfig;
@@ -23,16 +20,6 @@ import static gregtechfoodoption.item.GTFOMetaItem.*;
 
 public class CoffeeChain {
     public static void init() {
-        if (GTFOConfig.gtfoaaConfig.disableCoffeeMaker)
-            ModHandler.removeRecipeByOutput(new ItemStack(InitBlocks.blockCoffeeMachine));
-
-        if (Loader.isModLoaded(GTFOValues.MODID_AA)) {
-            JEIGTFOPlugin.itemStacksToHide.add(new ItemStack(InitItems.itemCoffee));
-            JEIGTFOPlugin.itemStacksToHide.add(new ItemStack(InitItems.itemCoffeeSeed));
-            JEIGTFOPlugin.itemStacksToHide.add(new ItemStack(InitItems.itemCoffeeBean));
-            JEIGTFOPlugin.itemStacksToHide.add(new ItemStack(InitBlocks.blockCoffeeMachine));
-        }
-
         ItemStack emptyCoffeeCup = GTFOMetaItem.EMPTY_CUP.getStackForm();
         ItemStack coffeeFilter = GTFOMetaItem.PAPER_CONE.getStackForm();
 
