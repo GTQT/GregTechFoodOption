@@ -11,6 +11,10 @@ import gregtechfoodoption.recipe.GTFORecipeMaps;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
+import static gregtech.api.unification.ore.OrePrefix.dust;
+import static gregtechfoodoption.GTFOMaterialHandler.BlackPepper;
+import static gregtechfoodoption.GTFOMaterialHandler.GratedHorseradishRoot;
+
 public class RussianChain {
     public static void init() {
         ModHandler.addShapelessRecipe("pelmeni_hand", GTFOMetaItem.UNCOOKED_PELMENI.getStackForm(), GTFOMetaItem.DOUGH.getStackForm(), OreDictUnifier.get(OrePrefix.dust, Materials.Meat));
@@ -45,7 +49,9 @@ public class RussianChain {
                 .buildAndRegister();
 
         GTFORecipeMaps.CUISINE_ASSEMBLER_RECIPES.recipeBuilder().EUt(24).duration(100)
-                .inputs(GTFOMetaItem.UNCOOKED_PELMENI.getStackForm(), GTFOMaterialHandler.GratedHorseradishRoot.getItemStack(), GTFOMaterialHandler.BlackPepper.getItemStack())
+                .input(dust,BlackPepper)
+                .input(dust,GratedHorseradishRoot)
+                .inputs(GTFOMetaItem.UNCOOKED_PELMENI.getStackForm())
                 .fluidInputs(GTFOMaterialHandler.SourCream.getFluid(100))
                 .outputs(GTFOMetaItem.UNCOOKED_SEASONED_PELMENI.getStackForm())
                 .buildAndRegister();

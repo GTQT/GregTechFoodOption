@@ -19,6 +19,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtechfoodoption.GTFOMaterialHandler.ChloroauricAcid;
 import static gregtechfoodoption.GTFOMaterialHandler.MashedPotato;
 
@@ -68,7 +69,7 @@ public class VanillaOverrideChain {
             ModHandler.addShapedRecipe("gtfo_paper", new ItemStack(Items.PAPER, 2),
                     " R ", "CCC",
                     'R', OreDictUnifier.get(GTFOValues.craftingToolRollingPin),
-                    'C', new UnificationEntry(OrePrefix.dust, Materials.Paper));
+                    'C', new UnificationEntry(dust, Materials.Paper));
             ModHandler.removeRecipeByOutput(new ItemStack(Blocks.STICKY_PISTON, 1));
             ModHandler.addShapedRecipe("gtfo_sticky_piston", new ItemStack(Blocks.STICKY_PISTON, 1),
                     "R", "S", "P",
@@ -92,7 +93,7 @@ public class VanillaOverrideChain {
         RecipeMaps.MIXER_RECIPES.recipeBuilder().EUt(8).duration(100)
                 .input(Blocks.BROWN_MUSHROOM)
                 .input(Blocks.RED_MUSHROOM)
-                .input(OrePrefix.dust, Wheat)
+                .input(dust, Wheat)
                 .fluidInputs(Milk.getFluid(200))
                 .fluidOutputs(GTFOMaterialHandler.MushroomSoup.getFluid(200))
                 .buildAndRegister();
@@ -105,7 +106,7 @@ public class VanillaOverrideChain {
 
         RecipeMaps.MIXER_RECIPES.recipeBuilder().EUt(8).duration(100)
                 .input(Items.BEETROOT, 2)
-                .input(OrePrefix.dust, Wheat)
+                .input(dust, Wheat)
                 .fluidInputs(Water.getFluid(200))
                 .fluidOutputs(GTFOMaterialHandler.BeetrootSoup.getFluid(200))
                 .buildAndRegister();
@@ -120,8 +121,8 @@ public class VanillaOverrideChain {
                 .input(Blocks.BROWN_MUSHROOM)
                 .input(Items.CARROT)
                 .input(Items.COOKED_RABBIT)
-                .inputs(MashedPotato.getItemStack())
-                .input(OrePrefix.dust, Wheat)
+                .input(dust,MashedPotato)
+                .input(dust, Wheat)
                 .fluidInputs(Water.getFluid(50))
                 .fluidOutputs(GTFOMaterialHandler.RabbitStew.getFluid(500))
                 .buildAndRegister();

@@ -70,7 +70,9 @@ public class BritishChain {
         ModHandler.addShapelessRecipe("beans_on_toast", BEANS_ON_TOAST.getStackForm(1), BAKED_BEANS.getStackForm(), TOAST.getStackForm());
 
         GTFORecipeMaps.CUISINE_ASSEMBLER_RECIPES.recipeBuilder().EUt(64).duration(200)
-                .inputs(MashedPotato.getItemStack(), CookedMinceMeat.getItemStack(), PEAS.getStackForm())
+                .input(dust,MashedPotato)
+                .input(dust,CookedMinceMeat)
+                .inputs(PEAS.getStackForm())
                 .outputs(SHEPHERDS_PIE.getStackForm())
                 .buildAndRegister();
 

@@ -24,7 +24,7 @@ import static gregtechfoodoption.item.GTFOMetaItem.SCRAP_MEAT;
 
 public class FatChain {
     public static void init() {
-        ModHandler.addShapelessRecipe("meat_hand_recipe", ToughMeat.getItemStack(2), OreDictUnifier.get("dustWheat"), new UnificationEntry(dust, Meat), new UnificationEntry(dust, Meat), FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.WATER, 1000)));
+        ModHandler.addShapelessRecipe("meat_hand_recipe", OreDictUnifier.get(dust,ToughMeat,2), OreDictUnifier.get("dustWheat"), new UnificationEntry(dust, Meat), new UnificationEntry(dust, Meat), FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.WATER, 1000)));
         GTFOUtils.getMeat().forEach(itemStack -> {
             ArrayList<ItemStack> input = new ArrayList<>();
             input.add(itemStack);

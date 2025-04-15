@@ -9,7 +9,6 @@ import gregtechfoodoption.block.GTFOMetaBlocks;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
-import static gregtechfoodoption.GTFOMaterialHandler.ArsenicTrioxide;
 import static gregtechfoodoption.GTFOMaterialHandler.*;
 
 // It's alive...
@@ -18,12 +17,12 @@ public class DyeChain {
         ARC_FURNACE_RECIPES.recipeBuilder().EUt(30).duration(100)
                 .input(dust, Arsenic, 2)
                 .fluidInputs(Oxygen.getFluid(3000))
-                .outputs(ArsenicTrioxide.getItemStack(5))
+                .output(dust,ArsenicTrioxide,5)
                 .buildAndRegister();
 
         // $stoik As2O3 + Na2CO3 + H2O-> 2NaAsO2(1/2H2O) + CO2
         CHEMICAL_RECIPES.recipeBuilder().EUt(30).duration(160)
-                .inputs(ArsenicTrioxide.getItemStack(5))
+                .input(dust,ArsenicTrioxide,5)
                 .fluidInputs(SodiumCarbonateSolution.getFluid(1000))
                 .fluidOutputs(SodiumArseniteSolution.getFluid(2000), CarbonDioxide.getFluid(1000))
                 .buildAndRegister();

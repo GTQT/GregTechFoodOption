@@ -246,7 +246,7 @@ public class CoreChain {
         CHEMICAL_RECIPES.recipeBuilder().EUt(30).duration(80)
                 .fluidInputs(HydrogenCyanide.getFluid(1000))
                 .input(dust, SodiumHydroxide, 3)
-                .outputs(SodiumCyanide.getItemStack(3))
+                .output(dust,SodiumCyanide,3)
                 .fluidOutputs(Water.getFluid(1000))
                 .buildAndRegister();
 
@@ -541,17 +541,17 @@ public class CoreChain {
 
         MACERATOR_RECIPES.recipeBuilder().EUt(4).duration(40)
                 .input(Items.POTATO)
-                .outputs(MashedPotato.getItemStack())
+                .output(dust,MashedPotato)
                 .buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder().EUt(16).duration(90)
                 .input(dust, Wheat)
                 .input(dust, Meat)
                 .fluidInputs(Water.getFluid(500))
-                .outputs(GTFOMaterialHandler.ToughMeat.getItemStack(2))
+                .output(dust,ToughMeat,2)
                 .buildAndRegister();
 
-        GTFOUtils.addBakingOvenRecipes(GTFOMaterialHandler.ToughMeat.getItemStack(), GTFOMaterialHandler.MeatIngot.getItemStack(), 200, 400, 1);
+        GTFOUtils.addBakingOvenRecipes(OreDictUnifier.get(dust,ToughMeat), GTFOMaterialHandler.MeatIngot.getItemStack(), 200, 400, 1);
 
         EXTRUDER_RECIPES.recipeBuilder().EUt(28).duration(20)
                 .input(dust, Meat)
@@ -559,7 +559,7 @@ public class CoreChain {
                 .outputs(GTFOMaterialHandler.MeatIngot.getItemStack())
                 .buildAndRegister();
 
-        GTFOUtils.addBakingOvenRecipes(OreDictUnifier.get(dust, Meat), CookedMinceMeat.getItemStack(), 200, 400, 1);
+        GTFOUtils.addBakingOvenRecipes(OreDictUnifier.get(dust, Meat),OreDictUnifier.get(dust, CookedMinceMeat), 200, 400, 1);
 
         ASSEMBLER_RECIPES.recipeBuilder().EUt(30).duration(60)
                 .inputs(PAPER_BAG.getStackForm())
@@ -585,7 +585,7 @@ public class CoreChain {
 
         MACERATOR_RECIPES.recipeBuilder().EUt(8).duration(100)
                 .inputs(HORSERADISH.getStackForm())
-                .outputs(GratedHorseradishRoot.getItemStack())
+                .output(dust,GratedHorseradishRoot)
                 .buildAndRegister();
 
         FORMING_PRESS_RECIPES.recipeBuilder().EUt(64).duration(200)

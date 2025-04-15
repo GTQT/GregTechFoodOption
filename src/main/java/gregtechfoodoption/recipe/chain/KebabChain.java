@@ -31,14 +31,14 @@ public class KebabChain {
         ModHandler.addShapedRecipe("gtfo_hand_kubide_kebab", KEBAB_KUBIDEH.getStackForm(),
                 "RMM", "SMM", "KTS",
                 'K', SKEWER,
-                'M', KubideMeat.getItemStack(),
+                'M', new UnificationEntry(dust, KubideMeat),
                 'S', new UnificationEntry(dustSmall, Salt),
                 'T', TOMATO,
                 'R', OreDictUnifier.get(GTFOValues.craftingToolRollingPin));
 
         ModHandler.addShapedRecipe("gtfo_hand_barg_kebab", KEBAB_BARG.getStackForm(),
                 "RMM", "SMM", "KTS",
-                'M', BargMeat.getItemStack(),
+                'M', new UnificationEntry(dust,BargMeat),
                 'K', SKEWER,
                 'S', new UnificationEntry(dustSmall, Salt),
                 'T', TOMATO,
@@ -73,18 +73,21 @@ public class KebabChain {
                 'k', new UnificationEntry(dust, Salt), Fat.getItemStack(), Fat.getItemStack(), SKEWER);
 
         CUISINE_ASSEMBLER_RECIPES.recipeBuilder().EUt(27).duration(20)
-                .inputs(KubideMeat.getItemStack(5), TOMATO_SLICE.getStackForm(4), SKEWER.getStackForm(2))
+                .input(dust,KubideMeat,5)
+                .inputs(TOMATO_SLICE.getStackForm(4), SKEWER.getStackForm(2))
                 .input(dustSmall, Salt)
                 .output(KEBAB_KUBIDEH, 2)
                 .buildAndRegister();
 
         CUISINE_ASSEMBLER_RECIPES.recipeBuilder().EUt(27).duration(80)
-                .inputs(BargMeat.getItemStack(5), Zest.getItemStack(4), TOMATO_SLICE.getStackForm(4), SKEWER.getStackForm(3))
+                .input(dust,BargMeat,5)
+                .inputs( Zest.getItemStack(4), TOMATO_SLICE.getStackForm(4), SKEWER.getStackForm(3))
                 .output(KEBAB_BARG, 3)
                 .buildAndRegister();
 
         CUISINE_ASSEMBLER_RECIPES.recipeBuilder().EUt(27).duration(80)
-                .inputs(BargMeat.getItemStack(5), Zest.getItemStack(4), SKEWER.getStackForm(3))
+                .input(dust,BargMeat,5)
+                .inputs( Zest.getItemStack(4), SKEWER.getStackForm(3))
                 .fluidInputs(TomatoSauce.getFluid(100))
                 .output(KEBAB_BARG, 3)
                 .buildAndRegister();
@@ -117,7 +120,8 @@ public class KebabChain {
                 .buildAndRegister();
 
         CUISINE_ASSEMBLER_RECIPES.recipeBuilder().EUt(16).duration(400)
-                .inputs(CHUM.getStackForm(8), BANANA_PEEL.getStackForm(2), ONION.getStackForm(), MashedPotato.getItemStack(4), SKEWER.getStackForm(4))
+                .input(dust,MashedPotato,4)
+                .inputs(CHUM.getStackForm(8), BANANA_PEEL.getStackForm(2), ONION.getStackForm(), SKEWER.getStackForm(4))
                 .fluidInputs(Yolk.getFluid(200), Stearin.getFluid(400))
                 .outputs(KEBAB_CHUM.getStackForm(4))
                 .buildAndRegister();
@@ -144,7 +148,7 @@ public class KebabChain {
 
     private static void kebabBase() {
         //Kubide Line
-        ModHandler.addShapedRecipe("gtfo_hand_kubide_kebab_meat", KubideMeat.getItemStack(4),
+        ModHandler.addShapedRecipe("gtfo_hand_kubide_kebab_meat", OreDictUnifier.get(dust, KubideMeat,4),
                 "STO", "MMM", "FMF",
                 'F', Fat.getItemStack(),
                 'M', new UnificationEntry(dust, Meat),
@@ -156,7 +160,7 @@ public class KebabChain {
                 .input(dust, Meat, 4)
                 .inputs(ONION_SLICE.getStackForm(4), MUSHROOM_SLICE.getStackForm(3), GTFOMaterialHandler.Fat.getItemStack(1))
                 .fluidInputs(GTFOMaterialHandler.TomatoSauce.getFluid(400))
-                .outputs(KubideMeat.getItemStack(5))
+                .output(dust,KubideMeat,5)
                 .notConsumable(new IntCircuitIngredient(3))
                 .buildAndRegister();
 
@@ -164,19 +168,19 @@ public class KebabChain {
                 .input(dust, Meat, 4)
                 .inputs(ONION_SLICE.getStackForm(4), MUSHROOM_SLICE.getStackForm(4), Zest.getItemStack(4), GTFOMaterialHandler.Fat.getItemStack(1))
                 .fluidInputs(GTFOMaterialHandler.TomatoSauce.getFluid(400))
-                .outputs(KubideMeat.getItemStack(15))
+                .output(dust,KubideMeat,15)
                 .notConsumable(new IntCircuitIngredient(1))
                 .buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder().EUt(30).duration(120)
                 .inputs(CHUM.getStackForm(8), ONION_SLICE.getStackForm(4), Zest.getItemStack(4), GTFOMaterialHandler.Fat.getItemStack(2))
                 .fluidInputs(GTFOMaterialHandler.TomatoSauce.getFluid(400))
-                .outputs(KubideMeat.getItemStack(30))
+                .output(dust,KubideMeat,30)
                 .notConsumable(new IntCircuitIngredient(2))
                 .buildAndRegister();
 
         //Barg Line
-        ModHandler.addShapedRecipe("gtfo_hand_barg_kebab_meat", BargMeat.getItemStack(4),
+        ModHandler.addShapedRecipe("gtfo_hand_barg_kebab_meat", OreDictUnifier.get(dust,BargMeat,4),
                 "SML", "MOM", "ZMZ",
                 'S', new UnificationEntry(dust, Salt),
                 'M', new UnificationEntry(dust, Meat),
@@ -189,7 +193,7 @@ public class KebabChain {
                 .input(dust, Salt, 2)
                 .inputs(ONION_SLICE.getStackForm(8), Zest.getItemStack(2))
                 .fluidInputs(OliveOil.getFluid(500))
-                .outputs(BargMeat.getItemStack(10))
+                .output(dust,BargMeat,10)
                 .notConsumable(new IntCircuitIngredient(3))
                 .buildAndRegister();
 
@@ -198,7 +202,7 @@ public class KebabChain {
                 .input(dust, Salt, 2)
                 .inputs(ONION_SLICE.getStackForm(8), Zest.getItemStack(2))
                 .fluidInputs(OliveOil.getFluid(1000))
-                .outputs(BargMeat.getItemStack(20))
+                .output(dust,BargMeat,20)
                 .notConsumable(new IntCircuitIngredient(1))
                 .buildAndRegister();
     }

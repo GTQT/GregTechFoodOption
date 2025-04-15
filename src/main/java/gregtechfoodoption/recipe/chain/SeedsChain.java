@@ -2,6 +2,7 @@ package gregtechfoodoption.recipe.chain;
 
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
@@ -13,6 +14,7 @@ import gregtechfoodoption.worldgen.trees.GTFOTrees;
 import net.minecraft.item.ItemStack;
 
 import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtechfoodoption.GTFOMaterialHandler.*;
 import static gregtechfoodoption.item.GTFOMetaItem.*;
 
@@ -208,17 +210,17 @@ public class SeedsChain {
                 .buildAndRegister();
 
 
-        ModHandler.addShapelessRecipe("gtfo_black_pepper", BlackPepper.getItemStack(),
+        ModHandler.addShapelessRecipe("gtfo_black_pepper", OreDictUnifier.get(dust,BlackPepper),
                 BLACK_PEPPERCORN, 'm');
         RecipeMaps.MACERATOR_RECIPES.recipeBuilder().EUt(8).duration(80)
                 .inputs(BLACK_PEPPERCORN.getStackForm())
-                .outputs(BlackPepper.getItemStack(2))
+                .output(dust,BlackPepper,2)
                 .buildAndRegister();
-        ModHandler.addShapelessRecipe("gtfo_nutmeg", Nutmeg.getItemStack(),
+        ModHandler.addShapelessRecipe("gtfo_nutmeg",OreDictUnifier.get(dust,Nutmeg),
                 NUTMEG_SEED, 'm');
         RecipeMaps.MACERATOR_RECIPES.recipeBuilder().EUt(8).duration(80)
                 .inputs(NUTMEG_SEED.getStackForm())
-                .outputs(Nutmeg.getItemStack(2))
+                .output(dust,Nutmeg,2)
                 .buildAndRegister();
 
         GTFORecipeMaps.GREENHOUSE_RECIPES.recipeBuilder().EUt(15).duration(500)

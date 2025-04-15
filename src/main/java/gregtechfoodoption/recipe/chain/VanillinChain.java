@@ -8,6 +8,9 @@ import gregtechfoodoption.GTFOMaterialHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
+import static gregtech.api.unification.ore.OrePrefix.dust;
+import static gregtechfoodoption.GTFOMaterialHandler.*;
+
 public class VanillinChain {
     public static void init() {
         GTRecipeHandler.removeRecipesByInputs(RecipeMaps.DISTILLATION_RECIPES, new ItemStack[]{}, new FluidStack[]{Materials.Creosote.getFluid(24)});
@@ -17,7 +20,7 @@ public class VanillinChain {
                 .buildAndRegister();
 
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().EUt(30).duration(120) // C2H4 + O -> C2H4O
-                .notConsumable(OrePrefix.dust, Materials.Palladium)
+                .notConsumable(dust, Materials.Palladium)
                 .fluidInputs(Materials.Ethylene.getFluid(1000), Materials.Oxygen.getFluid(1000))
                 .fluidOutputs(GTFOMaterialHandler.Acetaldehyde.getFluid(1000))
                 .buildAndRegister();
@@ -31,21 +34,21 @@ public class VanillinChain {
                 .buildAndRegister();
 
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().EUt(120).duration(160) // C7H8O2 + C2H2O3 -> C9H10O5
-                .notConsumable(OrePrefix.dust, Materials.SodiumHydroxide)
+                .notConsumable(dust, Materials.SodiumHydroxide)
                 .fluidInputs(GTFOMaterialHandler.Guaiacol.getFluid(1000), GTFOMaterialHandler.GlyoxylicAcid.getFluid(1000))
-                .outputs(GTFOMaterialHandler.VanillylmandelicAcid.getItemStack(24))
+                .output(dust,VanillylmandelicAcid,24)
                 .buildAndRegister();
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().EUt(120).duration(160) // C9H10O5 + O -> C9H8O5 + H2O
-                .notConsumable(OrePrefix.dust, Materials.SodiumHydroxide)
-                .inputs(GTFOMaterialHandler.VanillylmandelicAcid.getItemStack(24))
+                .notConsumable(dust, Materials.SodiumHydroxide)
+                .input(dust,VanillylmandelicAcid,24)
                 .fluidInputs(Materials.Oxygen.getFluid(1000))
-                .outputs(GTFOMaterialHandler.VanilglycolicAcid.getItemStack(22))
+                .output(dust,VanilglycolicAcid,22)
                 .fluidOutputs(Materials.Water.getFluid(1000))
                 .buildAndRegister();
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().EUt(120).duration(240) // C9H8O5 (H+) -> C8H8O3 + CO2
-                .inputs(GTFOMaterialHandler.VanilglycolicAcid.getItemStack(22))
+                .input(dust,VanilglycolicAcid,22)
                 .fluidInputs(Materials.HydrochloricAcid.getFluid(1000))
-                .outputs(GTFOMaterialHandler.Vanillin.getItemStack(19))
+                .output(dust,Vanillin,19)
                 .fluidOutputs(Materials.DilutedHydrochloricAcid.getFluid(1000), Materials.CarbonDioxide.getFluid(1000))
                 .buildAndRegister();
     }

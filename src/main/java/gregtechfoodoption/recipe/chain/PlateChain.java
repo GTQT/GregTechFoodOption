@@ -18,6 +18,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
+import static gregtechfoodoption.GTFOMaterialHandler.BoneChinaClay;
 
 public class PlateChain {
     public static void init() {
@@ -45,17 +46,17 @@ public class PlateChain {
                         .input(feldspar)
                         .input(calcium)
                         .circuitMeta(11)
-                        .outputs(GTFOMaterialHandler.BoneChinaClay.getItemStack(1))
+                        .output(dust,BoneChinaClay)
                         .buildAndRegister();
             }
         }
 
         COMPRESSOR_RECIPES.recipeBuilder().EUt(8).duration(80)
-                .inputs(GTFOMaterialHandler.BoneChinaClay.getItemStack(4))
+                .input(dust,BoneChinaClay,4)
                 .outputs(GTFOMetaItem.UNFIRED_PLATE.getStackForm())
                 .buildAndRegister();
         LATHE_RECIPES.recipeBuilder().EUt(8).duration(80)
-                .inputs(GTFOMaterialHandler.BoneChinaClay.getItemStack(6))
+                .input(dust,BoneChinaClay,6)
                 .outputs(GTFOMetaItem.UNFIRED_BOWL.getStackForm())
                 .buildAndRegister();
 
@@ -92,7 +93,7 @@ public class PlateChain {
                 .buildAndRegister();
 
         FORMING_PRESS_RECIPES.recipeBuilder().EUt(28).duration(160)
-                .inputs(GTFOMaterialHandler.BoneChinaClay.getItemStack(2))
+                .input(dust,BoneChinaClay,2)
                 .notConsumable(MetaItems.SHAPE_MOLD_PLATE.getStackForm())
                 .outputs(GTFOMaterialHandler.UnfiredPorcelainTile.getItemStack())
                 .buildAndRegister();

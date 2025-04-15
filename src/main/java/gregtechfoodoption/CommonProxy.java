@@ -10,6 +10,7 @@ import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.event.MaterialRegistryEvent;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.stack.UnificationEntry;
 import gregtechfoodoption.block.GTFOBerryBush;
 import gregtechfoodoption.block.GTFOCrop;
 import gregtechfoodoption.block.GTFOMetaBlocks;
@@ -48,6 +49,8 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.function.Function;
 
+import static gregtechfoodoption.GTFOMaterialHandler.LithiumCarbonate;
+import static gregtechfoodoption.GTFOMaterialHandler.SodiumCyanide;
 import static gregtechfoodoption.block.GTFOCrop.CROP_BLOCKS;
 
 @Mod.EventBusSubscriber(modid = GregTechFoodOption.MODID)
@@ -175,10 +178,10 @@ public class CommonProxy {
     public void onPostLoad() {
         MinecraftForge.addGrassSeed(GTFOMetaItem.UNKNOWN_SEED.getStackForm(), 5);
 
-        LacingEntry.LACING_REGISTRY.register(0, "cyanide", new LacingEntry(GTFOMaterialHandler.SodiumCyanide.getItemStack(),
+        LacingEntry.LACING_REGISTRY.register(0, "cyanide", new LacingEntry(OreDictUnifier.get(OrePrefix.dust, SodiumCyanide),
                 new PotionEffect(CyanidePoisoningPotion.INSTANCE, 1300, 0),
                 "5dkcap/2/4/"));
-        LacingEntry.LACING_REGISTRY.register(1, "antischizo", new LacingEntry(GTFOMaterialHandler.LithiumCarbonate.getItemStack(),
+        LacingEntry.LACING_REGISTRY.register(1, "antischizo", new LacingEntry(OreDictUnifier.get(OrePrefix.dust, LithiumCarbonate),
                 new PotionEffect(AntiSchizoPotion.INSTANCE, 1000, 0),
                 "14hez98zk7/2/3/5/9/10/"));
         LacingEntry.LACING_REGISTRY.register(2, "lungcancer", new LacingEntry(OreDictUnifier.get(OrePrefix.dust, Materials.Asbestos),

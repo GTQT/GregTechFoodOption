@@ -11,6 +11,8 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.plate;
+import static gregtechfoodoption.GTFOMaterialHandler.Nutmeg;
+import static gregtechfoodoption.GTFOMaterialHandler.ShreddedParmesan;
 import static gregtechfoodoption.item.GTFOMetaItem.*;
 
 public class PastaChain {
@@ -154,7 +156,9 @@ public class PastaChain {
         }
 
         GTFORecipeMaps.CUISINE_ASSEMBLER_RECIPES.recipeBuilder().EUt(24).duration(100)
-                .inputs(RAW_LASAGNA.getStackForm(), GTFOMaterialHandler.ShreddedParmesan.getItemStack(), GTFOMaterialHandler.Nutmeg.getItemStack())
+                .input(dust,ShreddedParmesan)
+                .input(dust,Nutmeg)
+                .inputs(RAW_LASAGNA.getStackForm())
                 .input(Items.PORKCHOP)
                 .outputs(TORTELLINI.getStackForm(8))
                 .buildAndRegister();

@@ -55,15 +55,15 @@ public class CapletChain {
                 .buildAndRegister();
         CHEMICAL_RECIPES.recipeBuilder().EUt(480).duration(10)
                 .fluidInputs(Nitrophenols.getFluid(1000))
-                .outputs(IVNitrophenol.getItemStack(15))
-                .outputs(IINitrophenol.getItemStack(15))
+                .output(dust,IVNitrophenol,15)
+                .output(dust,IINitrophenol,15)
                 .buildAndRegister();
         CHEMICAL_RECIPES.recipeBuilder().EUt(480).duration(80)
-                .inputs(IVNitrophenol.getItemStack(15))
+                .input(dust,IVNitrophenol,15)
                 .fluidInputs(Hydrogen.getFluid(6000))
                 .notConsumable(dust, Nickel)
                 .fluidOutputs(Water.getFluid(2000))
-                .outputs(Aminophenol.getItemStack(15))
+                .output(dust,Aminophenol,15)
                 .buildAndRegister();
         CHEMICAL_RECIPES.recipeBuilder().EUt(480).duration(500)
                 .notConsumable(new IntCircuitIngredient(16))
@@ -74,7 +74,7 @@ public class CapletChain {
         CHEMICAL_RECIPES.recipeBuilder().EUt(1800).duration(400)
                 .notConsumable(new IntCircuitIngredient(16))
                 .fluidInputs(AceticAnhydride.getFluid(1000))
-                .inputs(Aminophenol.getItemStack(15))
+                .input(dust,Aminophenol,15)
                 .output(dust, Paracetamol, 20)
                 .fluidOutputs(Water.getFluid(1000))
                 .buildAndRegister();

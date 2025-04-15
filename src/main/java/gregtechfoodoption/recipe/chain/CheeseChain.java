@@ -137,7 +137,7 @@ public class CheeseChain {
 
         FERMENTING_RECIPES.recipeBuilder().EUt(500).duration(1000)
                 .fluidInputs(ColdMoistAir.getFluid(8000))
-                .outputs(PenicilliumRoqueforti.getItemStack(1))
+                .output(dust,PenicilliumRoqueforti,1)
                 .buildAndRegister();
 
         if (!GTFOConfig.gtfoChainsConfig.makeChainsHarder) {
@@ -148,7 +148,7 @@ public class CheeseChain {
                     .buildAndRegister();
         }
         MIXER_RECIPES.recipeBuilder().EUt(110).duration(120)
-                .inputs(PenicilliumRoqueforti.getItemStack())
+                .input(dust,PenicilliumRoqueforti)
                 .fluidInputs(LacticAcidBacteria.getFluid(1))
                 .fluidInputs(CrudeRennetSolution.getFluid(250))
                 .fluidOutputs(FungalRennetSolution.getFluid(250))
@@ -243,7 +243,7 @@ public class CheeseChain {
                 .buildAndRegister();
         MACERATOR_RECIPES.recipeBuilder().EUt(8).duration(120)
                 .inputs(AGED_PARMIGIANO_ROLL.getStackForm())
-                .outputs(ShreddedParmesan.getItemStack(8))
+                .output(dust,ShreddedParmesan,8)
                 .buildAndRegister();
     }
 }
