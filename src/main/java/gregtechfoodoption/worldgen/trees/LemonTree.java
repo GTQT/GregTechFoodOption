@@ -19,6 +19,7 @@ import static gregtechfoodoption.item.GTFOMetaItem.LEMON;
 
 public class LemonTree extends GTFOTree {
     public static int LEAVES_COLOR = 0x87A92C;
+
     public LemonTree() {
         super("lemon", 4);
         this.addCondition(new BiomeCondition(Biomes.JUNGLE_EDGE, 3, 0.4));
@@ -68,6 +69,7 @@ public class LemonTree extends GTFOTree {
     public ItemStack getApple() {
         return LEMON.getStackForm();
     }
+
     @Override
     public int getMinTrunkHeight(Random random) {
         return 6 + random.nextInt(3);

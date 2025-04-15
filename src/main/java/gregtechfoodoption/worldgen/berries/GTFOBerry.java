@@ -3,7 +3,6 @@ package gregtechfoodoption.worldgen.berries;
 import gregtech.api.util.function.TriConsumer;
 import gregtechfoodoption.block.GTFOBerryBush;
 import gregtechfoodoption.worldgen.GTFOFeature;
-import gregtechfoodoption.worldgen.trees.GTFOTreeGen;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

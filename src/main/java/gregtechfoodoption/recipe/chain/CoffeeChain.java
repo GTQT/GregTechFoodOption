@@ -2,15 +2,11 @@ package gregtechfoodoption.recipe.chain;
 
 import gregtech.api.unification.material.Materials;
 import gregtech.common.items.MetaItems;
-import gregtechfoodoption.GTFOConfig;
 import gregtechfoodoption.GTFOMaterialHandler;
-import gregtechfoodoption.GTFOValues;
-import gregtechfoodoption.integration.jei.JEIGTFOPlugin;
 import gregtechfoodoption.item.GTFOMetaItem;
 import gregtechfoodoption.utils.GTFOUtils;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.Loader;
 
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.Paper;

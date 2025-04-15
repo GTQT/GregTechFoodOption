@@ -18,8 +18,8 @@ import java.util.Set;
 
 public class EntityItalianBuffalo extends EntityCow {
 
-    private static final Biome[] NEARBY_BIOME_SPAWNS = {Biomes.OCEAN, Biomes.DEEP_OCEAN, Biomes.RIVER, Biomes.SWAMPLAND};
     public static final Biome[] POSSIBLE_BIOME_SPAWNS = {Biomes.SWAMPLAND, Biomes.BEACH, Biomes.COLD_BEACH, Biomes.FOREST, Biomes.PLAINS, Biomes.ROOFED_FOREST, Biomes.EXTREME_HILLS};
+    private static final Biome[] NEARBY_BIOME_SPAWNS = {Biomes.OCEAN, Biomes.DEEP_OCEAN, Biomes.RIVER, Biomes.SWAMPLAND};
 
     public EntityItalianBuffalo(World worldIn) {
         super(worldIn);
@@ -28,22 +28,22 @@ public class EntityItalianBuffalo extends EntityCow {
     @Override
     public boolean getCanSpawnHere() {
         out:
-        for(byte biomeByte : world.getChunk(this.chunkCoordX, this.chunkCoordZ).getBiomeArray()) {
+        for (byte biomeByte : world.getChunk(this.chunkCoordX, this.chunkCoordZ).getBiomeArray()) {
             for (Biome currentBiome : POSSIBLE_BIOME_SPAWNS) {
                 if (currentBiome.equals(Biome.getBiome(biomeByte)))
                     break out;
             }
         }
         Set<Biome> nearbyBiomes = new HashSet<>();
-        for(int i = -1; i < 2; i++) { // We loop in a 3x3 around the spawn position.
+        for (int i = -1; i < 2; i++) { // We loop in a 3x3 around the spawn position.
             for (int j = -1; j < 2; j++) {
-                for(byte biomeByte : world.getChunk(this.chunkCoordX + i, this.chunkCoordZ + j).getBiomeArray()) {
+                for (byte biomeByte : world.getChunk(this.chunkCoordX + i, this.chunkCoordZ + j).getBiomeArray()) {
                     nearbyBiomes.add(Biome.getBiome(biomeByte));
                 }
             }
         }
-        for(Biome biome : NEARBY_BIOME_SPAWNS) {
-            if(nearbyBiomes.contains(biome)) {
+        for (Biome biome : NEARBY_BIOME_SPAWNS) {
+            if (nearbyBiomes.contains(biome)) {
                 return super.getCanSpawnHere();
             }
         }

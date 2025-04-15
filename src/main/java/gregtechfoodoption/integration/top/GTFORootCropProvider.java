@@ -17,8 +17,7 @@ public class GTFORootCropProvider implements IProbeInfoProvider {
 
     @Override
     public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, @Nonnull IBlockState blockState, IProbeHitData data) {
-        if (blockState.getBlock() instanceof GTFORootCrop) {
-            GTFORootCrop crop = (GTFORootCrop) blockState.getBlock();
+        if (blockState.getBlock() instanceof GTFORootCrop crop) {
 
             if (crop.cropHarvestable(blockState)) {
                 probeInfo.text(TextStyleClass.OK + "Crop may be harvested");

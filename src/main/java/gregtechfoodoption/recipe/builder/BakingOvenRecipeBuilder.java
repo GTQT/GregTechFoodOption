@@ -6,8 +6,6 @@ import gregtech.api.recipes.properties.impl.PrimitiveProperty;
 import gregtech.api.util.ValidationResult;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-import javax.annotation.Nonnull;
-
 public class BakingOvenRecipeBuilder extends RecipeBuilder<BakingOvenRecipeBuilder> {
     public BakingOvenRecipeBuilder() {
     }

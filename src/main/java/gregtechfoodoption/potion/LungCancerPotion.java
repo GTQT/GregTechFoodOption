@@ -6,7 +6,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

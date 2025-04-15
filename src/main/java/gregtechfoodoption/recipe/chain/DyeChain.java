@@ -9,8 +9,8 @@ import gregtechfoodoption.block.GTFOMetaBlocks;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
-import static gregtechfoodoption.GTFOMaterialHandler.*;
 import static gregtechfoodoption.GTFOMaterialHandler.ArsenicTrioxide;
+import static gregtechfoodoption.GTFOMaterialHandler.*;
 
 // It's alive...
 public class DyeChain {

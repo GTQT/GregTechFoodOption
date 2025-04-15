@@ -53,12 +53,9 @@ import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = GregTechFoodOption.MODID)
 public class GTFOEventHandler {
-    protected static Random rand = new Random();
-
     private static final HashMap<EntityLivingBase, Integer> snowGolemSpawnSpeeds = new HashMap<>();
-
     private static final Set<EntityLivingBase> jumpBoostSet = new HashSet<>();
-
+    protected static Random rand = new Random();
 
     @SubscribeEvent
     public static void onMaterialsInit(MaterialEvent event) { // Must be called during construction to be registered in time for MaterialEvents.
@@ -100,8 +97,7 @@ public class GTFOEventHandler {
         }
 */
 
-        if ((event.getEntityLiving() instanceof EntityPlayer)) {
-            EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+        if ((event.getEntityLiving() instanceof EntityPlayer player)) {
             NBTTagCompound persisted = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
             if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
                 player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, persisted);
@@ -213,7 +209,7 @@ public class GTFOEventHandler {
             }
         }
     }
-    
+
     @SubscribeEvent
     public static void onPlayerLoginEvent(PlayerEvent.PlayerLoggedInEvent event) {
         if (!event.player.getEntityWorld().isRemote && Loader.isModLoaded(GTFOValues.MODID_AP)) {

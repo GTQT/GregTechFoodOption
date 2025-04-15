@@ -1,7 +1,5 @@
 package gregtechfoodoption.integration.jei;
 
-import gregtech.api.items.metaitem.MetaItem;
-import gregtechfoodoption.item.food.GTFOFoodUseManager;
 import gregtechfoodoption.potion.LacingEntry;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -36,6 +34,7 @@ public class LacingInfo implements IRecipeWrapper {
     public String getPotionName() {
         return entry.getAppliedEffect().getEffectName();
     }
+
     public int getPotionDuration() {
         return entry.getAppliedEffect().getDuration();
     }

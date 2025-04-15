@@ -1,4 +1,5 @@
 package gregtechfoodoption.machines;
+
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.RecipeLogicEnergy;
 import gregtech.api.metatileentity.MetaTileEntity;

@@ -24,7 +24,8 @@ import static gregtech.common.items.MetaItems.SHAPE_MOLD_CYLINDER;
 import static gregtechfoodoption.GTFOMaterialHandler.TomatoSauce;
 import static gregtechfoodoption.GTFOMaterialHandler.VibrantExtract;
 import static gregtechfoodoption.item.GTFOMetaItem.*;
-import static gregtechfoodoption.recipe.GTFORecipeMaps.*;
+import static gregtechfoodoption.recipe.GTFORecipeMaps.CUISINE_ASSEMBLER_RECIPES;
+import static gregtechfoodoption.recipe.GTFORecipeMaps.SLICER_RECIPES;
 
 public class BreadsChain {
     public static void init() {
@@ -200,7 +201,7 @@ public class BreadsChain {
                 .outputs(FLAT_DOUGH.getStackForm())
                 .buildAndRegister();
 
-        ModHandler.addShapedRecipe("gtfo_slice_bread",  PRESLICED_BREAD.getStackForm(), "Bk", 'B', Items.BREAD);
+        ModHandler.addShapedRecipe("gtfo_slice_bread", PRESLICED_BREAD.getStackForm(), "Bk", 'B', Items.BREAD);
         CUTTER_RECIPES.recipeBuilder().EUt(18).duration(30)
                 .inputs(new ItemStack(Items.BREAD))
                 .outputs(PRESLICED_BREAD.getStackForm())

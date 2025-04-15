@@ -1,6 +1,5 @@
 package gregtechfoodoption;
 
-import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.util.Mods;
 import gregtechfoodoption.block.GTFOMetaBlocks;
@@ -15,12 +14,15 @@ import gregtechfoodoption.network.PacketAppleCoreFoodDivisorUpdate;
 import gregtechfoodoption.utils.GTFOConfigOverrider;
 import gregtechfoodoption.worldgen.GTFODungeonLootLoader;
 import gregtechfoodoption.worldgen.GTFOWorldGenerator;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = GregTechFoodOption.MODID, name = GregTechFoodOption.NAME, version = GregTechFoodOption.VERSION,
@@ -33,6 +35,9 @@ public class GregTechFoodOption {
     @Mod.Instance
     public static GregTechFoodOption instance;
 
+    public static ResourceLocation location(String name) {
+        return new ResourceLocation(GregTechFoodOption.MODID, name);
+    }
 
     @SidedProxy(modId = MODID, clientSide = "gregtechfoodoption.ClientProxy", serverSide = "gregtechfoodoption.CommonProxy")
     public static CommonProxy proxy;
@@ -55,7 +60,7 @@ public class GregTechFoodOption {
 
         MinecraftForge.EVENT_BUS.register(new GTFOEntities()); // For entity registration through EntityEntries!
 
-        if(GTFOConfig.gtfoOtherFoodModConfig.appleCoreCompat)
+        if (GTFOConfig.gtfoOtherFoodModConfig.appleCoreCompat)
             MinecraftForge.EVENT_BUS.register(new GTFOAppleCoreCompat());
 
         GTFOClientHandler.registerSounds();

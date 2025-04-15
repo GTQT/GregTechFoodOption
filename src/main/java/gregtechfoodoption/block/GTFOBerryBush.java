@@ -25,12 +25,10 @@ import java.util.Random;
 
 public class GTFOBerryBush extends GTFOCrop {
     public static final PropertyInteger EFFICIENCY_GTFO = PropertyInteger.create("efficiency", 0, 4);
+    protected static final PropertyInteger DEFAULT_AGE_BUSH = PropertyInteger.create("age", 0, 2);
     private static final AxisAlignedBB SMALL_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 0.5625D, 0.75D);
     private static final AxisAlignedBB LARGE_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.9375D, 0.9375D);
     private static final AxisAlignedBB STEM_AABB = new AxisAlignedBB(0.4325D, 0.0D, 0.4325D, 0.5675D, 0.25D, 0.5675D);
-
-    protected static final PropertyInteger DEFAULT_AGE_BUSH = PropertyInteger.create("age", 0, 2);
-
     private boolean isThorny = false;
 
     protected GTFOBerryBush(String name) {
@@ -39,13 +37,13 @@ public class GTFOBerryBush extends GTFOCrop {
         this.setHardness(1F);
     }
 
+    public static GTFOBerryBush create(String name) {
+        return new GTFOBerryBush(name);
+    }
+
     @Override
     protected boolean canSustainBush(IBlockState state) {
         return state.getBlock() == Blocks.DIRT || super.canSustainBush(state);
-    }
-
-    public static GTFOBerryBush create(String name) {
-        return new GTFOBerryBush(name);
     }
 
     protected BlockStateContainer createBlockState() {
@@ -83,8 +81,7 @@ public class GTFOBerryBush extends GTFOCrop {
         int i = this.getAge(state) + this.getBonemealAgeIncrease(worldIn);
         int j = this.getMaxAge();
 
-        if (i > j)
-        {
+        if (i > j) {
             i = j;
         }
 
@@ -150,7 +147,6 @@ public class GTFOBerryBush extends GTFOCrop {
     }
 
 
-
     public GTFOBerryBush setThorny(boolean thorny) {
         isThorny = thorny;
         return this;
@@ -214,6 +210,6 @@ public class GTFOBerryBush extends GTFOCrop {
 
     @Override
     public PropertyInteger getAgeProperty() {
-       return DEFAULT_AGE_BUSH;
+        return DEFAULT_AGE_BUSH;
     }
 }

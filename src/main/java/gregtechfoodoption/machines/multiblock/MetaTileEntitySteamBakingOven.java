@@ -80,6 +80,21 @@ public class MetaTileEntitySteamBakingOven extends RecipeMapSteamMultiblockContr
         return null;
     }
 
+    @Override
+    protected @NotNull TextureArea getLogo() {
+        return GTFOGuiTextures.GTFO_LOGO_WORKING;
+    }
+
+    @Override
+    protected @NotNull TextureArea getWarningLogo() {
+        return GTFOGuiTextures.GTFO_LOGO_WARNING;
+    }
+
+    @Override
+    protected @NotNull TextureArea getErrorLogo() {
+        return GTFOGuiTextures.GTFO_LOGO_ERROR;
+    }
+
     public static class SteamBakingOvenWorkable extends SteamMultiWorkable {
 
         protected int recipeSteamT;
@@ -153,25 +168,9 @@ public class MetaTileEntitySteamBakingOven extends RecipeMapSteamMultiblockContr
         }
 
 
-
         public long getMaxVoltage() {
             return GTValues.V[4];
         }
 
-    }
-
-    @Override
-    protected @NotNull TextureArea getLogo() {
-        return GTFOGuiTextures.GTFO_LOGO_WORKING;
-    }
-
-    @Override
-    protected @NotNull TextureArea getWarningLogo() {
-        return GTFOGuiTextures.GTFO_LOGO_WARNING;
-    }
-
-    @Override
-    protected @NotNull TextureArea getErrorLogo() {
-        return GTFOGuiTextures.GTFO_LOGO_ERROR;
     }
 }

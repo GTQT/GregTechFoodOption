@@ -108,7 +108,7 @@ public class PastaChain {
                 .inputs(RAW_DITALINI.getStackForm())
                 .outputs(DRIED_DITALINI.getStackForm())
                 .buildAndRegister();
-        
+
         CHEMICAL_BATH_RECIPES.recipeBuilder().EUt(16).duration(600)
                 .inputs(DRIED_TAGLIATELLE.getStackForm())
                 .fluidInputs(Water.getFluid(1000))

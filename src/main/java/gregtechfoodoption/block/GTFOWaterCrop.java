@@ -17,13 +17,13 @@ public class GTFOWaterCrop extends GTFOCrop {
     public static GTFOWaterCrop create(String name) {
         return new GTFOWaterCrop(name);
     }
+
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return WATER_CROP_AABB;
     }
 
-    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
         if (state.getBlock() == this) //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
         {
             IBlockState soil = worldIn.getBlockState(pos.down());
@@ -32,8 +32,7 @@ public class GTFOWaterCrop extends GTFOCrop {
         return this.canSustainBush(worldIn.getBlockState(pos.down())) && acceptableSoil(worldIn.getBlockState(pos.down(2)));
     }
 
-    protected boolean canSustainBush(IBlockState state)
-    {
+    protected boolean canSustainBush(IBlockState state) {
         return state.getBlock() == Blocks.WATER;
     }
 

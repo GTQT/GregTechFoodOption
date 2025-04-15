@@ -117,7 +117,7 @@ public class GreenhouseChain {
                 .outputs(GTUtility.copy(64, log))
                 .outputs(GTUtility.copy(6, sapling))
                 .chancedOutput(GTUtility.copy(4, sapling), 1000, 500)
-                .outputs(GTUtility.copy(4,  crop))
+                .outputs(GTUtility.copy(4, crop))
                 .buildAndRegister();
     }
 }

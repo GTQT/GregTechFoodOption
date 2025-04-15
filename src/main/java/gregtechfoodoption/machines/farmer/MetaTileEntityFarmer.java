@@ -63,23 +63,22 @@ import static gregtechfoodoption.GTFOValues.UPDATE_OPERATION_POS;
 
 public class MetaTileEntityFarmer extends TieredMetaTileEntity implements IControllable, IActiveOutputSide {
 
+    public static final int LENGTH = 9;
+    private static final int BASE_EU_CONSUMPTION = 16;
+    protected final GTItemStackHandler chargerInventory;
     private final int ticksPerAction;
+    private final List<FarmerMode> unusableHarvestingModes = new ArrayList<>();
+    public GregFakePlayer fakePlayer;
+    protected int seedSlot;
+    protected boolean seedsAreEmpty = false;
     private AxisAlignedBB workingArea;
     private MutableBlockPos operationPosition;
-    public static final int LENGTH = 9;
     private boolean isWorking;
     private boolean isWorkingEnabled = true;
     private FarmerMode cachedMode;
-    public GregFakePlayer fakePlayer;
-    private final List<FarmerMode> unusableHarvestingModes = new ArrayList<>();
-    protected int seedSlot;
-    protected boolean seedsAreEmpty = false;
     private boolean autoOutputItems;
     private EnumFacing outputFacing;
     private boolean allowInputFromOutputSide = false;
-
-    private static final int BASE_EU_CONSUMPTION = 16;
-    protected final GTItemStackHandler chargerInventory;
 
 
     public MetaTileEntityFarmer(ResourceLocation metaTileEntityId, int tier, int ticksPerAction) {
@@ -302,7 +301,7 @@ public class MetaTileEntityFarmer extends TieredMetaTileEntity implements IContr
     }
 
     protected IItemHandlerModifiable createExportItemHandler() {
-        return new NotifiableItemStackHandler(this,9, this, true);
+        return new NotifiableItemStackHandler(this, 9, this, true);
     }
 
     @Override
@@ -432,9 +431,26 @@ public class MetaTileEntityFarmer extends TieredMetaTileEntity implements IContr
         return outputFacing == null ? frontFacing.getOpposite() : outputFacing;
     }
 
+    public void setOutputFacing(EnumFacing outputFacing) {
+        this.outputFacing = outputFacing;
+        if (!getWorld().isRemote) {
+            notifyBlockUpdate();
+            writeCustomData(UPDATE_FARMER_OUTPUT_FACING, buf -> buf.writeByte(outputFacing.getIndex()));
+            markDirty();
+        }
+    }
+
     @Override
     public boolean isAutoOutputItems() {
         return autoOutputItems;
+    }
+
+    public void setAutoOutputItems(boolean autoOutputItems) {
+        this.autoOutputItems = autoOutputItems;
+        if (!getWorld().isRemote) {
+            writeCustomData(UPDATE_AUTO_OUTPUT_ITEMS, buf -> buf.writeBoolean(autoOutputItems));
+            markDirty();
+        }
     }
 
     @Override
@@ -489,23 +505,6 @@ public class MetaTileEntityFarmer extends TieredMetaTileEntity implements IContr
             return true;
         }
         return super.onWrenchClick(playerIn, hand, facing, hitResult);
-    }
-
-    public void setOutputFacing(EnumFacing outputFacing) {
-        this.outputFacing = outputFacing;
-        if (!getWorld().isRemote) {
-            notifyBlockUpdate();
-            writeCustomData(UPDATE_FARMER_OUTPUT_FACING, buf -> buf.writeByte(outputFacing.getIndex()));
-            markDirty();
-        }
-    }
-
-    public void setAutoOutputItems(boolean autoOutputItems) {
-        this.autoOutputItems = autoOutputItems;
-        if (!getWorld().isRemote) {
-            writeCustomData(UPDATE_AUTO_OUTPUT_ITEMS, buf -> buf.writeBoolean(autoOutputItems));
-            markDirty();
-        }
     }
 
     @Override

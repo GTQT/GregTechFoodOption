@@ -3,8 +3,6 @@ package gregtechfoodoption.worldgen;
 import gregtech.api.util.function.TriConsumer;
 import gregtechfoodoption.utils.GTFOLog;
 import gregtechfoodoption.worldgen.condition.FeatureCondition;
-import gregtechfoodoption.worldgen.trees.GTFOTree;
-import gregtechfoodoption.worldgen.trees.GTFOTreeGen;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -16,15 +14,15 @@ import java.util.Random;
 
 public abstract class GTFOFeature {
 
-    private NoiseGeneratorSimplex generatorSimplex;
-    private final int seed;
-    public final List<FeatureCondition> featureConditions = new ArrayList<>();
     public static final List<GTFOFeature> FEATURES = new ArrayList<>();
+    public final List<FeatureCondition> featureConditions = new ArrayList<>();
+    private final int seed;
     protected GTFOFeatureGen FEATURE_GROW_INSTANCE;
     protected GTFOFeatureGen WORLD_GEN_INSTANCE;
-
+    private NoiseGeneratorSimplex generatorSimplex;
     private int totalChunksChecked;
     private int totalChunksPlaced;
+
     public GTFOFeature(int seed) {
         this.seed = seed;
         FEATURES.add(this);

@@ -5,12 +5,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 
 public class LacingEntry {
-    private ItemStack lacingItem;
-    private PotionEffect appliedEffect;
-    private String nbtKey;
-
-
     public static GTControlledRegistry<String, LacingEntry> LACING_REGISTRY = new GTControlledRegistry<>(255);
+    private final ItemStack lacingItem;
+    private final PotionEffect appliedEffect;
+    private final String nbtKey;
 
     public LacingEntry(ItemStack lacingItem, PotionEffect appliedEffect, String nbtKey) {
         this.lacingItem = lacingItem;

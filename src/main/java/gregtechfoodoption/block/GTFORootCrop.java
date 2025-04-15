@@ -72,6 +72,6 @@ public class GTFORootCrop extends GTFOCrop {
 
     @Override
     public PropertyInteger getAgeProperty() {
-       return DEFAULT_AGE_ROOT;
+        return DEFAULT_AGE_ROOT;
     }
 }

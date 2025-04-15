@@ -37,9 +37,9 @@ import static gregtech.api.capability.GregtechDataCodes.IS_WORKING;
 
 public class MetaTileEntityMobAgeSorter extends TieredMetaTileEntity {
     private static final int BASE_EU_CONSUMPTION = 8;
+    private final int suckingRange;
     private boolean isWorking;
     private AxisAlignedBB areaBoundingBox;
-    private final int suckingRange;
     private boolean movesAdults;
     private BlockPos areaCenterPos;
 

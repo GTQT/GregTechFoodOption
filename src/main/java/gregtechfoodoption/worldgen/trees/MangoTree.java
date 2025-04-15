@@ -20,6 +20,7 @@ import static gregtechfoodoption.item.GTFOMetaItem.MANGO;
 
 public class MangoTree extends GTFOTree {
     public static int LEAVES_COLOR = 0x7D921E;
+
     public MangoTree() {
         super("mango", 2);
         this.addCondition(new BiomeCondition(new Biome[]{Biomes.MUTATED_JUNGLE_EDGE, Biomes.JUNGLE_EDGE}, 4, 0.2));

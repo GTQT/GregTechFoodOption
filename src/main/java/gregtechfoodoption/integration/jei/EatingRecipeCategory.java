@@ -1,7 +1,6 @@
 package gregtechfoodoption.integration.jei;
 
 import gregtech.api.gui.GuiTextures;
-import gregtech.common.items.MetaItems;
 import gregtechfoodoption.GTFOValues;
 import gregtechfoodoption.Tags;
 import gregtechfoodoption.item.GTFOMetaItem;
@@ -12,15 +11,15 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.resources.I18n;
 import org.jetbrains.annotations.Nullable;
 
 public class EatingRecipeCategory implements IRecipeCategory<EatingRecipeInfo> {
-    private final IDrawable icon;
     protected final IDrawable slot;
+    private final IDrawable icon;
     private final IDrawable arrow;
     private final IGuiHelper guiHelper;
+
     public EatingRecipeCategory(IGuiHelper guiHelper) {
         this.guiHelper = guiHelper;
 
@@ -28,6 +27,7 @@ public class EatingRecipeCategory implements IRecipeCategory<EatingRecipeInfo> {
         this.slot = guiHelper.drawableBuilder(GuiTextures.SLOT.imageLocation, 0, 0, 18, 18).setTextureSize(18, 18).build();
         this.arrow = guiHelper.drawableBuilder(GuiTextures.PROGRESS_BAR_ARROW.imageLocation, 0, 20, 20, 20).setTextureSize(20, 40).build();
     }
+
     @Override
     public String getUid() {
         return GTFOValues.MODID + ":eating_recipe";

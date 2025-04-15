@@ -24,6 +24,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 import java.util.*;
 
 public class GTFOAppleCoreCompat {
+    public static final Map<UUID, Float> clientDivisorsMap = new HashMap<>();
     private static final ArrayList<Item> sparedItems = new ArrayList<>();
     private static final HashMap<Item, FoodValues> sparedItemsFoodValues = new HashMap<>();
     private static final TreeMap<Float, ResourceLocation> foodReductionMap = new TreeMap() {{
@@ -33,43 +34,6 @@ public class GTFOAppleCoreCompat {
         put(3f, new ResourceLocation(GTValues.MODID, "extreme_voltage/47_nichrome_coil"));
         put(5f, new ResourceLocation(GTValues.MODID, "insane_voltage/57_tungstensteel_coil"));
     }};
-    public static final Map<UUID, Float> clientDivisorsMap = new HashMap<>();
-
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void setFoodValuesForEvent(FoodEvent.GetPlayerFoodValues event) {
-        event.foodValues = getGTFOFoodValues(event.unmodifiedFoodValues, event.food, event.player);
-    }
-
-    public FoodValues getGTFOFoodValues(FoodValues originalValues, ItemStack food, EntityPlayer player) {
-        Item sparedFood = food.getItem();
-        if (sparedItems.contains(sparedFood)) {
-            if (sparedItemsFoodValues.containsKey(sparedFood))
-                return sparedItemsFoodValues.get(sparedFood);
-            return originalValues;
-        }
-        if (GTFOConfig.gtfoOtherFoodModConfig.reduceForeignFoodStats) {
-            ItemStack actualFood = food;
-
-            float modifier = this.getFoodModifier(player, actualFood);
-            return this.getModifiedFoodValues(originalValues, modifier);
-        }
-        return originalValues;
-    }
-
-    private FoodValues getModifiedFoodValues(FoodValues foodValues, float modifier) {
-        return new FoodValues((int) Math.max(1, (float) foodValues.hunger / modifier), (float) Math.max(0.1, foodValues.saturationModifier / modifier));
-    }
-
-    private float getFoodModifier(EntityPlayer player, ItemStack actualFood) {
-        return actualFood.getItem().getRegistryName().getNamespace().equals("gregtechfoodoption") ? 1 : getForeignFoodDivisor(player);
-    }
-
-    private float getForeignFoodDivisor(EntityPlayer player) {
-        if (GTFOConfig.gtfoOtherFoodModConfig.useDefaultForeignFoodStatsReduction) {
-            return clientDivisorsMap.get(player.getUniqueID());
-        } else
-            return GTFOConfig.gtfoOtherFoodModConfig.constantFoodStatsDivisor;
-    }
 
     public static float advancementLookup(EntityPlayer player) {
         Map.Entry<Float, ResourceLocation> highestAdvancement = foodReductionMap.lastEntry();
@@ -115,5 +79,41 @@ public class GTFOAppleCoreCompat {
 
     public static boolean isAppleCoreEdible(ItemStack stack) {
         return stack.getItem() instanceof IEdible;
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void setFoodValuesForEvent(FoodEvent.GetPlayerFoodValues event) {
+        event.foodValues = getGTFOFoodValues(event.unmodifiedFoodValues, event.food, event.player);
+    }
+
+    public FoodValues getGTFOFoodValues(FoodValues originalValues, ItemStack food, EntityPlayer player) {
+        Item sparedFood = food.getItem();
+        if (sparedItems.contains(sparedFood)) {
+            if (sparedItemsFoodValues.containsKey(sparedFood))
+                return sparedItemsFoodValues.get(sparedFood);
+            return originalValues;
+        }
+        if (GTFOConfig.gtfoOtherFoodModConfig.reduceForeignFoodStats) {
+            ItemStack actualFood = food;
+
+            float modifier = this.getFoodModifier(player, actualFood);
+            return this.getModifiedFoodValues(originalValues, modifier);
+        }
+        return originalValues;
+    }
+
+    private FoodValues getModifiedFoodValues(FoodValues foodValues, float modifier) {
+        return new FoodValues((int) Math.max(1, (float) foodValues.hunger / modifier), (float) Math.max(0.1, foodValues.saturationModifier / modifier));
+    }
+
+    private float getFoodModifier(EntityPlayer player, ItemStack actualFood) {
+        return actualFood.getItem().getRegistryName().getNamespace().equals("gregtechfoodoption") ? 1 : getForeignFoodDivisor(player);
+    }
+
+    private float getForeignFoodDivisor(EntityPlayer player) {
+        if (GTFOConfig.gtfoOtherFoodModConfig.useDefaultForeignFoodStatsReduction) {
+            return clientDivisorsMap.get(player.getUniqueID());
+        } else
+            return GTFOConfig.gtfoOtherFoodModConfig.constantFoodStatsDivisor;
     }
 }

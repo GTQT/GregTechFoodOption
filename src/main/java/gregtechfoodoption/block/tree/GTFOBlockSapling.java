@@ -2,8 +2,8 @@ package gregtechfoodoption.block.tree;
 
 import gregtechfoodoption.GTFOValues;
 import gregtechfoodoption.block.GTFOMetaBlocks;
-import gregtechfoodoption.worldgen.trees.GTFOTree;
 import gregtechfoodoption.block.IVariantNamed;
+import gregtechfoodoption.worldgen.trees.GTFOTree;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -27,9 +27,8 @@ import static net.minecraft.block.BlockSapling.STAGE;
 
 public class GTFOBlockSapling extends BlockBush implements IGrowable, IVariantNamed {
 
-    protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0.0D, 0.1, 0.9, 0.8, 0.9);
-
     public static final PropertyInteger VARIANT = PropertyInteger.create("variant", 0, 7);
+    protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0.0D, 0.1, 0.9, 0.8, 0.9);
     public final int offset;
 
     public GTFOBlockSapling(int offset) {
@@ -125,16 +124,14 @@ public class GTFOBlockSapling extends BlockBush implements IGrowable, IVariantNa
         return state.getValue(VARIANT) << 1;
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-    {
-        if (!worldIn.isRemote)
-        {
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+        if (!worldIn.isRemote) {
             super.updateTick(worldIn, pos, state, rand);
 
             if (rand.nextInt(7) != 0) return; // Short-circuit the rest of this (looking at you, BlockSapling)
-            if (!worldIn.isAreaLoaded(pos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
-            if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
-            {
+            if (!worldIn.isAreaLoaded(pos, 1))
+                return; // Forge: prevent loading unloaded chunks when checking neighbor's light
+            if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
                 this.grow(worldIn, rand, pos, state);
             }
         }

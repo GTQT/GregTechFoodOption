@@ -7,7 +7,8 @@ import gregtechfoodoption.GTFOValues;
 import gregtechfoodoption.integration.applecore.GTFOAppleCoreCompat;
 import gregtechfoodoption.potion.LacingEntry;
 import gregtechfoodoption.utils.GTFOUtils;
-import it.unimi.dsi.fastutil.objects.*;
+import it.unimi.dsi.fastutil.objects.Object2FloatArrayMap;
+import it.unimi.dsi.fastutil.objects.Object2FloatMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -16,20 +17,18 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.Loader;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Supplier;
 
 public class GTFOFoodStats implements IFoodBehavior, IItemBehaviour { // These names suck
+    public RandomPotionEffect[] potionEffects;
+    public Supplier<ItemStack> stackSupplier;
+    public Object2FloatMap<String> nutrients = new Object2FloatArrayMap<>();
     protected int foodLevel;
     protected float saturation;
     protected boolean isDrink;
     protected boolean alwaysEdible;
-    public RandomPotionEffect[] potionEffects;
-    public Supplier<ItemStack> stackSupplier;
-    public Object2FloatMap<String> nutrients = new Object2FloatArrayMap<>();
     protected int eatingDuration = 32;
 
 
@@ -129,22 +128,22 @@ public class GTFOFoodStats implements IFoodBehavior, IItemBehaviour { // These n
         }
     }
 
+    public int getEatingDuration() {
+        return eatingDuration;
+    }
+
     public GTFOFoodStats setEatingDuration(int duration) {
         this.eatingDuration = duration;
         return this;
     }
 
+    public RandomPotionEffect[] getPotionEffects() {
+        return potionEffects;
+    }
+
     public GTFOFoodStats setPotionEffects(RandomPotionEffect... effects) {
         this.potionEffects = effects;
         return this;
-    }
-
-    public int getEatingDuration() {
-        return eatingDuration;
-    }
-
-    public RandomPotionEffect[] getPotionEffects() {
-        return potionEffects;
     }
 
     public Supplier<ItemStack> getStackSupplier() {

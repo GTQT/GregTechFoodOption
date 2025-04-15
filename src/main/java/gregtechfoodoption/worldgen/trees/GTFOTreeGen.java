@@ -4,7 +4,6 @@ import gregtechfoodoption.GTFOConfig;
 import gregtechfoodoption.worldgen.GTFOFeatureGen;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.SaplingGrowTreeEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;

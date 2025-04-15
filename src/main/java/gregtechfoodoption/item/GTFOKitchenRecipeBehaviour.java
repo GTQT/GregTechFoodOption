@@ -21,21 +21,6 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class GTFOKitchenRecipeBehaviour implements ItemUIFactory, IItemBehaviour {
-    @Override
-    public ModularUI createUI(PlayerInventoryHolder playerInventoryHolder, EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 220, 240);
-        ItemStack stack = playerInventoryHolder.getCurrentItem();
-        builder.widget(new KitchenRecipeWidget(10, 10, 180, 243,
-                getRecipeCount(stack),
-                (tag) -> addRecipe(stack, tag),
-                (index) -> getRecipe(stack, index),
-                (finalResult) -> setFinalResult(stack, finalResult),
-                (index) -> deleteRecipe(stack, index),
-                getFinalResult(stack)));
-        builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 30, 155);
-        return builder.build(playerInventoryHolder, entityPlayer);
-    }
-
     private static void addRecipe(ItemStack stack, NBTTagCompound recipe) {
         if (!GTFOMetaItem.KITCHEN_RECIPE.isItemEqual(stack))
             return;
@@ -101,6 +86,22 @@ public class GTFOKitchenRecipeBehaviour implements ItemUIFactory, IItemBehaviour
             return null;
         return new ItemStack(stack.getTagCompound().getCompoundTag("finalresult"));
     }
+
+    @Override
+    public ModularUI createUI(PlayerInventoryHolder playerInventoryHolder, EntityPlayer entityPlayer) {
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 220, 240);
+        ItemStack stack = playerInventoryHolder.getCurrentItem();
+        builder.widget(new KitchenRecipeWidget(10, 10, 180, 243,
+                getRecipeCount(stack),
+                (tag) -> addRecipe(stack, tag),
+                (index) -> getRecipe(stack, index),
+                (finalResult) -> setFinalResult(stack, finalResult),
+                (index) -> deleteRecipe(stack, index),
+                getFinalResult(stack)));
+        builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 30, 155);
+        return builder.build(playerInventoryHolder, entityPlayer);
+    }
+
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         ItemStack heldItem = player.getHeldItem(hand);

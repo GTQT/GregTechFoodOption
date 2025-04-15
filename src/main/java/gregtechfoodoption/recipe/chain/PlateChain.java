@@ -11,7 +11,6 @@ import gregtechfoodoption.GTFOMaterialHandler;
 import gregtechfoodoption.block.GTFOBlockCasing;
 import gregtechfoodoption.block.GTFOMetaBlocks;
 import gregtechfoodoption.item.GTFOMetaItem;
-import gregtechfoodoption.utils.GTFOUtils;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -99,9 +98,9 @@ public class PlateChain {
                 .buildAndRegister();
 
         BLAST_RECIPES.recipeBuilder().EUt(120).duration(800).blastFurnaceTemp(1600)
-            .inputs(GTFOMaterialHandler.UnfiredPorcelainTile.getItemStack())
-            .outputs(GTFOMaterialHandler.BiscuitPorcelainTile.getItemStack())
-            .buildAndRegister();
+                .inputs(GTFOMaterialHandler.UnfiredPorcelainTile.getItemStack())
+                .outputs(GTFOMaterialHandler.BiscuitPorcelainTile.getItemStack())
+                .buildAndRegister();
         BLAST_RECIPES.recipeBuilder().EUt(120).duration(500).blastFurnaceTemp(1600)
                 .inputs(GTFOMaterialHandler.BiscuitPorcelainTile.getItemStack())
                 .circuitMeta(1)

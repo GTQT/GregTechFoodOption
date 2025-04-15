@@ -1,4 +1,5 @@
 package gregtechfoodoption.machines.multiblock;
+
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
@@ -58,12 +59,16 @@ import static gregtechfoodoption.block.GTFOMetaBlocks.GTFO_METAL_CASING;
 
 public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockController implements IProgressBarMultiblock {
 
+    private static final MultiblockAbility<?>[] ALLOWED_ABILITIES = {
+            MultiblockAbility.IMPORT_ITEMS, MultiblockAbility.EXPORT_ITEMS,
+            MultiblockAbility.INPUT_ENERGY, MultiblockAbility.MAINTENANCE_HATCH
+    };
+    public int size;
+    public boolean adaptable = true;
     private int temp;
     private int targetTemp;
     private boolean canAchieveTargetTemp;
     private boolean hasEnoughEnergy;
-    public int size;
-    public boolean adaptable = true;
     private boolean canRunRecipe = false;
 
     public MetaTileEntityElectricBakingOven(ResourceLocation metaTileEntityId) {
@@ -74,10 +79,27 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
         targetTemp = 300;
     }
 
-    private static final MultiblockAbility<?>[] ALLOWED_ABILITIES = {
-            MultiblockAbility.IMPORT_ITEMS, MultiblockAbility.EXPORT_ITEMS,
-            MultiblockAbility.INPUT_ENERGY, MultiblockAbility.MAINTENANCE_HATCH
-    };
+    // This function is highly useful for detecting the length of this multiblock.
+    public static TraceabilityPredicate isIndicatorPredicate() {
+        return new TraceabilityPredicate((blockWorldState) -> {
+            if (air().test(blockWorldState)) {
+                blockWorldState.getMatchContext().increment("bakingOvenLength", 1);
+                return true;
+            } else
+                return false;
+        });
+    }
+
+    public static int temperatureEnergyCost(int temp, int multiSize) {
+        return temp <= 300 ? 0 : (int) Math.exp(((double) temp - 100 + (multiSize * 5)) / 100);
+    }
+
+    // Is the inverse of the previous function.
+    public static int temperatureForEnergy(int EUt) {
+        if (EUt <= 8)
+            return 300;
+        return (int) (Math.log(EUt) * 100) + 100;
+    }
 
     @Override
     protected void updateFormedValid() {
@@ -130,7 +152,6 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
         setTemp(temp - 5);
         return false;
     }
-
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
@@ -224,17 +245,6 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
 
     }
 
-    // This function is highly useful for detecting the length of this multiblock.
-    public static TraceabilityPredicate isIndicatorPredicate() {
-        return new TraceabilityPredicate((blockWorldState) -> {
-            if (air().test(blockWorldState)) {
-                blockWorldState.getMatchContext().increment("bakingOvenLength", 1);
-                return true;
-            } else
-                return false;
-        });
-    }
-
     @Override
     public void invalidateStructure() {
         setTemp(300);
@@ -250,17 +260,6 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityElectricBakingOven(metaTileEntityId);
-    }
-
-    public static int temperatureEnergyCost(int temp, int multiSize) {
-        return temp <= 300 ? 0 : (int) Math.exp(((double) temp - 100 + (multiSize * 5)) / 100);
-    }
-
-    // Is the inverse of the previous function.
-    public static int temperatureForEnergy(int EUt) {
-        if (EUt <= 8)
-            return 300;
-        return (int) (Math.log(EUt) * 100) + 100;
     }
 
     @Override
@@ -359,44 +358,6 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
     @Override
     public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager) {
         return null;
-    }
-
-    private class ElectricBakingOvenLogic extends MultiblockRecipeLogic {
-        public ElectricBakingOvenLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return ((MetaTileEntityElectricBakingOven) this.getMetaTileEntity()).size;
-        }
-
-        @Override
-        protected void performOverclocking(@NotNull Recipe recipe, @NotNull OCParams ocParams, @NotNull OCResult ocResult) {
-            super.performOverclocking(recipe, ocParams, ocResult);
-            ocResult.setEut(0);
-        }
-
-        @Override
-        public long getRecipeEUt() {
-            return temperatureEnergyCost(temp, size);
-        }
-
-        @Override
-        public boolean isWorking() {
-            return temp > 300 && !this.hasNotEnoughEnergy && this.workingEnabled;
-        }
-
-        @Override
-        public @NotNull ParallelLogicType getParallelLogicType() {
-            return ParallelLogicType.MULTIPLY;
-        }
-
-        @Override
-        protected void updateRecipeProgress() {
-            super.updateRecipeProgress();
-            canRunRecipe = true;
-        }
     }
 
     @Override
@@ -499,9 +460,46 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
         return builder;
     }
 
-
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
         this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, this.getFrontFacing(), temp > 300, this.recipeMapWorkable.isWorkingEnabled());
+    }
+
+    private class ElectricBakingOvenLogic extends MultiblockRecipeLogic {
+        public ElectricBakingOvenLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return ((MetaTileEntityElectricBakingOven) this.getMetaTileEntity()).size;
+        }
+
+        @Override
+        protected void performOverclocking(@NotNull Recipe recipe, @NotNull OCParams ocParams, @NotNull OCResult ocResult) {
+            super.performOverclocking(recipe, ocParams, ocResult);
+            ocResult.setEut(0);
+        }
+
+        @Override
+        public long getRecipeEUt() {
+            return temperatureEnergyCost(temp, size);
+        }
+
+        @Override
+        public boolean isWorking() {
+            return temp > 300 && !this.hasNotEnoughEnergy && this.workingEnabled;
+        }
+
+        @Override
+        public @NotNull ParallelLogicType getParallelLogicType() {
+            return ParallelLogicType.MULTIPLY;
+        }
+
+        @Override
+        protected void updateRecipeProgress() {
+            super.updateRecipeProgress();
+            canRunRecipe = true;
+        }
     }
 }

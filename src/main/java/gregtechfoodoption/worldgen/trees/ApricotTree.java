@@ -19,6 +19,7 @@ import static gregtechfoodoption.item.GTFOMetaItem.APRICOT;
 
 public class ApricotTree extends GTFOTree {
     public static int LEAVES_COLOR = 0x87A92C;
+
     public ApricotTree() {
         super("apricot", 3);
         this.addCondition(new BiomeCondition(Biomes.MUTATED_SAVANNA, 4, 0.40));

@@ -1,17 +1,12 @@
 package gregtechfoodoption.recipe.chain;
 
 import gregtech.api.recipes.ModHandler;
-import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.unification.OreDictUnifier;
-import gregtechfoodoption.GTFOValues;
 import gregtechfoodoption.recipe.GTFORecipeMaps;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtechfoodoption.GTFOMaterialHandler.*;
-import static gregtechfoodoption.GTFOMaterialHandler.LemonLimeSludge;
 import static gregtechfoodoption.item.GTFOMetaItem.*;
 
 public class BerryChain {

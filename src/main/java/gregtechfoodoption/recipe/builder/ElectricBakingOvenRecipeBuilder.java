@@ -12,8 +12,6 @@ import net.minecraft.nbt.NBTTagInt;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-
 public class ElectricBakingOvenRecipeBuilder extends RecipeBuilder<ElectricBakingOvenRecipeBuilder> {
 
     private int temp;

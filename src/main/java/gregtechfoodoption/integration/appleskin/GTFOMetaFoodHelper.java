@@ -27,8 +27,7 @@ public class GTFOMetaFoodHelper extends FoodHelper {
         MetaItem<?>.MetaValueItem metaValueItem = metaItem.getItem(stackInHand);
         IItemUseManager useManager = metaValueItem.getUseManager();
         if (useManager != null) {
-            if (useManager instanceof FoodUseManager) {
-                FoodUseManager foodUseManager = (FoodUseManager) useManager;
+            if (useManager instanceof FoodUseManager foodUseManager) {
                 IFoodBehavior foodStats = foodUseManager.getFoodStats();
                 int hunger = foodStats.getFoodLevel(stackInHand, null);
                 float saturationModifier = foodStats.getSaturation(stackInHand, null);

@@ -4,11 +4,9 @@ import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
 import gregtechfoodoption.utils.GTFOUtils;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -19,12 +17,9 @@ import java.util.Arrays;
 
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
-import static gregtech.api.unification.material.Materials.Calcite;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.common.items.MetaItems.CARBON_MESH;
 import static gregtechfoodoption.GTFOMaterialHandler.*;
-import static gregtechfoodoption.GTFOMaterialHandler.Sludge;
 import static gregtechfoodoption.item.GTFOMetaItem.SCRAP_MEAT;
 
 public class FatChain {

@@ -1,7 +1,6 @@
 package gregtechfoodoption;
 
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
-import gregtech.api.util.LocalizationUtils;
 import gregtechfoodoption.block.GTFOMetaBlocks;
 import gregtechfoodoption.entity.GTFOEntities;
 import gregtechfoodoption.integration.appleskin.GTFOMetaHUDOverlay;
@@ -10,19 +9,14 @@ import gregtechfoodoption.potion.AntiSchizoPotion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.network.NetworkPlayerInfo;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ChatType;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -30,7 +24,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -41,41 +34,13 @@ import java.util.UUID;
 public class ClientProxy extends CommonProxy {
 
     private static final ResourceLocation GTFO_CAPE_TEXTURE = new ResourceLocation(GregTechFoodOption.MODID, "textures/gtfocape.png");
-
-
-    @Override
-    public void preLoad() {
-        super.preLoad();
-        if (!Minecraft.getMinecraft().getFramebuffer().isStencilEnabled()) {
-            Minecraft.getMinecraft().getFramebuffer().enableStencil();
-        }
-        GTFOEntities.registerRenders();
-    }
-
-
-    @Override
-    public void onLoad() {
-        super.onLoad();
-        if (Loader.isModLoaded("appleskin")) {
-            GTFOMetaTooltipOverlay.init();
-            GTFOMetaHUDOverlay.init();
-        }
-        GTFOMetaBlocks.registerColors();
-    }
-
-    @Override
-    public void onPostLoad() {
-        super.onPostLoad();
-        capeHoldersUUIDs.add(UUID.fromString("aaf70ec1-ac70-494f-9966-ea5933712750"));
-    }
+    private static final Set<UUID> capeHoldersUUIDs = new HashSet<>();
 
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
         //GTFOMetaBlocks.registerStateMappers();
         GTFOMetaBlocks.registerItemModels();
     }
-
-    private static final Set<UUID> capeHoldersUUIDs = new HashSet<>();
 
     @SubscribeEvent
     public static void onPlayerRender(RenderPlayerEvent.Pre event) {
@@ -106,6 +71,31 @@ public class ClientProxy extends CommonProxy {
         if (event.getPotionEffect().getPotion() == AntiSchizoPotion.INSTANCE && event.getEntity().isEntityEqual(Minecraft.getMinecraft().player)) {
             Minecraft.getMinecraft().ingameGUI.getChatGUI().clearChatMessages(true);
         }
+    }
+
+    @Override
+    public void preLoad() {
+        super.preLoad();
+        if (!Minecraft.getMinecraft().getFramebuffer().isStencilEnabled()) {
+            Minecraft.getMinecraft().getFramebuffer().enableStencil();
+        }
+        GTFOEntities.registerRenders();
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (Loader.isModLoaded("appleskin")) {
+            GTFOMetaTooltipOverlay.init();
+            GTFOMetaHUDOverlay.init();
+        }
+        GTFOMetaBlocks.registerColors();
+    }
+
+    @Override
+    public void onPostLoad() {
+        super.onPostLoad();
+        capeHoldersUUIDs.add(UUID.fromString("aaf70ec1-ac70-494f-9966-ea5933712750"));
     }
 
 }

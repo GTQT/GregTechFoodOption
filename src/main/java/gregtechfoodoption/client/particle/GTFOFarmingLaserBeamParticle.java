@@ -4,17 +4,15 @@ import codechicken.lib.vec.Vector3;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.client.particle.GTLaserBeamParticle;
 import gregtech.client.utils.EffectRenderContext;
-import gregtechfoodoption.machines.farmer.MetaTileEntityFarmer;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 public class GTFOFarmingLaserBeamParticle extends GTLaserBeamParticle {
 
-    private int particleAge;
     private final int particleMaxAge;
+    private int particleAge;
+
     public GTFOFarmingLaserBeamParticle(MetaTileEntity mte, Vector3 startPos, Vector3 endPos, int maxAge) {
         super(mte, startPos, endPos);
         this.particleAge = 0;

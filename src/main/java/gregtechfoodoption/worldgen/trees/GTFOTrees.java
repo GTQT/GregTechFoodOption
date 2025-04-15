@@ -1,7 +1,5 @@
 package gregtechfoodoption.worldgen.trees;
 
-import gregtechfoodoption.worldgen.trees.*;
-
 public class GTFOTrees {
     public static BananaTree BANANA_TREE;
     public static OrangeTree ORANGE_TREE;

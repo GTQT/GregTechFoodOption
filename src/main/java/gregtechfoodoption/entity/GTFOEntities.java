@@ -19,8 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @Mod.EventBusSubscriber(modid = GregTechFoodOption.MODID)
 public class GTFOEntities {
     @SubscribeEvent
-    public static void onEntityRegistry(RegistryEvent.Register<EntityEntry> event)
-    {
+    public static void onEntityRegistry(RegistryEvent.Register<EntityEntry> event) {
         event.getRegistry().register(EntityEntryBuilder.create().entity(EntityItalianBuffalo.class)
                 .id(new ResourceLocation(GregTechFoodOption.MODID, "italian_buffalo"), 28)
                 .name("italian_buffalo")

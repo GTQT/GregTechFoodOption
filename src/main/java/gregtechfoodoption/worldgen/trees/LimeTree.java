@@ -19,6 +19,7 @@ import static gregtechfoodoption.item.GTFOMetaItem.LIME;
 
 public class LimeTree extends GTFOTree {
     public static int LEAVES_COLOR = 0x426801;
+
     public LimeTree() {
         super("lime", 5);
         this.addCondition(new BiomeCondition(Biomes.JUNGLE, 3, 0.3));

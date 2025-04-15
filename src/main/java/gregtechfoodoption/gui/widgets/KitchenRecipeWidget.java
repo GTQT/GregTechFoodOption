@@ -8,9 +8,7 @@ import gregtech.api.gui.widgets.*;
 import gregtech.api.items.metaitem.FoodUseManager;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.category.GTRecipeCategory;
-import gregtech.api.unification.material.registry.MaterialRegistry;
 import gregtech.api.util.Position;
 import gregtech.api.util.Size;
 import gregtech.integration.jei.recipe.GTRecipeWrapper;
@@ -26,17 +24,12 @@ import gregtechfoodoption.utils.GTFOLog;
 import mezz.jei.api.gui.IGhostIngredientHandler;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import mezz.jei.gui.recipes.RecipeCatalysts;
 import mezz.jei.gui.recipes.RecipeLayout;
-import mezz.jei.runtime.JeiHelpers;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ClickType;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.FoodStats;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
@@ -53,18 +46,18 @@ import java.util.function.Function;
 
 public class KitchenRecipeWidget extends AbstractWidgetGroup implements IRecipeTransferHandlerWidget {
 
-    private Function<Integer, NBTTagCompound> loadingFunction;
-    private Consumer<NBTTagCompound> savingFunction;
+    private final Function<Integer, NBTTagCompound> loadingFunction;
+    private final Consumer<NBTTagCompound> savingFunction;
     private Consumer<NBTTagCompound> deletingFunction;
     private int recipeCount;
     private int recipeShown;
-    private PhantomRecipeWidget recipeWidget;
-    private ClickButtonWidget leftArrowWidget;
-    private ClickButtonWidget rightArrowWidget;
-    private ClickButtonWidget deleteButtonWidget;
-    private SimpleTextWidget recipeCountLabel;
-    private SlotWidget finalResultSlot;
-    private ItemStackHandler finalResult = new ItemStackHandler(1) {
+    private final PhantomRecipeWidget recipeWidget;
+    private final ClickButtonWidget leftArrowWidget;
+    private final ClickButtonWidget rightArrowWidget;
+    private final ClickButtonWidget deleteButtonWidget;
+    private final SimpleTextWidget recipeCountLabel;
+    private final SlotWidget finalResultSlot;
+    private final ItemStackHandler finalResult = new ItemStackHandler(1) {
         @NotNull
         @Override
         public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
@@ -85,8 +78,9 @@ public class KitchenRecipeWidget extends AbstractWidgetGroup implements IRecipeT
         }
     };
 
-    private List<ItemStack> neededInputs = new ArrayList<>();
-    private List<FluidStack> neededFluidInputs = new ArrayList<>();
+    private final List<ItemStack> neededInputs = new ArrayList<>();
+    private final List<FluidStack> neededFluidInputs = new ArrayList<>();
+
     public KitchenRecipeWidget(int x, int y, int width, int height, int recipeCount,
                                Consumer<NBTTagCompound> savingFunction,
                                Function<Integer, NBTTagCompound> loadingFunction,

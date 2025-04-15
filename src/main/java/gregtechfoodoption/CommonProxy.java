@@ -8,6 +8,7 @@ import gregtech.api.metatileentity.registry.MTEManager;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.material.event.MaterialRegistryEvent;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtechfoodoption.block.GTFOBerryBush;
 import gregtechfoodoption.block.GTFOCrop;
@@ -39,8 +40,6 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -54,49 +53,14 @@ import static gregtechfoodoption.block.GTFOCrop.CROP_BLOCKS;
 @Mod.EventBusSubscriber(modid = GregTechFoodOption.MODID)
 public class CommonProxy {
 
-    public void preLoad() {
-        GTFOPotions.initPotionInstances();
-        GTFOMetaItems.init();
-
-        GTFORecipeHandler.register();
-        RecipeMaps.BREWING_RECIPES.setMaxOutputs(1);
-        RecipeMaps.EXTRACTOR_RECIPES.setMaxInputs(2);
-        RecipeMaps.FERMENTING_RECIPES.setMaxInputs(1);
-        RecipeMaps.FERMENTING_RECIPES.setMaxOutputs(1);
-        RecipeMaps.COMPRESSOR_RECIPES.setMaxFluidInputs(1);
-        RecipeMaps.COMPRESSOR_RECIPES.setMaxFluidOutputs(1);
-    }
-
-    public void onLoad() {
-    }
-
-    public void onPostLoad() {
-        MinecraftForge.addGrassSeed(GTFOMetaItem.UNKNOWN_SEED.getStackForm(), 5);
-
-        LacingEntry.LACING_REGISTRY.register(0, "cyanide", new LacingEntry(GTFOMaterialHandler.SodiumCyanide.getItemStack(),
-                new PotionEffect(CyanidePoisoningPotion.INSTANCE, 1300, 0),
-                "5dkcap/2/4/"));
-        LacingEntry.LACING_REGISTRY.register(1, "antischizo", new LacingEntry(GTFOMaterialHandler.LithiumCarbonate.getItemStack(),
-                new PotionEffect(AntiSchizoPotion.INSTANCE, 1000, 0),
-                "14hez98zk7/2/3/5/9/10/"));
-        LacingEntry.LACING_REGISTRY.register(2, "lungcancer", new LacingEntry(OreDictUnifier.get(OrePrefix.dust, Materials.Asbestos),
-                new PotionEffect(LungCancerPotion.INSTANCE, 99999999, 0),
-                "17aaqe0i1q/1/2/3/7/10/"));
-
-
-        if (Loader.isModLoaded(GTFOValues.MODID_NUGT) && GTFOConfig.gtfoOtherFoodModConfig.enableGTFONutrition) {
-            GTFONutritionCompatibility.init();
-        }
-
-        GTFOLog.logger.info("Removing recipes during post init (thanks Ender IO!)");
-        GTFORecipeRemoval.init();
-    }
-
     @SubscribeEvent
     public static void registerMTERegistry(MTEManager.MTERegistryEvent event) {
         GregTechAPI.mteManager.createRegistry(GTFOValues.MODID);
     }
-    
+    @SubscribeEvent
+    public static void createMaterialRegistry(MaterialRegistryEvent event) {
+        GregTechAPI.materialManager.createRegistry(GTFOValues.MODID);
+    }
     @SubscribeEvent
     public static void syncConfigValues(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals(GregTechFoodOption.MODID)) {
@@ -148,7 +112,6 @@ public class CommonProxy {
         GTFORecipeAddition.lowInit();
     }
 
-
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void registerOrePrefix(RegistryEvent.Register<IRecipe> event) {
         GTFOLog.logger.info("Registering ore prefix...");
@@ -173,7 +136,7 @@ public class CommonProxy {
         GTFORecipeAddition.compatInit();
     }
 
-        @SubscribeEvent
+    @SubscribeEvent
     @Optional.Method(modid = "enderio")
     public static void registerEIOFarmerJoes(@Nonnull RegistryEvent.Register<IFarmerJoe> event) {
         for (GTFOCrop crop : CROP_BLOCKS) {
@@ -191,6 +154,44 @@ public class CommonProxy {
             event.getRegistry().register(new CustomSeedFarmer(crop, crop.getSeedStack())
                     .setRegistryName(crop.getRegistryName()));
         }
+    }
+
+    public void preLoad() {
+        GTFOPotions.initPotionInstances();
+        GTFOMetaItems.init();
+
+        GTFORecipeHandler.register();
+        RecipeMaps.BREWING_RECIPES.setMaxOutputs(1);
+        RecipeMaps.EXTRACTOR_RECIPES.setMaxInputs(2);
+        RecipeMaps.FERMENTING_RECIPES.setMaxInputs(1);
+        RecipeMaps.FERMENTING_RECIPES.setMaxOutputs(1);
+        RecipeMaps.COMPRESSOR_RECIPES.setMaxFluidInputs(1);
+        RecipeMaps.COMPRESSOR_RECIPES.setMaxFluidOutputs(1);
+    }
+
+    public void onLoad() {
+    }
+
+    public void onPostLoad() {
+        MinecraftForge.addGrassSeed(GTFOMetaItem.UNKNOWN_SEED.getStackForm(), 5);
+
+        LacingEntry.LACING_REGISTRY.register(0, "cyanide", new LacingEntry(GTFOMaterialHandler.SodiumCyanide.getItemStack(),
+                new PotionEffect(CyanidePoisoningPotion.INSTANCE, 1300, 0),
+                "5dkcap/2/4/"));
+        LacingEntry.LACING_REGISTRY.register(1, "antischizo", new LacingEntry(GTFOMaterialHandler.LithiumCarbonate.getItemStack(),
+                new PotionEffect(AntiSchizoPotion.INSTANCE, 1000, 0),
+                "14hez98zk7/2/3/5/9/10/"));
+        LacingEntry.LACING_REGISTRY.register(2, "lungcancer", new LacingEntry(OreDictUnifier.get(OrePrefix.dust, Materials.Asbestos),
+                new PotionEffect(LungCancerPotion.INSTANCE, 99999999, 0),
+                "17aaqe0i1q/1/2/3/7/10/"));
+
+
+        if (Loader.isModLoaded(GTFOValues.MODID_NUGT) && GTFOConfig.gtfoOtherFoodModConfig.enableGTFONutrition) {
+            GTFONutritionCompatibility.init();
+        }
+
+        GTFOLog.logger.info("Removing recipes during post init (thanks Ender IO!)");
+        GTFORecipeRemoval.init();
     }
     // These recipes are generated at the beginning of the init() phase with the proper config set.
     // This is not great practice, but ensures that they are run AFTER CraftTweaker,

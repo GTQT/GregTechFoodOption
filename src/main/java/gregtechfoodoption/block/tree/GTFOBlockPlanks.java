@@ -2,8 +2,8 @@ package gregtechfoodoption.block.tree;
 
 import gregtechfoodoption.GTFOValues;
 import gregtechfoodoption.block.GTFOMetaBlocks;
-import gregtechfoodoption.worldgen.trees.GTFOTree;
 import gregtechfoodoption.block.IVariantNamed;
+import gregtechfoodoption.worldgen.trees.GTFOTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;

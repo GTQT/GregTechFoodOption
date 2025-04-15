@@ -13,6 +13,7 @@ public class EatingRecipeInfo implements IRecipeWrapper {
         this.foodInput = foodInput;
         this.substrateOutput = substrateOutput;
     }
+
     @Override
     public void getIngredients(IIngredients ingredients) {
         ingredients.setInput(VanillaTypes.ITEM, foodInput);

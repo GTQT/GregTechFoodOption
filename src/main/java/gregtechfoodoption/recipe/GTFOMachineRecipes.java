@@ -20,7 +20,6 @@ import gregtechfoodoption.item.GTFOMetaItem;
 import gregtechfoodoption.machines.GTFOTileEntities;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.common.Loader;
 

@@ -20,10 +20,10 @@ public class KitchenRequestNode {
     final Recipe recipe;
     final RecipeMap map;
     final KitchenLogic logic;
-
+    final List<GTRecipeInput> dependencies = new ArrayList<>();
     BlockPos machineRunning;
     KitchenRequestState state = KitchenRequestState.NEEDS_PROCESSING;
-    final List<GTRecipeInput> dependencies = new ArrayList<>();
+
     public KitchenRequestNode(Recipe recipe, RecipeMap map, KitchenLogic logic) {
         this.recipe = recipe;
         this.map = map;

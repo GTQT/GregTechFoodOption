@@ -11,11 +11,9 @@ import gregtechfoodoption.block.GTFOMetaBlocks;
 import gregtechfoodoption.block.tree.GTFOBlockLeaves;
 import gregtechfoodoption.block.tree.GTFOBlockLog;
 import gregtechfoodoption.block.tree.GTFOBlockSapling;
-import gregtechfoodoption.utils.GTFOLog;
 import gregtechfoodoption.utils.GTFOUtils;
 import gregtechfoodoption.worldgen.GTFOFeature;
 import gregtechfoodoption.worldgen.GTFOFeatureGen;
-import gregtechfoodoption.worldgen.condition.FeatureCondition;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
@@ -26,7 +24,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.NoiseGeneratorSimplex;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -42,15 +39,12 @@ import static net.minecraft.block.BlockLeaves.CHECK_DECAY;
 import static net.minecraft.block.BlockLeaves.DECAYABLE;
 
 public abstract class GTFOTree extends GTFOFeature {
+    public static final List<GTFOTree> TREES = new ArrayList<>();
     public final String name;
-
+    private final int seed;
     public IBlockState logState;
     public IBlockState leavesState;
     public IBlockState saplingState;
-
-    private final int seed;
-
-    public static final List<GTFOTree> TREES = new ArrayList<>();
 
     public GTFOTree(String name, int seed) {
         super(seed);
@@ -88,9 +82,6 @@ public abstract class GTFOTree extends GTFOFeature {
     }
 
 
-
-
-
     public void setupBlocks() {
         GTFOBlockLeaves leaves = GTFOMetaBlocks.GTFO_LEAVES.get(seed / 4);
         this.leavesState = leaves.getStateFromMeta(seed % 4 << 2);
@@ -105,6 +96,7 @@ public abstract class GTFOTree extends GTFOFeature {
     }
 
     public abstract int getBlockColor(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex);
+
     public abstract int getItemColor(ItemStack stack, int tintIndex);
 
     public boolean isReplaceable(World world, BlockPos pos) {
@@ -173,7 +165,7 @@ public abstract class GTFOTree extends GTFOFeature {
     }
 
     /**
-     * @param height An integer representing the block height at which this radius is being taken (starting from 0).
+     * @param height      An integer representing the block height at which this radius is being taken (starting from 0).
      * @param trunkHeight An integer representing the height of the trunk.
      * @return The maximum radius outside the center block that the tree can take up at this height value.
      */

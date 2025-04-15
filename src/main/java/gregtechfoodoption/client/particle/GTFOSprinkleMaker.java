@@ -6,7 +6,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.world.World;
 
 public class GTFOSprinkleMaker extends Particle {
-    private CoverSprinkler sprinkler;
+    private final CoverSprinkler sprinkler;
 
     public GTFOSprinkleMaker(World worldIn, double posXIn, double posYIn, double posZIn, CoverSprinkler sprinkler) {
         super(worldIn, posXIn, posYIn, posZIn);

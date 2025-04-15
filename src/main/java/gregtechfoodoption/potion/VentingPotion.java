@@ -2,10 +2,8 @@ package gregtechfoodoption.potion;
 
 import gregtechfoodoption.client.GTFOClientHandler;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 
 public class VentingPotion extends GTFOPotion {
     public static final String TAG_NAME = "gregtechfoodoption - venting";
@@ -24,9 +22,9 @@ public class VentingPotion extends GTFOPotion {
             double playerY = entityLiving.posY;
             double playerZ = entityLiving.posZ;
 
-            for(int i = 0; i < 16; ++i) {
+            for (int i = 0; i < 16; ++i) {
                 double newX = entityLiving.posX + (entityLiving.getRNG().nextDouble() - 0.5) * 16.0;
-                double newY = MathHelper.clamp(entityLiving.posY + (double)(entityLiving.getRNG().nextInt(16) - 8), 0.0, entityLiving.getEntityWorld().getActualHeight() - 1);
+                double newY = MathHelper.clamp(entityLiving.posY + (double) (entityLiving.getRNG().nextInt(16) - 8), 0.0, entityLiving.getEntityWorld().getActualHeight() - 1);
                 double newZ = entityLiving.posZ + (entityLiving.getRNG().nextDouble() - 0.5) * 16.0;
                 if (entityLiving.isRiding()) {
                     entityLiving.dismountRidingEntity();

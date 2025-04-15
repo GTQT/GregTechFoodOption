@@ -1,12 +1,5 @@
 package gregtechfoodoption.recipe.properties;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 import gregtech.api.recipes.properties.RecipeProperty;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -23,14 +16,14 @@ public class MobOnTopProperty extends RecipeProperty<ResourceLocation> {
     public static final String KEY = "mob_on_top";
     private static MobOnTopProperty INSTANCE;
 
+    private MobOnTopProperty() {
+        super(KEY, ResourceLocation.class);
+    }
+
     public static MobOnTopProperty getInstance() {
         if (INSTANCE == null)
             INSTANCE = new MobOnTopProperty();
         return INSTANCE;
-    }
-
-    private MobOnTopProperty() {
-        super(KEY, ResourceLocation.class);
     }
 
     @Override

@@ -5,8 +5,8 @@ import net.minecraft.world.biome.Biome;
 import java.util.Arrays;
 
 public class BiomeCondition extends FeatureCondition {
-    private Biome[] biomes;
-    private double perlinCutoff;
+    private final Biome[] biomes;
+    private final double perlinCutoff;
 
     public BiomeCondition(Biome[] biomes, int maxAmount, double perlinCutoff) {
         super(maxAmount);

@@ -2,7 +2,6 @@ package gregtechfoodoption.mixins.early;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import gregtechfoodoption.potion.AntiSchizoPotion;
-import gregtechfoodoption.utils.GTFOLog;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiPlayerTabOverlay;
 import net.minecraft.client.network.NetHandlerPlayClient;
@@ -25,10 +24,7 @@ public class GuiPlayerTabOverlayMixin {
             return;
         }
         list.removeIf(playerInfo -> {
-            if (!playerInfo.getGameProfile().getName().equals(Minecraft.getMinecraft().player.getName())) {
-                return true;
-            }
-            return false;
+            return !playerInfo.getGameProfile().getName().equals(Minecraft.getMinecraft().player.getName());
         });
     }
 }

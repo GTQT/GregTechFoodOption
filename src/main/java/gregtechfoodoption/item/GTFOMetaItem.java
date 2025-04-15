@@ -42,7 +42,7 @@ import static net.minecraft.potion.Potion.getPotionById;
 
 
 @Optional.Interface(modid = GTFOValues.MODID_AP, iface = "squeek.applecore.api.food.IEdible")
-public class GTFOMetaItem extends MetaItem<GTFOMetaItem.GTFOMetaValueItem> implements IEdible , ItemUIFactory {
+public class GTFOMetaItem extends MetaItem<GTFOMetaItem.GTFOMetaValueItem> implements IEdible, ItemUIFactory {
     //foods
     public static MetaItem<?>.MetaValueItem POPCORN_BAG;
     public static MetaItem<?>.MetaValueItem PAPER_BAG;
@@ -1015,7 +1015,7 @@ public class GTFOMetaItem extends MetaItem<GTFOMetaItem.GTFOMetaValueItem> imple
                 .setPotionEffects(new RandomPotionEffect(MobEffects.JUMP_BOOST, 1000, 0, 100 - 80))
                 .nutrients(0f, 0f, 1f, 0.5f, 0.75f));
         RISOTTO = addItem(283, "food.risotto").addComponents(new GTFOFoodStats(10, 0.8f).setReturnStack(DIRTY_CERAMIC_BOWL.getStackForm())
-                .setPotionEffects(new RandomPotionEffect(MobEffects.SPEED, 10000, 1, 100 - 100))
+                .setPotionEffects(new RandomPotionEffect(MobEffects.SPEED, 10000, 1, 0))
                 .nutrients(1f, 0.25f, 1f, 0.75f, 0.75f));
         SPAGHETTI_ALLASSASSINA = addItem(284, "food.spaghetti_all'assassina").addComponents(new GTFOFoodStats(6, 0.8f).setReturnStack(DIRTY_PLATE.getStackForm())
                 .setPotionEffects(new RandomPotionEffect(MobEffects.STRENGTH, 60, 10, 100 - 60))
@@ -1034,7 +1034,7 @@ public class GTFOMetaItem extends MetaItem<GTFOMetaItem.GTFOMetaValueItem> imple
                 .setPotionEffects(new RandomPotionEffect(MobEffects.NIGHT_VISION, 6000, 0, 100 - 90)).setEatingDuration(64)
                 .nutrients(0.5f, 0.75f, 1f, 1f, 0.25f));
         LASAGNA_PESTO = addItem(290, "food.lasagna.pesto").addComponents(new GTFOFoodStats(15, 0.7f).setReturnStack(DIRTY_PLATE.getStackForm())
-                .setPotionEffects(new RandomPotionEffect(MobEffects.FIRE_RESISTANCE, 6000, 0, 100 - 100)).setEatingDuration(64)
+                .setPotionEffects(new RandomPotionEffect(MobEffects.FIRE_RESISTANCE, 6000, 0, 0)).setEatingDuration(64)
                 .nutrients(1f, 0f, 1f, 1f, 0.25f));
         PASTA_ALLAMOGUS = addItem(295, "food.pasta_all'amogus").addComponents(new GTFOFoodStats(5, 0.1f).setReturnStack(DIRTY_PLATE.getStackForm())
                 .setPotionEffects(new RandomPotionEffect(VentingPotion.INSTANCE, 400, 0, 100 - 50))
@@ -1119,7 +1119,7 @@ public class GTFOMetaItem extends MetaItem<GTFOMetaItem.GTFOMetaValueItem> imple
         SORBET_VIBRANT = addItem(351, "food.sorbet.vibrant").addComponents(new GTFOFoodStats(0, 0f)
                 .nutrients(0, 2f, 0f, 0f, 2f).setEatingDuration(12)
                 .setPotionEffects(new RandomPotionEffect(CreativityPotion.INSTANCE, 1200, 0, 100 - 80),
-                        new RandomPotionEffect(MobEffects.POISON, 1200, 2, 100 - 100),
+                        new RandomPotionEffect(MobEffects.POISON, 1200, 2, 0),
                         new RandomPotionEffect(MobEffects.NAUSEA, 1200, 1, 100 - 40)));
 
         FERMENTED_CHORUS = addItem(352, "food.fermented_chorus").addComponents(new GTFOFoodStats(2, 0.5f, false, true)
@@ -1127,14 +1127,14 @@ public class GTFOMetaItem extends MetaItem<GTFOMetaItem.GTFOMetaValueItem> imple
                 .setPotionEffects(new RandomPotionEffect(EnhancedChorusPotion.INSTANCE, 300, 0, 100 - 80)));
         FERMENTED_CHORUS_PIE = addItem(353, "food.pie.fermented_chorus").addComponents(new GTFOFoodStats(6, 1f, false, true)
                 .nutrients(0, 0f, 2f, 0f, 2f)
-                .setPotionEffects(new RandomPotionEffect(EnhancedChorusPotion.INSTANCE, 1200, 0, 100 - 100)));
+                .setPotionEffects(new RandomPotionEffect(EnhancedChorusPotion.INSTANCE, 1200, 0, 0)));
 
         NAQUADAH_CHIPS = addItem(354, "food.naquadah_chips").addComponents(new GTFOFoodStats(GTFOConfig.gtfoFoodConfig.chipHunger, GTFOConfig.gtfoFoodConfig.chipSaturation, false, true, () -> OreDictUnifier.get(OrePrefix.foil, Materials.TungstenSteel))
                 .nutrients(0, 0f, 1f, 0f, 1f)
-                .setPotionEffects(new RandomPotionEffect(MobEffects.BLINDNESS, 500, 0, 100 - 100)));
+                .setPotionEffects(new RandomPotionEffect(MobEffects.BLINDNESS, 500, 0, 0)));
 
         CHORUS_CAPLET = addItem(355, "food.caplet.chorus").addComponents(new GTFOFoodStats(0, 1f, false, true, ItemStack.EMPTY)
-                .setPotionEffects(new RandomPotionEffect(EnhancedChorusPotion.INSTANCE, 300, 0, 100 - 100)));
+                .setPotionEffects(new RandomPotionEffect(EnhancedChorusPotion.INSTANCE, 300, 0, 0)));
         VIBRANT_CAPLET = addItem(356, "food.caplet.vibrant").addComponents(new GTFOFoodStats(0, 1f, false, true, ItemStack.EMPTY)
                 .setPotionEffects(new RandomPotionEffect(CreativityPotion.INSTANCE, 600, 0, 100 - 60),
                         new RandomPotionEffect(MobEffects.POISON, 600, 2, 100 - 90)));
@@ -1143,7 +1143,7 @@ public class GTFOMetaItem extends MetaItem<GTFOMetaItem.GTFOMetaValueItem> imple
                 .setEatingDuration(40)
                 .nutrients(0f, 1f, 1f, 1f, 0f)
                 .setPotionEffects(new RandomPotionEffect(CreativityPotion.INSTANCE, 1200, 0, 100 - 80),
-                        new RandomPotionEffect(MobEffects.POISON, 1200, 2, 100 - 100)));
+                        new RandomPotionEffect(MobEffects.POISON, 1200, 2, 0)));
 
         UNKNOWN_SEED = addItem(158, "seed.unknown");
         ONION_SEED = addItem(159, "seed.onion");
@@ -1284,19 +1284,20 @@ public class GTFOMetaItem extends MetaItem<GTFOMetaItem.GTFOMetaValueItem> imple
         }
         return false;
     }
+
     @Override
     public ModularPanel buildUI(HandGuiData data, PanelSyncManager syncManager) {
         return null;
     }
+
     public class GTFOMetaValueItem extends MetaItem<?>.MetaValueItem {
 
         private boolean kitchenBlacklisted;
+        private boolean hasEnchantmentSheen;
 
         protected GTFOMetaValueItem(int metaValue, String unlocalizedName) {
             super(metaValue, unlocalizedName);
         }
-
-        private boolean hasEnchantmentSheen;
 
         public void setHasEnchantmentSheen(boolean hasEnchantmentSheen) {
             this.hasEnchantmentSheen = hasEnchantmentSheen;

@@ -4,9 +4,9 @@ import com.google.common.collect.Lists;
 import gregtech.core.CoreModule;
 import gregtechfoodoption.GTFOValues;
 import gregtechfoodoption.block.GTFOMetaBlocks;
+import gregtechfoodoption.block.IVariantNamed;
 import gregtechfoodoption.worldgen.trees.GTFOTree;
 import gregtechfoodoption.worldgen.trees.GTFOTrees;
-import gregtechfoodoption.block.IVariantNamed;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.properties.PropertyInteger;
@@ -161,7 +161,7 @@ public class GTFOBlockLeaves extends BlockLeaves implements IVariantNamed {
 
     @Override
     protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance) {
-        spawnAsEntity(worldIn, pos, ((GTFOBlockLeaves)state.getBlock()).getTreeFromState(state).getAppleDrop(chance));
+        spawnAsEntity(worldIn, pos, ((GTFOBlockLeaves) state.getBlock()).getTreeFromState(state).getAppleDrop(chance));
     }
 
     // Primarily for getting the correct sapling type.

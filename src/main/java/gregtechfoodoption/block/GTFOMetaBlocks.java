@@ -85,7 +85,7 @@ public class GTFOMetaBlocks {
             registerItemModel(sapling);
             for (int v = 0; v < 8; v++)
                 ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(sapling), v << 1,
-                    new ModelResourceLocation(sapling.getRegistryName() + "_" + v, "inventory"));
+                        new ModelResourceLocation(sapling.getRegistryName() + "_" + v, "inventory"));
         }
         for (GTFOBlockLog log : GTFO_LOGS) {
             registerItemModelWithOverride(log, ImmutableMap.of(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y));

@@ -1,12 +1,11 @@
 package gregtechfoodoption.recipe.chain;
 
-import gregtech.api.recipes.ModHandler;
-import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.ore.OrePrefix;
 
-import static gregtech.api.recipes.RecipeMaps.*;
-import static gregtech.api.unification.material.Materials.*;
-import static gregtechfoodoption.item.GTFOMetaItem.*;
+import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
+import static gregtech.api.unification.material.Materials.PolyvinylChloride;
+import static gregtech.api.unification.material.Materials.StainlessSteel;
+import static gregtechfoodoption.item.GTFOMetaItem.IV_BAG;
 
 public class IVBagChain {
     public static void init() {

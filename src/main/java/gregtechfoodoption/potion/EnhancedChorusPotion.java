@@ -1,6 +1,5 @@
 package gregtechfoodoption.potion;
 
-import gregtechfoodoption.client.GTFOClientHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

@@ -3,13 +3,10 @@ package gregtechfoodoption.integration.enderio;
 import crazypants.enderio.base.init.ModObject;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.ore.OrePrefix;
 import gregtechfoodoption.GTFOMaterialHandler;
 import gregtechfoodoption.recipe.GTFORecipeMaps;
 import net.minecraft.init.Items;
 import net.minecraft.util.ResourceLocation;
-
-import static gregtech.api.unification.material.Materials.Wheat;
 
 public class GTFOEIORecipeHandler {
     public static void enderios() {

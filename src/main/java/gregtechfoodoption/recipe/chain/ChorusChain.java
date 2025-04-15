@@ -7,7 +7,8 @@ import gregtechfoodoption.item.GTFOMetaItem;
 import gregtechfoodoption.recipe.GTFORecipeMaps;
 import net.minecraft.init.Items;
 
-import static gregtech.api.GTValues.*;
+import static gregtech.api.GTValues.HV;
+import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.CANNER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtechfoodoption.item.GTFOMetaItem.*;

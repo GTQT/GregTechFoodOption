@@ -3,9 +3,9 @@ package gregtechfoodoption.recipe;
 import gregtechfoodoption.GTFOConfig;
 import gregtechfoodoption.GTFOValues;
 import gregtechfoodoption.integration.enderio.GTFOEIORecipeHandler;
-import gregtechfoodoption.worldgen.trees.GTFOTree;
 import gregtechfoodoption.recipe.chain.*;
 import gregtechfoodoption.tools.GTFOToolItems;
+import gregtechfoodoption.worldgen.trees.GTFOTree;
 import net.minecraftforge.fml.common.Loader;
 
 public class GTFORecipeAddition {

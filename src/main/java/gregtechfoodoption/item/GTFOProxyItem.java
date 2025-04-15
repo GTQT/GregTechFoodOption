@@ -10,8 +10,8 @@ import static gregtechfoodoption.item.GTFOMetaItems.SHAPED_ITEM;
 
 public class GTFOProxyItem {
     private final Supplier<ItemStack> itemPreparer;
-    private ItemStack preferredItem;
     private final boolean isOverriden;
+    private ItemStack preferredItem;
 
     public GTFOProxyItem(Supplier<MetaOreDictItem.OreDictValueItem> gtfoItem, int gtfoItemID, String name, Supplier<ItemStack> otherItem) {
         isOverriden = GregTechAPI.materialManager.getMaterial(name) != null;

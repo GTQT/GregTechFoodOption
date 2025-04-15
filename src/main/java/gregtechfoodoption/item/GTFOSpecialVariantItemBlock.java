@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 public class GTFOSpecialVariantItemBlock<T extends Block & IVariantNamed> extends ItemBlock {
 
-    private T block;
+    private final T block;
 
     public GTFOSpecialVariantItemBlock(T block) {
         super(block);

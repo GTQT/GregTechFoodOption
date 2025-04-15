@@ -9,7 +9,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class GTFOSprinkle extends Particle {
-    private double posXFinal, posYFinal, posZFinal;
+    private final double posXFinal;
+    private final double posYFinal;
+    private final double posZFinal;
 
     public GTFOSprinkle(World worldIn, double posXIn, double posYIn, double posZIn, double posXFinal, double posYFinal, double posZFinal, int color) {
         super(worldIn, posXIn, posYIn, posZIn);
@@ -57,7 +59,7 @@ public class GTFOSprinkle extends Particle {
                 d0 = BlockLiquid.getLiquidHeightPercent(iblockstate.getValue(BlockLiquid.LEVEL));
             }
 
-            double d1 = (double)(MathHelper.floor(this.posY) + 1) - d0;
+            double d1 = (double) (MathHelper.floor(this.posY) + 1) - d0;
             if (this.posY < d1) {
                 this.setExpired();
             }

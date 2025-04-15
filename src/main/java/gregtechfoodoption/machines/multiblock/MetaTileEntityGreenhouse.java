@@ -23,7 +23,6 @@ import gregtechfoodoption.GTFOConfig;
 import gregtechfoodoption.block.GTFOGlassCasing;
 import gregtechfoodoption.block.GTFOMetaBlocks;
 import gregtechfoodoption.client.GTFOGuiTextures;
-import gregtechfoodoption.recipe.GTFORecipeMaps;
 import gregtechfoodoption.utils.GTFOLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -54,6 +53,11 @@ import static gregtech.api.unification.material.Materials.Steel;
 
 public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
     protected static IBlockState[] GRASSES;
+
+    public MetaTileEntityGreenhouse(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, RecipeMap.getByName("greenhouse")); // Use Nomi Labs recipes if the mod is installed
+        this.recipeMapWorkable = new GreenhouseWorkable(this);
+    }
 
     public static void addGrasses() {
         GRASSES = new IBlockState[GTFOConfig.gtfoMiscConfig.greenhouseDirts.length];
@@ -100,11 +104,6 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
             throw new IllegalArgumentException("One or more errors were found with the Greenhouse Blocks configuration for GTFO. Check log above.");
     }
 
-    public MetaTileEntityGreenhouse(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMap.getByName("greenhouse")); // Use Nomi Labs recipes if the mod is installed
-        this.recipeMapWorkable = new GreenhouseWorkable(this);
-    }
-
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -128,6 +127,7 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
     protected IBlockState getCasingState() {
         return GTFOMetaBlocks.GTFO_GLASS_CASING.getState(GTFOGlassCasing.CasingType.GREENHOUSE_GLASS);
     }
+
     protected IBlockState getCasingState2() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
     }
@@ -171,7 +171,7 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
     protected void addWarningText(List<ITextComponent> textList) {
         super.addWarningText(textList);
         if (this.isStructureFormed()) {
-            if (!((GreenhouseWorkable)this.recipeMapWorkable).hasSun())
+            if (!((GreenhouseWorkable) this.recipeMapWorkable).hasSun())
                 textList.add(new TextComponentTranslation("gregtech.multiblock.not_enough_sun")
                         .setStyle(new Style().setColor(TextFormatting.RED)));
         }
@@ -181,66 +181,6 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
     protected ModularUI createUI(EntityPlayer entityPlayer) {
         ((GreenhouseWorkable) this.recipeMapWorkable).hasSun = this.checkNaturalLighting();
         return super.createUI(entityPlayer);
-    }
-
-    public static class GreenhouseWorkable extends MultiblockRecipeLogic {
-
-        private boolean hasSun;
-
-        public GreenhouseWorkable(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-        @Override
-        protected void setupRecipe(Recipe recipe) {
-            super.setupRecipe(recipe);
-            this.hasSun = ((MetaTileEntityGreenhouse) metaTileEntity).checkNaturalLighting();
-        }
-
-        public boolean hasSun() {
-            return hasSun;
-        }
-
-        @Override
-        protected void updateRecipeProgress() {
-            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
-                this.drawEnergy(this.recipeEUt, false);
-                if (this.hasSun)
-                    this.progressTime++;
-                else
-                    this.progressTime += Math.random() * 2;
-
-                if (this.progressTime > this.maxProgressTime) {
-                    this.completeRecipe();
-                }
-
-                if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long)this.recipeEUt) {
-                    this.hasNotEnoughEnergy = false;
-                }
-            } else if (this.recipeEUt > 0) {
-                this.hasNotEnoughEnergy = true;
-                if (this.progressTime >= 2) {
-                    if (ConfigHolder.machines.recipeProgressLowEnergy) {
-                        this.progressTime = 1;
-                    } else {
-                        this.progressTime = Math.max(1, this.progressTime - 2);
-                    }
-                }
-            }
-        }
-
-        @Override
-        public NBTTagCompound serializeNBT() {
-            NBTTagCompound tag = super.serializeNBT();
-            tag.setBoolean("hasSun", hasSun);
-            return tag;
-        }
-
-        @Override
-        public void deserializeNBT(@Nonnull NBTTagCompound compound) {
-            super.deserializeNBT(compound);
-            this.hasSun = compound.getBoolean("hasSun");
-        }
     }
 
     @Override
@@ -276,5 +216,65 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
     @Override
     public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager) {
         return null;
+    }
+
+    public static class GreenhouseWorkable extends MultiblockRecipeLogic {
+
+        private boolean hasSun;
+
+        public GreenhouseWorkable(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        protected void setupRecipe(Recipe recipe) {
+            super.setupRecipe(recipe);
+            this.hasSun = ((MetaTileEntityGreenhouse) metaTileEntity).checkNaturalLighting();
+        }
+
+        public boolean hasSun() {
+            return hasSun;
+        }
+
+        @Override
+        protected void updateRecipeProgress() {
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
+                if (this.hasSun)
+                    this.progressTime++;
+                else
+                    this.progressTime += Math.random() * 2;
+
+                if (this.progressTime > this.maxProgressTime) {
+                    this.completeRecipe();
+                }
+
+                if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * this.recipeEUt) {
+                    this.hasNotEnoughEnergy = false;
+                }
+            } else if (this.recipeEUt > 0) {
+                this.hasNotEnoughEnergy = true;
+                if (this.progressTime >= 2) {
+                    if (ConfigHolder.machines.recipeProgressLowEnergy) {
+                        this.progressTime = 1;
+                    } else {
+                        this.progressTime = Math.max(1, this.progressTime - 2);
+                    }
+                }
+            }
+        }
+
+        @Override
+        public NBTTagCompound serializeNBT() {
+            NBTTagCompound tag = super.serializeNBT();
+            tag.setBoolean("hasSun", hasSun);
+            return tag;
+        }
+
+        @Override
+        public void deserializeNBT(@Nonnull NBTTagCompound compound) {
+            super.deserializeNBT(compound);
+            this.hasSun = compound.getBoolean("hasSun");
+        }
     }
 }

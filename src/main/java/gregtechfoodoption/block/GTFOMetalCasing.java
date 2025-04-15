@@ -41,6 +41,7 @@ public class GTFOMetalCasing extends VariantBlock<GTFOMetalCasing.CasingType> {
             this.name = name;
             this.material = material;
         }
+
         @Override
         public String getName() {
             return this.name;

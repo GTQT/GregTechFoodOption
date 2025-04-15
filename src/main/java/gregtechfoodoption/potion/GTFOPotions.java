@@ -13,8 +13,7 @@ import java.util.List;
 public class GTFOPotions {
     public static final List<GTFOPotion> POTIONS = new ArrayList<>();
 
-    public static void initPotionInstances()
-    {
+    public static void initPotionInstances() {
         new CreativityPotion();
         //new AddictionPotion();
         //new WithdrawalPotion();
@@ -31,10 +30,8 @@ public class GTFOPotions {
 
 
     @SubscribeEvent
-    public static void registerPotionEffects(RegistryEvent.Register<Potion> event)
-    {
-        for (GTFOPotion potion : POTIONS)
-        {
+    public static void registerPotionEffects(RegistryEvent.Register<Potion> event) {
+        for (GTFOPotion potion : POTIONS) {
             event.getRegistry().register(potion);
         }
     }

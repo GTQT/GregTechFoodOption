@@ -2,7 +2,6 @@ package gregtechfoodoption.recipe.chain;
 
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.blocks.BlockCleanroomCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;

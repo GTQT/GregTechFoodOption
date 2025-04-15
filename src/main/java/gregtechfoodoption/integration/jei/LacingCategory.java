@@ -1,11 +1,7 @@
 package gregtechfoodoption.integration.jei;
 
 import gregtech.api.gui.GuiTextures;
-import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
-import gregtech.integration.jei.basic.BasicRecipeCategory;
 import gregtechfoodoption.GTFOValues;
 import gregtechfoodoption.Tags;
 import mezz.jei.api.IGuiHelper;
@@ -14,18 +10,16 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
-import mezz.jei.api.recipe.IRecipeWrapper;
-import mezz.jei.api.recipe.IRecipeWrapperFactory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class LacingCategory implements IRecipeCategory<LacingInfo> {
-    private final IDrawable icon;
     protected final IDrawable slot;
-    private String potionName;
+    private final IDrawable icon;
     private final IGuiHelper guiHelper;
+    private String potionName;
+
     public LacingCategory(IGuiHelper guiHelper) {
         this.guiHelper = guiHelper;
 

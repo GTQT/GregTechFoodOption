@@ -7,13 +7,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class CyanidePoisoningPotion extends GTFOPotion {
     public static final String TAG_NAME = "gregtechfoodoption - cyanidepoisoning";
     public static CyanidePoisoningPotion INSTANCE = null;
+
     public CyanidePoisoningPotion() {
         super("cyanidepoisoning", true, 0xffffff, 0);
         INSTANCE = this;

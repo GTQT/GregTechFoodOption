@@ -39,17 +39,17 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public class KitchenLogic extends MTETrait implements IControllable {
+    final HashMap<GTRecipeInput, List<KitchenRequestNode>> leaves = new HashMap<>();
     private final boolean hasMaintenance;
     private final Set<WorkableTieredMetaTileEntity> controlledMTEs = new HashSet<>();
     private final List<KitchenRequestNode> requestNodes = new ObjectArrayList<>();
-    final HashMap<GTRecipeInput, List<KitchenRequestNode>> leaves = new HashMap<>();
     public String info = "";
+    public int dirtiness;
+    public KitchenLogicState state = KitchenLogicState.PROBABLY_FINE;
     boolean wasNotified = true;
     boolean recheckOutputs = true;
     private boolean workingEnabled = true;
     private ItemStack resultItem;
-    public int dirtiness;
-    public KitchenLogicState state = KitchenLogicState.PROBABLY_FINE;
 
     public KitchenLogic(MetaTileEntityKitchen controller) {
         super(controller);
@@ -452,16 +452,6 @@ public class KitchenLogic extends MTETrait implements IControllable {
         return null;
     }
 
-    private static class RecipeAndMap {
-        Recipe recipe;
-        RecipeMap map;
-
-        public RecipeAndMap(Recipe recipe, RecipeMap map) {
-            this.recipe = recipe;
-            this.map = map;
-        }
-    }
-
     public enum KitchenLogicState {
         NO_RECIPE,
         NO_INGREDIENTS,
@@ -471,5 +461,15 @@ public class KitchenLogic extends MTETrait implements IControllable {
         BUSES_FULL,
         HATCHES_FULL,
         ORDER_COMPLETE
+    }
+
+    private static class RecipeAndMap {
+        Recipe recipe;
+        RecipeMap map;
+
+        public RecipeAndMap(Recipe recipe, RecipeMap map) {
+            this.recipe = recipe;
+            this.map = map;
+        }
     }
 }

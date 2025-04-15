@@ -30,13 +30,30 @@ import java.util.Map;
 @JEIPlugin
 public class JEIGTFOPlugin implements IModPlugin {
 
-    private IIngredientBlacklist itemBlacklist;
-    private IIngredientRegistry iItemRegistry;
-    private IRecipeTransferRegistry iRecipeTransferRegistry;
     public static final List<ItemStack> itemStacksToHide = new ArrayList<>();
     public static final List<FluidStack> fluidsToHide = new ArrayList<>();
     public static final List<ItemStack> FOOD_ITEMS = new ArrayList<>();
+    private IIngredientBlacklist itemBlacklist;
+    private IIngredientRegistry iItemRegistry;
+    private IRecipeTransferRegistry iRecipeTransferRegistry;
 
+    public static void initializeFoodItems(IModRegistry registry) {
+        for (MetaItem<?> metaItem : MetaItem.getMetaItems()) {
+            for (MetaItem.MetaValueItem metaValueItem : metaItem.getAllItems()) {
+                if (metaValueItem.getUseManager() instanceof GTFOFoodUseManager manager) {
+                    FOOD_ITEMS.add(metaValueItem.getStackForm());
+
+                    // Handle eating recipes
+                    if (manager.getFoodStats() instanceof GTFOFoodStats stats // A sanity check can't hurt
+                            && stats.stackSupplier.get() != ItemStack.EMPTY) {
+                        registry.addRecipes(ObjectSets.singleton(new EatingRecipeInfo(metaValueItem.getStackForm(),
+                                        stats.stackSupplier.get())),
+                                GTFOValues.MODID + ":eating_recipe");
+                    }
+                }
+            }
+        }
+    }
 
     @Override
     public void register(@Nonnull IModRegistry registry) {
@@ -65,29 +82,10 @@ public class JEIGTFOPlugin implements IModPlugin {
         initializeFoodItems(registry);
     }
 
-
     @Override
     public void registerCategories(IRecipeCategoryRegistration registry) {
         registry.addRecipeCategories(new LacingCategory(registry.getJeiHelpers().getGuiHelper()));
         registry.addRecipeCategories(new EatingRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 
-    }
-
-    public static void initializeFoodItems(IModRegistry registry) {
-        for (MetaItem<?> metaItem : MetaItem.getMetaItems()) {
-            for (MetaItem.MetaValueItem metaValueItem : metaItem.getAllItems()) {
-                if (metaValueItem.getUseManager() instanceof GTFOFoodUseManager manager) {
-                    FOOD_ITEMS.add(metaValueItem.getStackForm());
-
-                    // Handle eating recipes
-                    if (manager.getFoodStats() instanceof GTFOFoodStats stats // A sanity check can't hurt
-                            && stats.stackSupplier.get() != ItemStack.EMPTY) {
-                        registry.addRecipes(ObjectSets.singleton(new EatingRecipeInfo(metaValueItem.getStackForm(),
-                                        stats.stackSupplier.get())),
-                                GTFOValues.MODID + ":eating_recipe");
-                    }
-                }
-            }
-        }
     }
 }

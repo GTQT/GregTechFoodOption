@@ -29,7 +29,7 @@ public class VanillaOverrideChain {
 
         GTFOUtils.addBakingOvenRecipes(new ItemStack(Items.POTATO), new ItemStack(Items.BAKED_POTATO), 450, 435, 1);
 
-        if(GTFOConfig.gtfoVanillaOverridesConfig.useBakingOvenForMeats) {
+        if (GTFOConfig.gtfoVanillaOverridesConfig.useBakingOvenForMeats) {
             GTFOUtils.removeAllSmelting(GTFOUtils.wildcardize(new ItemStack(Items.BEEF)));
             GTFOAppleCoreCompat.addToSparedItems(Items.COOKED_BEEF, 6, (float) 0.6);
             GTFOUtils.addBakingOvenRecipes(new ItemStack(Items.BEEF), new ItemStack(Items.COOKED_BEEF), 1000, 500, 2);
@@ -52,8 +52,8 @@ public class VanillaOverrideChain {
             GTFOAppleCoreCompat.addToSparedItems(Items.COOKED_RABBIT, 7, (float) 0.75);
             GTFOUtils.addBakingOvenRecipes(new ItemStack(Items.RABBIT), new ItemStack(Items.COOKED_RABBIT), 1000, 500, 2);
 
-            GTFOUtils.removeAllSmelting(new ItemStack(Items.FISH,1, 0));
-            GTFOUtils.removeAllSmelting(new ItemStack(Items.FISH,1, 1));
+            GTFOUtils.removeAllSmelting(new ItemStack(Items.FISH, 1, 0));
+            GTFOUtils.removeAllSmelting(new ItemStack(Items.FISH, 1, 1));
 
             GTFOAppleCoreCompat.addToSparedItems(Items.COOKED_FISH, 5, (float) 0.8);
             GTFOUtils.addBakingOvenRecipes(new ItemStack(Items.FISH), new ItemStack(Items.COOKED_FISH), 400, 485, 2);
@@ -63,7 +63,7 @@ public class VanillaOverrideChain {
 
         }
 
-        if(GTFOConfig.gtfoVanillaOverridesConfig.useRollingPinForPaper) {
+        if (GTFOConfig.gtfoVanillaOverridesConfig.useRollingPinForPaper) {
             ModHandler.removeRecipeByOutput(new ItemStack(Items.PAPER, 2));
             ModHandler.addShapedRecipe("gtfo_paper", new ItemStack(Items.PAPER, 2),
                     " R ", "CCC",

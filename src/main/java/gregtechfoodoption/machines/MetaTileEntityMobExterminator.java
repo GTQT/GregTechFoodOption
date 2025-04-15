@@ -44,11 +44,11 @@ public class MetaTileEntityMobExterminator extends TieredMetaTileEntity {
 
     private static final int BASE_EU_CONSUMPTION_PER_KILL = 2;
     private static final int RADIUS = 4;
+    public static int LOOTING_USED;
+    private final FluidTank fluidTank;
     private boolean isWorking;
     private AxisAlignedBB areaBoundingBox;
     private BlockPos areaCenterPos;
-    public static int LOOTING_USED;
-    private final FluidTank fluidTank;
 
     public MetaTileEntityMobExterminator(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);

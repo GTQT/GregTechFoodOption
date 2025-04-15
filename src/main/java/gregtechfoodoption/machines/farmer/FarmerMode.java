@@ -24,7 +24,7 @@ public interface FarmerMode {
 
     default List<ItemStack> getDrops(IBlockState state, World world, MutableBlockPos pos, MetaTileEntityFarmer farmer) {
         NonNullList<ItemStack> drops = NonNullList.create();
-        state.getBlock().getDrops(drops, world, pos, state,0);
+        state.getBlock().getDrops(drops, world, pos, state, 0);
         return drops;
     }
 

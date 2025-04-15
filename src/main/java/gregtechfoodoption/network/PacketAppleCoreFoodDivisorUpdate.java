@@ -15,7 +15,7 @@ public class PacketAppleCoreFoodDivisorUpdate implements IPacket, IClientExecuto
     public PacketAppleCoreFoodDivisorUpdate() {
 
     }
-    
+
     public PacketAppleCoreFoodDivisorUpdate(UUID uuid, float divisor) {
         this.uuid = uuid;
         this.divisor = divisor;

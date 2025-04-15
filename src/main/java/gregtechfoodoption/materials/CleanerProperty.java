@@ -6,7 +6,7 @@ import gregtech.api.unification.material.properties.PropertyKey;
 
 public class CleanerProperty implements IMaterialProperty {
 
-    private int cleaningPower;
+    private final int cleaningPower;
 
     public CleanerProperty(int cleaningPower) {
         this.cleaningPower = cleaningPower;

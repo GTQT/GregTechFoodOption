@@ -1,18 +1,17 @@
 package gregtechfoodoption.recipe.chain;
 
-import gregtech.api.unification.material.Materials;
-import gregtechfoodoption.GTFOMaterialHandler;
 import gregtech.api.recipes.ModHandler;
+import gregtechfoodoption.GTFOMaterialHandler;
 import gregtechfoodoption.utils.GTFOUtils;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import static gregtechfoodoption.item.GTFOMetaItem.*;
-import static gregtechfoodoption.recipe.GTFORecipeMaps.SLICER_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.foil;
+import static gregtechfoodoption.item.GTFOMetaItem.*;
+import static gregtechfoodoption.recipe.GTFORecipeMaps.SLICER_RECIPES;
 
 public class PotatoProcessingChain {
     public static void init() {

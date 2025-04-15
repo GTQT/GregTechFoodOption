@@ -121,7 +121,6 @@ public class GTFOConfig {
     }
 
 
-
     public static class GTFOFoodConfig {
         @Config.Comment("Popcorn hunger")
         public int popcornHunger = 5;

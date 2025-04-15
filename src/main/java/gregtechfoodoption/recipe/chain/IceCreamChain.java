@@ -1,9 +1,7 @@
 package gregtechfoodoption.recipe.chain;
 
 import gregtech.api.recipes.RecipeMaps;
-import gregtechfoodoption.GTFOValues;
 import gregtechfoodoption.item.GTFOMetaItem;
-import net.minecraftforge.fml.common.Loader;
 
 import static gregtech.api.unification.material.Materials.Milk;
 import static gregtech.api.unification.material.Materials.Sugar;

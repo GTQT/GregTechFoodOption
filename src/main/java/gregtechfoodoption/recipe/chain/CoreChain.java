@@ -50,7 +50,6 @@ public class CoreChain {
     }
 
 
-
     public static void zest() {
         EXTRACTOR_RECIPES.recipeBuilder()
                 .inputs(LEMON.getStackForm())

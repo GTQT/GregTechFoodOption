@@ -1,25 +1,24 @@
 package gregtechfoodoption.gui.widgets;
 
 import gregtech.api.gui.GuiTextures;
-import gregtech.api.gui.widgets.*;
+import gregtech.api.gui.widgets.AbstractWidgetGroup;
+import gregtech.api.gui.widgets.LabelWidget;
+import gregtech.api.gui.widgets.PhantomFluidWidget;
+import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.util.Position;
-import gregtechfoodoption.machines.multiblock.kitchen.FluidStackInfo;
-import gregtechfoodoption.machines.multiblock.kitchen.ItemStackInfo;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class PhantomRecipeWidget extends AbstractWidgetGroup {
-    private ItemStackHandler inputs = new ItemStackHandler(9);
+    private final ItemStackHandler inputs = new ItemStackHandler(9);
     private boolean[] nonConsumableItems = new boolean[9];
-    private FluidTank[] fluidInputs = new FluidTank[9];
+    private final FluidTank[] fluidInputs = new FluidTank[9];
     private boolean[] nonConsumableFluids = new boolean[9];
-    private ItemStackHandler outputs = new ItemStackHandler(9);
-    private FluidTank[] fluidOutputs = new FluidTank[9];
+    private final ItemStackHandler outputs = new ItemStackHandler(9);
+    private final FluidTank[] fluidOutputs = new FluidTank[9];
 
     public PhantomRecipeWidget(int x, int y) {
         super(new Position(x, y));

@@ -2,8 +2,7 @@ package gregtechfoodoption.recipe.chain;
 
 
 public class MineralWaterChain {
-    public static void init()
-    {
+    public static void init() {
 /*        CANNER_RECIPES.recipeBuilder()
                 .fluidInputs(Water.getFluid(1000))
                 .inputs(DEWAR_FLASK.getStackForm())

@@ -1,7 +1,5 @@
 package gregtechfoodoption.worldgen;
 
-import gregtechfoodoption.GTFOConfig;
-import gregtechfoodoption.worldgen.trees.GTFOTree;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkGeneratorFlat;

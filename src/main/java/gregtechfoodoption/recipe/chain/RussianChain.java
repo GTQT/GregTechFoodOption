@@ -8,7 +8,6 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtechfoodoption.GTFOMaterialHandler;
 import gregtechfoodoption.item.GTFOMetaItem;
 import gregtechfoodoption.recipe.GTFORecipeMaps;
-import gregtechfoodoption.utils.GTFOUtils;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 

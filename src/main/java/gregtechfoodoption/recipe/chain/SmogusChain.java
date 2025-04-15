@@ -235,7 +235,7 @@ public class SmogusChain {
 
         Item[] gelatins = {Items.BONE, Items.LEATHER, Items.PORKCHOP, Items.BEEF, Items.CHICKEN, Items.RABBIT, Items.MUTTON};
 
-        for (Item gelatinProducer : gelatins){
+        for (Item gelatinProducer : gelatins) {
             EXTRACTOR_RECIPES.recipeBuilder()
                     .input(gelatinProducer)
                     .outputs(GELATIN.getStackForm())

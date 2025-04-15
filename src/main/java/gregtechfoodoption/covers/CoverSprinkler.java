@@ -9,13 +9,10 @@ import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.cover.CoverBase;
 import gregtech.api.cover.CoverDefinition;
-import gregtech.api.cover.CoverWithUI;
 import gregtech.api.cover.CoverableView;
-import gregtech.api.gui.ModularUI;
 import gregtech.api.unification.material.Material;
 import gregtechfoodoption.GTFOMaterialHandler;
 import gregtechfoodoption.client.GTFOClientHandler;
-import gregtechfoodoption.client.particle.GTFOSprinkle;
 import gregtechfoodoption.client.particle.GTFOSprinkleMaker;
 import gregtechfoodoption.materials.FertilizerProperty;
 import net.minecraft.block.BlockFarmland;
@@ -42,13 +39,12 @@ import static gregtechfoodoption.GTFOValues.UPDATE_SPRINKLER_EXISTENCE;
 import static net.minecraft.block.BlockFarmland.MOISTURE;
 
 public class CoverSprinkler extends CoverBase implements ITickable {
-    private int tier;
-
+    private static final int LENGTH = 9;
     public BlockPos.MutableBlockPos operationPosition;
+    private final int tier;
     private int sprinkleColor;
     private AxisAlignedBB workingArea;
     private boolean wasWorking = false;
-    private static final int LENGTH = 9;
     private boolean showsSprinkles = true;
 
     @SideOnly(Side.CLIENT)

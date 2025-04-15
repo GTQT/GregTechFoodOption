@@ -1,6 +1,5 @@
 package gregtechfoodoption.machines.farmer;
 
-import gregtechfoodoption.utils.GTFOUtils;
 import it.unimi.dsi.fastutil.PriorityQueue;
 import it.unimi.dsi.fastutil.objects.ObjectArrayPriorityQueue;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;

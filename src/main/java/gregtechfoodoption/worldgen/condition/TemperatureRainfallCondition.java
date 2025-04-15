@@ -3,10 +3,10 @@ package gregtechfoodoption.worldgen.condition;
 import net.minecraft.world.biome.Biome;
 
 public class TemperatureRainfallCondition extends FeatureCondition {
-    private double optimalTemp;
-    private double optimalRain;
-    private double range;
-    private double commonality;
+    private final double optimalTemp;
+    private final double optimalRain;
+    private final double range;
+    private final double commonality;
 
     public TemperatureRainfallCondition(int maxAmount, double commonality, double optimalTemp, double optimalRain, double range) {
         super(maxAmount);

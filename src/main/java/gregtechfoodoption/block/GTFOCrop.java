@@ -25,10 +25,10 @@ public class GTFOCrop extends BlockCrops {
 
     public static final PropertyInteger DEFAULT_AGE = PropertyInteger.create("age", 0, 5);
     private static final AxisAlignedBB CROPS_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D);
-    protected ItemStack seed;
-    protected ItemStack crop;
     public static List<GTFOCrop> CROP_BLOCKS = new ArrayList<>();
     private final String name;
+    protected ItemStack seed;
+    protected ItemStack crop;
 
     protected GTFOCrop(String name) {
         this.setDefaultState(this.blockState.getBaseState().withProperty(this.getAgeProperty(), 0));
@@ -87,20 +87,20 @@ public class GTFOCrop extends BlockCrops {
         return seed.getItem();
     }
 
-    public Item getCrop() {
-        return crop.getItem();
-    }
-
-    public ItemStack getCropStack() {
-        return crop;
-    }
-
     public void setSeed(ItemStack seed) {
         this.seed = seed;
     }
 
+    public Item getCrop() {
+        return crop.getItem();
+    }
+
     public void setCrop(ItemStack crop) {
         this.crop = crop;
+    }
+
+    public ItemStack getCropStack() {
+        return crop;
     }
 
     @Override
