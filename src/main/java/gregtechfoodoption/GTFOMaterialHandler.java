@@ -501,7 +501,7 @@ public class GTFOMaterialHandler {
             .color(0xFFFF00)
             .build()
             .setFormula("C6H5NO3");
-    
+
     public static final Material SodiumCyanide= new Material.Builder(getID(), gtfoId("sodium_cyanide"))
             .dust()
             .color(0x121110)
