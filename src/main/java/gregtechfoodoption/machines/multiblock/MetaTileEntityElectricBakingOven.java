@@ -356,11 +356,6 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
     }
 
     @Override
-    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager) {
-        return null;
-    }
-
-    @Override
     public SoundEvent getBreakdownSound() {
         return GTSoundEvents.BREAKDOWN_ELECTRICAL;
     }

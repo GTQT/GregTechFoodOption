@@ -115,9 +115,4 @@ public class MetaTileEntityBakingOven extends RecipeMapPrimitiveMultiblockContro
     public boolean hasMaintenanceMechanics() {
         return false;
     }
-
-    @Override
-    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager) {
-        return null;
-    }
 }

@@ -76,11 +76,6 @@ public class MetaTileEntitySteamBakingOven extends RecipeMapSteamMultiblockContr
     }
 
     @Override
-    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager) {
-        return null;
-    }
-
-    @Override
     protected @NotNull TextureArea getLogo() {
         return GTFOGuiTextures.GTFO_LOGO_WORKING;
     }

@@ -213,11 +213,6 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
         return true;
     }
 
-    @Override
-    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager) {
-        return null;
-    }
-
     public static class GreenhouseWorkable extends MultiblockRecipeLogic {
 
         private boolean hasSun;

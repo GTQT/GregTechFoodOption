@@ -66,6 +66,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MetaTileEntityKitchen extends MultiblockWithDisplayBase {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public static final int MIN_RADIUS = 2;
     private final KitchenLogic kitchenLogic;
     protected IItemHandlerModifiable inputInventory;
