@@ -9,6 +9,7 @@ import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.ParallelLogicType;
 import gregtech.api.metatileentity.multiblock.RecipeMapSteamMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
@@ -37,8 +38,7 @@ import static gregtech.api.unification.material.Materials.Steel;
 
 public class MetaTileEntitySteamBakingOven extends RecipeMapSteamMultiblockController {
     public MetaTileEntitySteamBakingOven(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, double conversionRate) {
-        super(metaTileEntityId, recipeMap, conversionRate);
-        this.recipeMapWorkable = new SteamBakingOvenWorkable(this, CONVERSION_RATE);
+        super(metaTileEntityId, recipeMap, conversionRate, ParallelLogicType.MULTIPLY);
         this.recipeMapWorkable.setParallelLimit(1);
     }
 
@@ -52,7 +52,20 @@ public class MetaTileEntitySteamBakingOven extends RecipeMapSteamMultiblockContr
 
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start().aisle("XXXX", "XGGX", "XXXX").aisle("XXXX", "GFFG", "XFFX").aisle("XXXX", "GFFG", "XFFX").aisle("XXXX", "YGGX", "XXXX").where('X', states(getCasingState()).or(this.autoAbilities(true, false, true, true, false))).where('F', states(getFrameState())).where('#', air()).where(' ', any()).where('Y', selfPredicate()).where('G', states(getCasingState()).or(states(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS)))).build();
+        return FactoryBlockPattern.start()
+                .aisle("XXXX", "XGGX", "XXXX")
+                .aisle("XXXX", "GFFG", "XFFX")
+                .aisle("XXXX", "GFFG", "XFFX")
+                .aisle("XXXX", "YGGX", "XXXX")
+                .where('X', states(getCasingState())
+                        .or(this.autoAbilities(true, false, true, true, false)))
+                .where('F', states(getFrameState()))
+                .where('#', air())
+                .where(' ', any())
+                .where('Y', selfPredicate())
+                .where('G', states(getCasingState())
+                        .or(states(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS))))
+                .build();
     }
 
     @Override
@@ -95,7 +108,7 @@ public class MetaTileEntitySteamBakingOven extends RecipeMapSteamMultiblockContr
         protected int recipeSteamT;
 
         public SteamBakingOvenWorkable(RecipeMapSteamMultiblockController tileEntity, double conversionRate) {
-            super(tileEntity, conversionRate);
+            super(tileEntity, conversionRate, ParallelLogicType.MULTIPLY);
         }
 
         @Override
