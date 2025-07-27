@@ -504,9 +504,11 @@ public class GTFOMaterialHandler {
 
     public static final Material SodiumCyanide= new Material.Builder(getID(), gtfoId("sodium_cyanide"))
             .dust()
-            .color(0x121110)
-            .build()
-            .setFormula("NaCN");
+            .color(0x5F7C8C)
+            .iconSet(MaterialIconSet.METALLIC)
+            .flags(DISABLE_DECOMPOSITION)
+            .components(Sodium, 1, Carbon, 1, Nitrogen, 1)
+            .build();
 
     public static final Material LithiumOxide= new Material.Builder(getID(), gtfoId("lithium_oxide"))
             .dust()
