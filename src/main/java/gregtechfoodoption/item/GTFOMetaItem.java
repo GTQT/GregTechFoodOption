@@ -277,6 +277,7 @@ public class GTFOMetaItem extends MetaItem<GTFOMetaItem.GTFOMetaValueItem> imple
     public static MetaItem<?>.MetaValueItem BEANS_WITH_SAUCE;
     public static MetaItem<?>.MetaValueItem UNCOOKED_SAUSAGE_ROLL;
     public static MetaItem<?>.MetaValueItem NILK;
+    public static MetaItem<?>.MetaValueItem SOY_MILK;
 
     public static MetaItem<?>.MetaValueItem SPRINKLER_COVER;
     public static MetaItem<?>.MetaValueItem PLUTONIUM_241_CAPLET;
@@ -426,6 +427,10 @@ public class GTFOMetaItem extends MetaItem<GTFOMetaItem.GTFOMetaValueItem> imple
     public static MetaItem<?>.MetaValueItem CHORUS_CAPLET;
     public static MetaItem<?>.MetaValueItem VIBRANT_CAPLET;
     public static MetaItem<?>.MetaValueItem SANDWICH_VIBRANT;
+
+    public static MetaItem<?>.MetaValueItem CLEAN_SOYBEANS;
+    public static MetaItem<?>.MetaValueItem BEAN_DREGS;
+    public static MetaItem<?>.MetaValueItem MATURE_SOYBEANS;
 
     public GTFOMetaItem() {
         super((short) 0);
@@ -1234,6 +1239,24 @@ public class GTFOMetaItem extends MetaItem<GTFOMetaItem.GTFOMetaValueItem> imple
             FOUR_SMOGUS = smores[6];
             HEART_SMOGUS = smores[7];
         }
+
+
+        //在此注册
+        //洗净大豆 CleanSoybeans
+        CLEAN_SOYBEANS = addItem(400, "component.soybeans_clean");
+        //豆渣 BeanDregs
+        BEAN_DREGS = addItem(401, "component.bean_dregs");
+        //熟化大豆 MatureSoybeans
+        MATURE_SOYBEANS = addItem(402, "component.soybeans_mature");
+
+
+        //食物
+
+        //饮料
+        //豆浆 SoyMilk
+        SOY_MILK = addItem(600, "food.soy_milk").addComponents(new GTFOFoodStats(4, 0.5f, true, true, new ItemStack(Items.GLASS_BOTTLE),
+                new RandomPotionEffect(MobEffects.REGENERATION, 200, 0, 100 - 60)));
+
     }
 
     @Override

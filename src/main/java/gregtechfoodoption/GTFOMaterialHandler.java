@@ -795,6 +795,53 @@ public class GTFOMaterialHandler {
             .color(0x695934)
             .build();
 
+    //酱油
+    public static final Material SoySauce = fluidBuilderFood(getID(), "soy_sauce")
+            .color(0x4A2C2C)
+            .build();
+
+    //醋
+    public static final Material Vinegar = fluidBuilderFood(getID(), "vinegar")
+            .color(0xF0E68C)
+            .build();
+
+    //生抽
+    public static final Material LightSoySauce = fluidBuilderFood(getID(), "light_soy_sauce")
+            .color(0x8B4513)
+            .build();
+
+    //蚝油
+    public static final Material OysterSauce = fluidBuilderFood(getID(), "oyster_sauce")
+            .color(0x8B0000)
+            .build();
+
+    // 成曲 (Koji)
+    public static final Material Koji = fluidBuilderFood(getID(), "koji")
+            .color(0xD2B48C)
+            .build();
+
+    // 酱醪 (Mash)
+    public static final Material Mash = fluidBuilderFood(getID(), "mash")
+            .color(0xCD853F)
+            .build();
+
+    // 粗酱油 (Crude Soy Sauce)
+    public static final Material CrudeSoySauce = fluidBuilderFood(getID(), "crude_soy_sauce")
+            .color(0x8B4513)
+            .build();
+
+    // 酱渣 (Soy Sauce Residue)
+    public static final Material SoySauceResidue = fluidBuilderFood(getID(), "soy_sauce_residue")
+            .color(0xA0522D)
+            .build();
+
+    //豆浆
+    public static final Material SoyMilk = fluidBuilderFood(getID(), "soy_milk")
+            .color(0xFFFDD0)
+            .build();
+
+
+    // Oredict
     public static final GTFOOredictItem.OreDictValueItem COFFEE_GROUNDS = SHAPED_ITEM.addOreDictItem(1, "coffee_grounds", 0x1a1612, MaterialIconSet.DULL, OrePrefix.dust);
     public static final GTFOOredictItem.OreDictValueItem SMALL_ROASTED_COFFEE = SHAPED_ITEM.addOreDictItem(2, "roasted_coffee_small", 0x1a1612, MaterialIconSet.GEM_VERTICAL, OrePrefix.gemChipped);
     public static final GTFOOredictItem.OreDictValueItem LARGE_ROASTED_COFFEE = SHAPED_ITEM.addOreDictItem(3, "roasted_coffee_large", 0x1a1612, MaterialIconSet.GEM_VERTICAL, OrePrefix.gemChipped);

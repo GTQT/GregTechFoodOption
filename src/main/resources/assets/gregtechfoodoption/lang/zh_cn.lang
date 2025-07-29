@@ -81,7 +81,15 @@ metaitem.roasted_coffee_small_gem_chipped.name=烘焙小粒咖啡豆
 metaitem.coffee_grounds_dust.name=咖啡粉
 gregtechfoodoption.material.coffee=咖啡
 gregtechfoodoption.material.energized_coffee=提神咖啡
-
+gregtechfoodoption.material.soy_sauce=酱油
+gregtechfoodoption.material.vinegar=醋
+gregtechfoodoption.material.light_soy_sauce=生抽
+gregtechfoodoption.material.oyster_sauce=蚝油
+gregtechfoodoption.material.koji=成曲
+gregtechfoodoption.material.mash=酱醪
+gregtechfoodoption.material.crude_soy_sauce=粗酱油
+gregtechfoodoption.material.soy_sauce_residue=酱渣
+gregtechfoodoption.material.soy_milk=豆浆
 metaitem.food.mineral_water.name=矿泉水
 metaitem.food.mineral_water.tooltip=认输吧，无神论者。
 metaitem.component.dewar_flask.casing.name=膳魔师保温杯身
@@ -875,7 +883,8 @@ gregtechfoodoption.recipe.cause_damage=对生物造成%d心的伤害
 gregtechfoodoption.material.nilk=硅岩风味乳
 metaitem.food.nilk.name=硅岩风味乳
 metaitem.food.nilk.tooltip=釢
-
+metaitem.food.soy_milk.name=豆浆
+metaitem.food.soy_milk.tooltip=放心豆浆！
 gregtechfoodoption.tooltip.food.lacing=§2可以掺入有趣的化学物质
 gregtechfoodoption.fluid.lacing=§2可以使用装罐机将 100 mB 此液体掺入食物
 gregtechfoodoption.cyanide.1=§c你感到非常恶心……
@@ -1217,7 +1226,9 @@ metaitem.food.naquadah_chips.name=硅岩薯片
 metaitem.food.naquadah_chips.tooltip=你们的科学家们太专注于他们是否能做到，而没有停下来思考他们是否应该这样做。
 metaitem.food.sandwich.vibrant.name=活力三明治
 metaitem.food.sandwich.vibrant.tooltip=我想它作为果酱还不错。
-
+metaitem.component.soybeans_clean.name=洗净大豆
+metaitem.component.bean_dregs.name=豆渣
+metaitem.component.soybeans_mature.name=熟化大豆
 gregtechfoodoption.material.ender_pearl_solution=末影珍珠溶液
 gregtechfoodoption.material.ender_sugar_solution=末影糖溶液
 gregtechfoodoption.material.chorus_juice=合唱果汁
