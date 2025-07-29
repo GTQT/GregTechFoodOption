@@ -9,7 +9,7 @@ import static gregtech.api.GTValues.VA;
 
 public class VinegarChain {
     public static void init() {
-        RecipeMaps.CHEMICAL_BATH_RECIPES.recipeBuilder()
+        RecipeMaps.MIXER_RECIPES.recipeBuilder()
                 .fluidInputs(Materials.AceticAcid, 1000)
                 .fluidInputs(Materials.Water.getFluid(1000))
                 .fluidOutputs(GTFOMaterialHandler.Vinegar.getFluid(1000))
