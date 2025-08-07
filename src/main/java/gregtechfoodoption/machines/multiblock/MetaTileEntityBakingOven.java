@@ -3,19 +3,28 @@ package gregtechfoodoption.machines.multiblock;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import com.cleanroommc.modularui.api.drawable.IKey;
 import com.cleanroommc.modularui.factory.PosGuiData;
 import com.cleanroommc.modularui.screen.ModularPanel;
+import com.cleanroommc.modularui.value.sync.DoubleSyncValue;
 import com.cleanroommc.modularui.value.sync.PanelSyncManager;
+import com.cleanroommc.modularui.widgets.ItemSlot;
+import com.cleanroommc.modularui.widgets.ProgressWidget;
+import com.cleanroommc.modularui.widgets.slot.ModularSlot;
+import com.cleanroommc.modularui.widgets.slot.SlotGroup;
 import gregtech.api.capability.impl.ItemHandlerProxy;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.LabelWidget;
-import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIFactory;
+import gregtech.api.mui.GTGuiTextures;
+import gregtech.api.mui.GTGuiTheme;
+import gregtech.api.mui.widget.RecipeProgressWidget;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
@@ -98,20 +107,47 @@ public class MetaTileEntityBakingOven extends RecipeMapPrimitiveMultiblockContro
     }
 
     @Override
-    protected ModularUI createUI(EntityPlayer entityPlayer) {
-        return ModularUI.builder(GuiTextures.PRIMITIVE_BACKGROUND, 176, 166)
-                .widget(new LabelWidget(5, 5, getMetaFullName()))
-                .widget(new SlotWidget(importItems, 0, 53, 20, true, true)
-                        .setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GTFOGuiTextures.PRIMITIVE_FOOD_OVERLAY))
-                .widget(new SlotWidget(importItems, 1, 53, 38, true, true)
-                        .setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GuiTextures.PRIMITIVE_FURNACE_OVERLAY))
-                .progressBar(recipeMapWorkable::getProgressPercent, 78, 31, 20, 15, GuiTextures.PRIMITIVE_BLAST_FURNACE_PROGRESS_BAR, ProgressWidget.MoveType.HORIZONTAL, this.getRecipeMap())
-                .widget(new SlotWidget(exportItems, 0, 105, 29, true, false)
-                        .setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GTFOGuiTextures.PRIMITIVE_FOOD_OVERLAY))
-                .bindPlayerInventory(entityPlayer.inventory, GuiTextures.PRIMITIVE_SLOT, 0)
-                .build(getHolder(), entityPlayer);
+    protected MultiblockUIFactory createUIFactory() {
+        return new MultiblockUIFactory(this)
+                .setSize(176, 166)
+                .disableDisplay()
+                .disableButtons()
+                .addScreenChildren((parent, syncManager) -> {
+
+                    SlotGroup importGroup = new SlotGroup("import", 1, true);
+
+                    parent.child(IKey.lang(getMetaFullName()).asWidget().pos(5, 5))
+                            .child(new ItemSlot()
+                                    .background(GTGuiTextures.SLOT_PRIMITIVE)
+                                    .slot(new ModularSlot(importItems, 0)
+                                            .slotGroup(importGroup)
+                                            .accessibility(true, true))
+                                    .pos(22, 30))
+                            .child(new ItemSlot()
+                                    .background(GTGuiTextures.SLOT_PRIMITIVE)
+                                    .slot(new ModularSlot(importItems, 1)
+                                            .slotGroup(importGroup)
+                                            .accessibility(true, true))
+                                    .pos(40, 30))
+                            .child(new RecipeProgressWidget()
+                                    .recipeMap(this.recipeMapWorkable.recipeMap)
+                                    .size(20, 15)
+                                    .pos(61, 32)
+                                    .value(new DoubleSyncValue(recipeMapWorkable::getProgressPercent))
+                                    .texture(GTGuiTextures.PRIMITIVE_BLAST_FURNACE_PROGRESS_BAR, -1)
+                                    .direction(ProgressWidget.Direction.RIGHT))
+                            .child(new ItemSlot()
+                                    .background(GTGuiTextures.SLOT_PRIMITIVE)
+                                    .slot(new ModularSlot(exportItems, 0)
+                                            .accessibility(false, true))
+                                    .pos(86, 30));
+                });
     }
 
+    @Override
+    public GTGuiTheme getUITheme() {
+        return GTGuiTheme.PRIMITIVE;
+    }
     public boolean hasMaintenanceMechanics() {
         return false;
     }
