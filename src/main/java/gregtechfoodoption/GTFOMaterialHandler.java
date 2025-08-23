@@ -485,10 +485,11 @@ public class GTFOMaterialHandler {
             .setFormula("C8H8O3");
 
     public static final Material Aminophenol = new Material.Builder(getID(), gtfoId("aminophenol"))
-            .dust()
-            .color(0xFFFFFF)
+            .fluid()
+            .color(0xFF7F50)
+            .components(Carbon, 6, Hydrogen, 7, Nitrogen, 1, Oxygen, 1)
             .build()
-            .setFormula("C6H7NO");
+            .setFormula("HOC6H4NH2", true);
 
     public static final Material IVNitrophenol= new Material.Builder(getID(), gtfoId("ivnitrophenol"))
             .dust()
