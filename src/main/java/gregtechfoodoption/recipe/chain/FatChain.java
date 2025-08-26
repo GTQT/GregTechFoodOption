@@ -71,7 +71,7 @@ public class FatChain {
 
         CENTRIFUGE_RECIPES.recipeBuilder().EUt(30).duration(300)
                 .input(dust, Meat, 3)
-                .fluidOutputs(Biomass.getFluid(200), Stearin.getFluid(10))
+                .fluidOutputs(Biomass.getFluid(200), Stearin.getFluid(100))
                 .buildAndRegister();
 
         FERMENTING_RECIPES.recipeBuilder().EUt(32).duration(1200)
