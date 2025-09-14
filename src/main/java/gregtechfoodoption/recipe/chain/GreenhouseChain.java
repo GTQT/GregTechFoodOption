@@ -9,6 +9,7 @@ import gregtech.common.items.MetaItems;
 import gregtechfoodoption.GTFOMaterialHandler;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -43,6 +44,21 @@ public class GreenhouseChain {
                 .fluidInputs(GTFOMaterialHandler.RubberSap.getFluid(100))
                 .notConsumable(MetaItems.SHAPE_MOLD_BALL)
                 .output(MetaItems.STICKY_RESIN)
+                .buildAndRegister();
+
+        //种蘑菇
+        GREENHOUSE_RECIPES.recipeBuilder().EUt(60).duration(1000)
+                .input(Blocks.BROWN_MUSHROOM)
+                .circuitMeta(1)
+                .fluidInputs(Materials.Water.getFluid(2000))
+                .output(Blocks.BROWN_MUSHROOM,16)
+                .buildAndRegister();
+
+        GREENHOUSE_RECIPES.recipeBuilder().EUt(60).duration(1000)
+                .input(Blocks.RED_MUSHROOM)
+                .circuitMeta(1)
+                .fluidInputs(Materials.Water.getFluid(2000))
+                .output(Blocks.RED_MUSHROOM,16)
                 .buildAndRegister();
     }
 

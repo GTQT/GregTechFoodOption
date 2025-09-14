@@ -520,6 +520,7 @@ public class GTFOMaterialHandler {
     public static final Material LithiumCarbonate= new Material.Builder(getID(), gtfoId("lithium_carbonate"))
             .dust()
             .color(0x121110)
+            .components(Lithium, 2, Carbon, 1, Oxygen, 3)
             .build()
             .setFormula("Li2CO3");
 
