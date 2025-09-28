@@ -58,7 +58,7 @@ public class MetaTileEntitySteamBakingOven extends RecipeMapSteamMultiblockContr
                 .aisle("XXXX", "GFFG", "XFFX")
                 .aisle("XXXX", "YGGX", "XXXX")
                 .where('X', states(getCasingState())
-                        .or(this.autoAbilities(true, false, true, true, false)))
+                        .or(this.autoAbilities(true, false, true, true,false,false, false)))
                 .where('F', states(getFrameState()))
                 .where('#', air())
                 .where(' ', any())
