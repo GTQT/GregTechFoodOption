@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class GTFOClientHandler {
     public static OrientedOverlayRenderer SLICER_OVERLAY = new OrientedOverlayRenderer("machines/slicer");
     public static OrientedOverlayRenderer BAKING_OVEN_OVERLAY = new OrientedOverlayRenderer("machines/baking_oven");
+    public static final OrientedOverlayRenderer ELECTRIC_OVEN_OVERLAY = new OrientedOverlayRenderer("machines/electric_oven");
     public static OrientedOverlayRenderer CUISINE_ASSEMBLER_OVERLAY = new OrientedOverlayRenderer("machines/cuisine_assembler");
     public static OrientedOverlayRenderer MICROWAVE_OVERLAY = new OrientedOverlayRenderer("machines/microwave");
     public static OrientedOverlayRenderer MULTICOOKER_OVERLAY = new OrientedOverlayRenderer("machines/multicooker");

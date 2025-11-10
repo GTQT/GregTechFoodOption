@@ -12,7 +12,6 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
-import gregtechfoodoption.GTFOValues;
 import gregtechfoodoption.block.GTFOBlockCasing;
 import gregtechfoodoption.block.GTFOMetaBlocks;
 import gregtechfoodoption.block.GTFOMetalCasing;
@@ -21,11 +20,8 @@ import gregtechfoodoption.machines.GTFOTileEntities;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.IStringSerializable;
-import net.minecraftforge.fml.common.Loader;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static gregtech.api.GTValues.L;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
@@ -60,14 +56,11 @@ public class GTFOMachineRecipes {
         registerMachineRecipe(GTFOTileEntities.MOB_EXTRACTOR, "BCE", "PME", "WCW", 'M', HULL, 'E', PISTON, 'P', PUMP, 'C', CIRCUIT, 'W', CABLE, 'B', SAWBLADE);
         registerMachineRecipe(GTFOTileEntities.FARMER, "BEP", "WMW", "CWC", 'M', HULL, 'E', EMITTER, 'P', PISTON, 'C', CIRCUIT, 'W', CABLE_QUAD, 'B', SENSOR);
         registerMachineRecipe(GTFOTileEntities.MULTICOOKER, "CGC", "GHG", "WMW", 'G', GLASS, 'H', HULL, 'C', CIRCUIT, 'W', COIL_HEATING_DOUBLE, 'M', MOTOR);
+        registerMachineRecipe(GTFOTileEntities.ELECTRIC_BAKING_OVEN, "GGG", "CHC", "WMW", 'G', COIL_HEATING, 'H', HULL, 'C', CIRCUIT, 'W', CABLE, 'M', CONVEYOR);
 
-        ModHandler.addShapedRecipe("baking_oven", GTFOTileEntities.BAKING_OVEN.getStackForm(),
+        ModHandler.addShapedRecipe("large_baking_oven", GTFOTileEntities.LARGE_BAKING_OVEN.getStackForm(),
                 "dSS", "RRA", "fSS",
                 'S', new UnificationEntry(screw, Iron),
-                'R', new UnificationEntry(stick, Iron),
-                'A', GTFOMetaBlocks.GTFO_CASING.getItemVariant(GTFOBlockCasing.CasingType.ADOBE_BRICKS));
-        ModHandler.addShapedRecipe("baking_oven2", GTFOTileEntities.BAKING_OVEN.getStackForm(),
-                "dRR", "RRA", "fRR",
                 'R', new UnificationEntry(stick, Iron),
                 'A', GTFOMetaBlocks.GTFO_CASING.getItemVariant(GTFOBlockCasing.CasingType.ADOBE_BRICKS));
 
@@ -77,9 +70,9 @@ public class GTFOMachineRecipes {
                 'P', GTFOMetaBlocks.GTFO_CASING.getItemVariant(GTFOBlockCasing.CasingType.REINFORCED_ADOBE_BRICKS),
                 'R', new UnificationEntry(pipeSmallFluid, Bronze),
                 'G', new UnificationEntry(gear, Invar),
-                'A', GTFOTileEntities.BAKING_OVEN.getStackForm());
+                'A', GTFOTileEntities.LARGE_BAKING_OVEN.getStackForm());
 
-        ModHandler.addShapedRecipe("electric_baking_oven", GTFOTileEntities.ELECTRIC_BAKING_OVEN.getStackForm(),
+        ModHandler.addShapedRecipe("large_electric_baking_oven", GTFOTileEntities.LARGE_ELECTRIC_BAKING_OVEN.getStackForm(),
                 "CPC", "IWI", "CAC",
                 'C', GTFOMetaBlocks.GTFO_METAL_CASING.getItemVariant(GTFOMetalCasing.CasingType.BISMUTH_BRONZE_CASING),
                 'P', MetaItems.ELECTRIC_PUMP_MV,

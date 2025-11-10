@@ -274,25 +274,25 @@ gregtechfoodoption.material.frying_oil=煎炸油
 gregtechfoodoption.material.starch_filled_water=淀粉水
 gregtechfoodoption.material.hot_frying_oil=热煎炸油
 
-gregtechfoodoption.machine.baking_oven.name=简易烤炉
+gregtechfoodoption.machine.large_baking_oven.name=简易烤炉
 gregtechfoodoption.machine.steam_baking_oven.name=蒸汽烤炉
 gregtechfoodoption.machine.steam_baking_oven.tooltip=工作速度是普通烤炉的一般，但不需要燃料。
-gregtechfoodoption.machine.electric_baking_oven.name=电力烤炉
+gregtechfoodoption.machine.large_electric_baking_oven.name=大型电力烤炉
 gregtechfoodoption.machine.kitchen.name=厨房
 tile.gtfo_casing.adobe_bricks.name=土坯砖块
 tile.gtfo_casing.reinforced_adobe_bricks.name=加固土坯砖块
 tile.gtfo_casing.porcelain_tile.name=瓷砖
 tile.gtfo_casing.dark_porcelain_tile.name=暗色瓷砖
-gregtechfoodoption.multiblock.electric_baking_oven.tooltip.1=温度：§a%d K§7。
-gregtechfoodoption.multiblock.electric_baking_oven.tooltip.2=最大输入功率不足以到达目标温度！
-gregtechfoodoption.multiblock.electric_baking_oven.tooltip.3=设定目标温度：
-gregtechfoodoption.multiblock.electric_baking_oven.tooltip.4=耗能功率：%d EU/t。
-gregtechfoodoption.multiblock.electric_baking_oven.tooltip.5=目标温度：§a%d K§7。
-gregtechfoodoption.multiblock.electric_baking_oven.tooltip.6=切换自适应模式（主动调节温度）:
-gregtechfoodoption.multiblock.electric_baking_oven.temp_increment=将目标温度§a提高5K§r/n§7电力烤炉的耗能随着温度升高而增加/n§c仅在自适应模式关闭时生效
-gregtechfoodoption.multiblock.electric_baking_oven.temp_decrement=将目标温度§c降低5K§r/n§7电力烤炉的耗能随着温度升高而增加/n§c仅在自适应模式关闭时生效
-gregtechfoodoption.multiblock.electric_baking_oven.adaptable_on=§c关闭§r自适应模式/n自适应模式将在不使用时自动关闭烤炉，但重新升温需要一定时间/n关闭以允许手动设定温度
-gregtechfoodoption.multiblock.electric_baking_oven.adaptable_off=§c开启§r自适应模式/n自适应模式将在不使用时自动关闭烤炉，但重新升温需要一定时间/n关闭以允许手动设定温度
+gregtechfoodoption.multiblock.large_electric_baking_oven.tooltip.1=温度：§a%d K§7。
+gregtechfoodoption.multiblock.large_electric_baking_oven.tooltip.2=最大输入功率不足以到达目标温度！
+gregtechfoodoption.multiblock.large_electric_baking_oven.tooltip.3=设定目标温度：
+gregtechfoodoption.multiblock.large_electric_baking_oven.tooltip.4=耗能功率：%d EU/t。
+gregtechfoodoption.multiblock.large_electric_baking_oven.tooltip.5=目标温度：§a%d K§7。
+gregtechfoodoption.multiblock.large_electric_baking_oven.tooltip.6=切换自适应模式（主动调节温度）:
+gregtechfoodoption.multiblock.large_electric_baking_oven.temp_increment=将目标温度§a提高5K§r/n§7电力烤炉的耗能随着温度升高而增加/n§c仅在自适应模式关闭时生效
+gregtechfoodoption.multiblock.large_electric_baking_oven.temp_decrement=将目标温度§c降低5K§r/n§7电力烤炉的耗能随着温度升高而增加/n§c仅在自适应模式关闭时生效
+gregtechfoodoption.multiblock.large_electric_baking_oven.adaptable_on=§c关闭§r自适应模式/n自适应模式将在不使用时自动关闭烤炉，但重新升温需要一定时间/n关闭以允许手动设定温度
+gregtechfoodoption.multiblock.large_electric_baking_oven.adaptable_off=§c开启§r自适应模式/n自适应模式将在不使用时自动关闭烤炉，但重新升温需要一定时间/n关闭以允许手动设定温度
 gregtechfoodoption.recipe.baking_oven_temperature=温度：%dK
 recipemap.baking_oven.name=简易烤炉
 recipemap.electric_baking_oven.name=电力烤炉
@@ -504,9 +504,9 @@ gregtechfoodoption.material.white_wine=白葡萄酒
 
 gregtechfoodoption.material.sodium_carbonate_solution=碳酸钠溶液
 
-gregtechfoodoption.machine.electric_baking_oven.tooltip.1=仅在达到所需温度后才能处理配方。
-gregtechfoodoption.machine.electric_baking_oven.tooltip.2=每 tick 消耗的 §aEU§7 与当前温度呈指数关系。
-gregtechfoodoption.machine.electric_baking_oven.tooltip.3=多方块长度每增加 §a1§7 格，最大并行数加一。
+gregtechfoodoption.machine.large_electric_baking_oven.tooltip.1=仅在达到所需温度后才能处理配方。
+gregtechfoodoption.machine.large_electric_baking_oven.tooltip.2=每 tick 消耗的 §aEU§7 与当前温度呈指数关系。
+gregtechfoodoption.machine.large_electric_baking_oven.tooltip.3=多方块长度每增加 §a1§7 格，最大并行数加一。
 
 
 gregtechfoodoption.machine.microwave.lv.name=基础微波炉
@@ -1083,6 +1083,35 @@ gregtechfoodoption.machine.multicooker.uev.tooltip=烹饪锅 9001
 gregtechfoodoption.machine.multicooker.uiv.tooltip=烹饪锅 9001
 gregtechfoodoption.machine.multicooker.uxv.tooltip=烹饪锅 9001
 gregtechfoodoption.machine.multicooker.opv.tooltip=烹饪锅 9001
+
+# 电烤箱
+gregtechfoodoption.machine.electric_baking_oven.lv.name=基础电烤箱
+gregtechfoodoption.machine.electric_baking_oven.lv.tooltip=食品烘焙设备
+gregtechfoodoption.machine.electric_baking_oven.mv.name=进阶电烤箱
+gregtechfoodoption.machine.electric_baking_oven.mv.tooltip=食品烘焙设备
+gregtechfoodoption.machine.electric_baking_oven.hv.name=进阶电烤箱 II
+gregtechfoodoption.machine.electric_baking_oven.hv.tooltip=食品烘焙设备
+gregtechfoodoption.machine.electric_baking_oven.ev.name=进阶电烤箱 III
+gregtechfoodoption.machine.electric_baking_oven.ev.tooltip=工业烘焙装置
+gregtechfoodoption.machine.electric_baking_oven.iv.name=精英电烤箱
+gregtechfoodoption.machine.electric_baking_oven.iv.tooltip=工业烘焙装置
+gregtechfoodoption.machine.electric_baking_oven.luv.name=精英电烤箱 II
+gregtechfoodoption.machine.electric_baking_oven.luv.tooltip=工业烘焙装置
+gregtechfoodoption.machine.electric_baking_oven.zpm.name=精英电烤箱 III
+gregtechfoodoption.machine.electric_baking_oven.zpm.tooltip=精密温控烤箱
+gregtechfoodoption.machine.electric_baking_oven.uv.name=终极电烤箱
+gregtechfoodoption.machine.electric_baking_oven.uv.tooltip=精密温控烤箱
+gregtechfoodoption.machine.electric_baking_oven.uhv.name=史诗电烤箱
+gregtechfoodoption.machine.electric_baking_oven.uhv.tooltip=分子料理设备
+gregtechfoodoption.machine.electric_baking_oven.uev.name=史诗电烤箱 II
+gregtechfoodoption.machine.electric_baking_oven.uev.tooltip=分子料理设备
+gregtechfoodoption.machine.electric_baking_oven.uiv.name=史诗电烤箱 III
+gregtechfoodoption.machine.electric_baking_oven.uiv.tooltip=分子料理设备
+gregtechfoodoption.machine.electric_baking_oven.uxv.name=史诗电烤箱 IV
+gregtechfoodoption.machine.electric_baking_oven.uxv.tooltip=分子料理设备
+gregtechfoodoption.machine.electric_baking_oven.opv.name=传奇电烤箱
+gregtechfoodoption.machine.electric_baking_oven.opv.tooltip=分子料理设备
+
 recipemap.multicooker.name=多功能烹饪机
 
 metaitem.food.emergency_rations.name=应急配给

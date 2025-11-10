@@ -25,6 +25,7 @@ import gregtechfoodoption.block.GTFOBlockCasing;
 import gregtechfoodoption.block.GTFOMetaBlocks;
 import gregtechfoodoption.client.GTFOClientHandler;
 import gregtechfoodoption.client.GTFOGuiTextures;
+import gregtechfoodoption.recipe.GTFORecipeMaps;
 import gregtechfoodoption.recipe.builder.ElectricBakingOvenRecipeBuilder;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -37,8 +38,8 @@ import javax.annotation.Nonnull;
 import static gregtech.api.unification.material.Materials.Steel;
 
 public class MetaTileEntitySteamBakingOven extends RecipeMapSteamMultiblockController {
-    public MetaTileEntitySteamBakingOven(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, double conversionRate) {
-        super(metaTileEntityId, recipeMap, conversionRate, ParallelLogicType.MULTIPLY);
+    public MetaTileEntitySteamBakingOven(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, GTFORecipeMaps.ELECTRIC_BAKING_OVEN_RECIPES, 10, ParallelLogicType.MULTIPLY);
         this.recipeMapWorkable.setParallelLimit(1);
     }
 
@@ -85,7 +86,7 @@ public class MetaTileEntitySteamBakingOven extends RecipeMapSteamMultiblockContr
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntitySteamBakingOven(metaTileEntityId, getRecipeMap(), CONVERSION_RATE);
+        return new MetaTileEntitySteamBakingOven(metaTileEntityId);
     }
 
     @Override

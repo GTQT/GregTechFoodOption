@@ -157,9 +157,9 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
 
-        tooltip.add(I18n.format("gregtechfoodoption.machine.electric_baking_oven.tooltip.1"));
-        tooltip.add(I18n.format("gregtechfoodoption.machine.electric_baking_oven.tooltip.2"));
-        tooltip.add(I18n.format("gregtechfoodoption.machine.electric_baking_oven.tooltip.3"));
+        tooltip.add(I18n.format("gregtechfoodoption.machine.large_electric_baking_oven.tooltip.1"));
+        tooltip.add(I18n.format("gregtechfoodoption.machine.large_electric_baking_oven.tooltip.2"));
+        tooltip.add(I18n.format("gregtechfoodoption.machine.large_electric_baking_oven.tooltip.3"));
     }
 
     @Override
@@ -187,13 +187,13 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
                 textList.add((new TextComponentTranslation("gregtech.multiblock.not_enough_energy")).setStyle((new Style()).setColor(TextFormatting.RED)));
             }
 
-            textList.add(new TextComponentTranslation("gregtechfoodoption.multiblock.electric_baking_oven.tooltip.4", temperatureEnergyCost(temp, size)));
+            textList.add(new TextComponentTranslation("gregtechfoodoption.multiblock.large_electric_baking_oven.tooltip.4", temperatureEnergyCost(temp, size)));
 
-            textList.add(new TextComponentTranslation("gregtechfoodoption.multiblock.electric_baking_oven.tooltip.5", targetTemp));
+            textList.add(new TextComponentTranslation("gregtechfoodoption.multiblock.large_electric_baking_oven.tooltip.5", targetTemp));
 
 
             if (!canAchieveTargetTemp && hasEnoughEnergy)
-                textList.add(new TextComponentTranslation("gregtechfoodoption.multiblock.electric_baking_oven.tooltip.2")
+                textList.add(new TextComponentTranslation("gregtechfoodoption.multiblock.large_electric_baking_oven.tooltip.2")
                         .setStyle(new Style().setColor(TextFormatting.RED)));
             if (!hasEnoughEnergy)
                 textList.add(new TextComponentTranslation("gregtech.multiblock.not_enough_energy")
@@ -352,7 +352,7 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
 
     @Override
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
-        hoverList.add(new TextComponentTranslation("gregtechfoodoption.multiblock.electric_baking_oven.tooltip.1", temp));
+        hoverList.add(new TextComponentTranslation("gregtechfoodoption.multiblock.large_electric_baking_oven.tooltip.1", temp));
     }
 
     @Override
@@ -393,10 +393,10 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
             String tooltip = "";
             switch (mode) {
                 case 0:
-                    tooltip = "gregtechfoodoption.multiblock.electric_baking_oven.adaptable_on";
+                    tooltip = "gregtechfoodoption.multiblock.large_electric_baking_oven.adaptable_on";
                     break;
                 case 1:
-                    tooltip = "gregtechfoodoption.multiblock.electric_baking_oven.adaptable_off";
+                    tooltip = "gregtechfoodoption.multiblock.large_electric_baking_oven.adaptable_off";
                     break;
             }
 
@@ -406,8 +406,8 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
 
     protected @NotNull Widget getTemperatureButton(int x, int y, int width, int height) {
         WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget((new ClickButtonWidget(0, 0, 9, 18, "", this::decrementTemperatureTarget)).setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS).setTooltipText("gregtechfoodoption.multiblock.electric_baking_oven.temp_decrement"));
-        group.addWidget((new ClickButtonWidget(9, 0, 9, 18, "", this::incrementTemperatureTarget)).setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS).setTooltipText("gregtechfoodoption.multiblock.electric_baking_oven.temp_increment"));
+        group.addWidget((new ClickButtonWidget(0, 0, 9, 18, "", this::decrementTemperatureTarget)).setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS).setTooltipText("gregtechfoodoption.multiblock.large_electric_baking_oven.temp_decrement"));
+        group.addWidget((new ClickButtonWidget(9, 0, 9, 18, "", this::incrementTemperatureTarget)).setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS).setTooltipText("gregtechfoodoption.multiblock.large_electric_baking_oven.temp_increment"));
         return group;
     }
 

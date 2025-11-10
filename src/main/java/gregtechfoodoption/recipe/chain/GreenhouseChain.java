@@ -1,9 +1,14 @@
 package gregtechfoodoption.recipe.chain;
 
+import forestry.api.arboriculture.*;
+import forestry.api.genetics.IAlleleSpecies;
+import forestry.arboriculture.genetics.alleles.AlleleTreeSpecies;
+import forestry.farming.logic.ForestryFarmIdentifier;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.Mods;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtechfoodoption.GTFOMaterialHandler;
@@ -19,7 +24,7 @@ import static gregtechfoodoption.recipe.GTFORecipeMaps.GREENHOUSE_RECIPES;
 
 public class GreenhouseChain {
 
-    public static void init() {
+    public static void initVanilla() {
         registerVanillaTreeRecipes(new ItemStack(Blocks.SAPLING, 1, 0), new ItemStack(Blocks.LOG, 1, 0),
                 new ItemStack(Blocks.LEAVES, 1, 0), new ItemStack(Items.APPLE));
         registerVanillaTreeRecipes(new ItemStack(Blocks.SAPLING, 1, 1), new ItemStack(Blocks.LOG, 1, 1),
@@ -36,15 +41,7 @@ public class GreenhouseChain {
                 new ItemStack(Blocks.LEAVES2, 1, 1), new ItemStack(Items.STICK));
         registerVanillaLargeTreeRecipe(new ItemStack(Blocks.SAPLING, 1, 5), new ItemStack(Blocks.LOG2, 1, 1),
                 new ItemStack(Items.STICK));
-        registerTappingRecipes(new ItemStack(MetaBlocks.RUBBER_SAPLING, 1, 0), new ItemStack(MetaBlocks.RUBBER_LOG, 1, 0),
-                new ItemStack(MetaBlocks.RUBBER_LEAVES, 1, 0), GTFOMaterialHandler.RubberSap.getFluid());
 
-        // Sap processing
-        RecipeMaps.FLUID_SOLIDFICATION_RECIPES.recipeBuilder().EUt(8).duration(160)
-                .fluidInputs(GTFOMaterialHandler.RubberSap.getFluid(100))
-                .notConsumable(MetaItems.SHAPE_MOLD_BALL)
-                .output(MetaItems.STICKY_RESIN)
-                .buildAndRegister();
 
         //种蘑菇
         GREENHOUSE_RECIPES.recipeBuilder().EUt(60).duration(1000)
@@ -61,6 +58,26 @@ public class GreenhouseChain {
                 .output(Blocks.RED_MUSHROOM,16)
                 .buildAndRegister();
     }
+    public static void initGregTech(){
+        registerTappingRecipes(new ItemStack(MetaBlocks.RUBBER_SAPLING, 1, 0), new ItemStack(MetaBlocks.RUBBER_LOG, 1, 0),
+                new ItemStack(MetaBlocks.RUBBER_LEAVES, 1, 0), GTFOMaterialHandler.RubberSap.getFluid());
+        // Sap processing
+        RecipeMaps.FLUID_SOLIDFICATION_RECIPES.recipeBuilder().EUt(8).duration(160)
+                .fluidInputs(GTFOMaterialHandler.RubberSap.getFluid(100))
+                .notConsumable(MetaItems.SHAPE_MOLD_BALL)
+                .output(MetaItems.STICKY_RESIN)
+                .buildAndRegister();
+
+
+
+    }
+
+
+    public static void init() {
+        initVanilla();
+        initGregTech();
+
+    }
 
     public static void registerTappingRecipes(ItemStack sapling, ItemStack log, ItemStack leaves, Fluid sap) {
         GREENHOUSE_RECIPES.recipeBuilder().EUt(60).duration(2000)
@@ -70,6 +87,7 @@ public class GreenhouseChain {
                 .outputs(GTUtility.copy(6, log), sapling)
                 .chancedOutput(sapling, 2000, 1000)
                 .buildAndRegister();
+
         GREENHOUSE_RECIPES.recipeBuilder().EUt(60).duration(2000)
                 .inputs(sapling)
                 .circuitMeta(2)
@@ -78,6 +96,7 @@ public class GreenhouseChain {
                 .chancedOutput(sapling, 1000, 1000)
                 .outputs(GTUtility.copy(20, leaves))
                 .buildAndRegister();
+
         GREENHOUSE_RECIPES.recipeBuilder().EUt(90).duration(3000)
                 .inputs(sapling)
                 .notConsumable(OrePrefix.toolHeadChainsaw, Steel)
@@ -87,6 +106,7 @@ public class GreenhouseChain {
                 .chancedOutput(sapling, 8000, 200)
                 .fluidOutputs(new FluidStack(sap, 4000))
                 .buildAndRegister();
+
         GREENHOUSE_RECIPES.recipeBuilder().EUt(90).duration(4000)
                 .inputs(sapling, MetaItems.FERTILIZER.getStackForm(1))
                 .notConsumable(OrePrefix.toolHeadChainsaw, Steel)
@@ -106,6 +126,7 @@ public class GreenhouseChain {
                 .outputs(GTUtility.copy(6, log), crop, sapling)
                 .chancedOutput(sapling, 2000, 1000)
                 .buildAndRegister();
+
         GREENHOUSE_RECIPES.recipeBuilder().EUt(60).duration(2000)
                 .inputs(sapling)
                 .circuitMeta(2)
@@ -114,6 +135,7 @@ public class GreenhouseChain {
                 .chancedOutput(sapling, 1000, 1000)
                 .outputs(GTUtility.copy(20, leaves))
                 .buildAndRegister();
+
         GREENHOUSE_RECIPES.recipeBuilder().EUt(60).duration(2000)
                 .inputs(sapling)
                 .circuitMeta(3)

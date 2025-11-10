@@ -2,6 +2,7 @@ package gregtechfoodoption.recipe;
 
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.ProgressWidget;
+import gregtech.api.mui.GTGuiTextures;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMapBuilder;
@@ -16,6 +17,7 @@ import gregtechfoodoption.recipe.builder.MobProximityRecipeBuilder;
 import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenProperty;
+import com.cleanroommc.modularui.widgets.ProgressWidget.Direction;
 
 @ZenClass("mods.gregtechfoodoption.recipe.GTFORecipeMaps")
 
@@ -26,11 +28,13 @@ public class GTFORecipeMaps {
             .itemOutputs(2)
             .fluidInputs(1)
             .fluidOutputs(1)
-            .itemSlotOverlay(GTFOGuiTextures.SLICER_INPUT_OVERLAY, false, false)
-            .itemSlotOverlay(GTFOGuiTextures.SLICER_CUTTER_OVERLAY, false, true)
-            .itemSlotOverlay(GTFOGuiTextures.SLICER_OUTPUT_OVERLAY, true, false)
-            .itemSlotOverlay(GuiTextures.DUST_OVERLAY, true, true)
-            .progressBar(GTFOGuiTextures.PROGRESS_BAR_SLICER, ProgressWidget.MoveType.HORIZONTAL)
+            .uiBuilder(b -> b
+                    .itemSlotOverlay(GTFOGuiTextures.SLICER_INPUT_OVERLAY, false, false)
+                    .itemSlotOverlay(GTFOGuiTextures.SLICER_CUTTER_OVERLAY, false, true)
+                    .itemSlotOverlay(GTFOGuiTextures.SLICER_OUTPUT_OVERLAY, true, false)
+                    .itemSlotOverlay(GTGuiTextures.DUST_OVERLAY, true, true)
+                    .progressBar(GTFOGuiTextures.PROGRESS_BAR_SLICER)
+            )
             .build()
             .setSound(GTSoundEvents.CUT);
 
@@ -40,8 +44,10 @@ public class GTFORecipeMaps {
             .itemOutputs(2)
             .fluidInputs(3)
             .fluidOutputs(1)
-            .itemSlotOverlay(GuiTextures.INT_CIRCUIT_OVERLAY, false, true)
-            .progressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
+            .uiBuilder(b -> b
+                    .itemSlotOverlay(GTGuiTextures.INT_CIRCUIT_OVERLAY, false, true)
+                    .progressBar(GTGuiTextures.PROGRESS_BAR_ARROW)
+            )
             .build()
             .setSound(GTSoundEvents.ASSEMBLER);
 
@@ -51,7 +57,10 @@ public class GTFORecipeMaps {
             .itemOutputs(1)
             .fluidInputs(0)
             .fluidOutputs(0)
-            .progressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
+            .uiBuilder(b -> b
+                    .itemSlotOverlay(GTGuiTextures.HEATING_OVERLAY_1, false, true)
+                    .progressBar(GTGuiTextures.PROGRESS_BAR_ARROW)
+            )
             .build()
             .setSound(GTSoundEvents.ARC);
 
@@ -61,8 +70,10 @@ public class GTFORecipeMaps {
             .itemOutputs(3)
             .fluidInputs(3)
             .fluidOutputs(2)
-            .itemSlotOverlay(GuiTextures.HEATING_OVERLAY_1, false, true)
-            .progressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL)
+            .uiBuilder(b -> b
+                    .itemSlotOverlay(GTGuiTextures.HEATING_OVERLAY_1, false, true)
+                    .progressBar(GTGuiTextures.PROGRESS_BAR_ARROW)
+            )
             .build()
             .setSound(GTSoundEvents.MIXER);
 
@@ -70,8 +81,10 @@ public class GTFORecipeMaps {
     public static final RecipeMap<ElectricBakingOvenRecipeBuilder> ELECTRIC_BAKING_OVEN_RECIPES = new RecipeMapBuilder<>("electric_baking_oven", new ElectricBakingOvenRecipeBuilder())
             .itemInputs(1)
             .itemOutputs(1)
-            .itemSlotOverlay(GuiTextures.FURNACE_OVERLAY_1, false, true)
-            .progressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL)
+            .uiBuilder(b -> b
+                    .itemSlotOverlay(GTGuiTextures.FURNACE_OVERLAY_1, false, true)
+                    .progressBar(GTGuiTextures.PROGRESS_BAR_ARROW_MULTIPLE)
+            )
             .build()
             .setSound(GTSoundEvents.FURNACE);
 
@@ -99,8 +112,10 @@ public class GTFORecipeMaps {
             .itemInputs(1)
             .itemOutputs(1)
             .fluidOutputs(1)
-            .itemSlotOverlay(GuiTextures.INT_CIRCUIT_OVERLAY, false, true)
-            .progressBar(GuiTextures.PROGRESS_BAR_EXTRACT, ProgressWidget.MoveType.HORIZONTAL)
+            .uiBuilder(b -> b
+                    .itemSlotOverlay(GTGuiTextures.INT_CIRCUIT_OVERLAY, false, true)
+                    .progressBar(GTGuiTextures.PROGRESS_BAR_EXTRACT)
+            )
             .build()
             .setSound(GTSoundEvents.COMPRESSOR);
 

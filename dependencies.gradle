@@ -20,10 +20,8 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-    api("org.spongepowered:mixin:0.8.3") { transitive = false }
-
     implementation rfg.deobf("curse.maven:code-chicken-lib-1-8-242818:2779848")
-    implementation rfg.deobf(files("libs/gregtech-MeowmelMuku-1.12.2-2.9.0-188.jar"))
+    implementation rfg.deobf(files("libs/gregtech-MeowmelMuku-1.12.2-2.9.0-190.jar"))
     implementation rfg.deobf(files("libs/!mixinbooter-8.9.jar"))
     api("com.cleanroommc:groovyscript:1.2.0-hotfix1") { transitive = false }
     api("com.cleanroommc:modularui:2.5.0-rc4") { transitive = false }
@@ -45,6 +43,8 @@ dependencies {
     // One day...
     //compile "com.enderio.core:EnderCore:${mc_version}-0.5.76:dev"
     //compile "com.enderio:EnderIO:${mc_version}-5.3.70"
+    implementation "curse.maven:forestry-59751:2684780" // Forestry 5.8.2.387
+    //implementation "curse.maven:binnies-mods-patched-899182:5492997" // Binnie's Mods Patched 2.5.1.212
 
     implementation "curse.maven:infinitylib-251396:3317119"
     implementation "curse.maven:spice-of-life-carrot-edition-277616:2959847"

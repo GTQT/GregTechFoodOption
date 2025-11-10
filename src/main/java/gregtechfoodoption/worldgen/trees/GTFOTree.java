@@ -5,7 +5,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.function.TriConsumer;
 import gregtech.common.items.MetaItems;
-import gregtech.loaders.WoodTypeEntry;
+import gregtech.loaders.recipe.WoodTypeEntry;
 import gregtechfoodoption.GTFOValues;
 import gregtechfoodoption.block.GTFOMetaBlocks;
 import gregtechfoodoption.block.tree.GTFOBlockLeaves;
@@ -191,6 +191,7 @@ public abstract class GTFOTree extends GTFOFeature {
                 .outputs(GTUtility.copy(6, log), sapling, getApple())
                 .chancedOutput(sapling, 2000, 1000)
                 .buildAndRegister();
+
         GREENHOUSE_RECIPES.recipeBuilder().EUt(60).duration(2000)
                 .inputs(sapling)
                 .circuitMeta(2)
@@ -209,6 +210,7 @@ public abstract class GTFOTree extends GTFOFeature {
                     .outputs(GTUtility.copy(3, getApple()))
                     .chancedOutput(GTUtility.copy(2, getApple()), 4000, 500)
                     .buildAndRegister();
+
             GREENHOUSE_RECIPES.recipeBuilder().EUt(60).duration(2000)
                     .inputs(sapling, MetaItems.FERTILIZER.getStackForm(2))
                     .circuitMeta(4)
@@ -228,6 +230,7 @@ public abstract class GTFOTree extends GTFOFeature {
                     .chancedOutput(sapling, 8000, 200)
                     .fluidOutputs(new FluidStack(this.getSap(), 4000))
                     .buildAndRegister();
+
             GREENHOUSE_RECIPES.recipeBuilder().EUt(90).duration(4000)
                     .inputs(sapling, MetaItems.FERTILIZER.getStackForm(1))
                     .notConsumable(OrePrefix.toolHeadChainsaw, Steel)
