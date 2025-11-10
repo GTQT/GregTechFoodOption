@@ -27,9 +27,10 @@ public class GTFOTileEntities {
     public static SimpleMachineMetaTileEntity[] SLICER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static SimpleMachineMetaTileEntity[] CUISINE_ASSEMBLER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static SimpleMachineMetaTileEntity[] ELECTRIC_BAKING_OVEN = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
+    public static SimpleMachineMetaTileEntity[] MULTICOOKER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
 
     public static MetaTileEntityMicrowave[] MICROWAVE = new MetaTileEntityMicrowave[GTValues.V.length - 1];
-    public static GTFOSimpleMachineMetaTileEntity[] MULTICOOKER = new GTFOSimpleMachineMetaTileEntity[GTValues.V.length - 1];
+
     public static MetaTileEntityBakingOven LARGE_BAKING_OVEN;
     public static MetaTileEntityElectricBakingOven LARGE_ELECTRIC_BAKING_OVEN;
     public static MetaTileEntitySteamBakingOven STEAM_BAKING_OVEN;

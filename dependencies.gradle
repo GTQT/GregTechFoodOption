@@ -44,7 +44,7 @@ dependencies {
     //compile "com.enderio.core:EnderCore:${mc_version}-0.5.76:dev"
     //compile "com.enderio:EnderIO:${mc_version}-5.3.70"
     implementation "curse.maven:forestry-59751:2684780" // Forestry 5.8.2.387
-    //implementation "curse.maven:binnies-mods-patched-899182:5492997" // Binnie's Mods Patched 2.5.1.212
+    implementation "curse.maven:binnies-mods-patched-899182:5492997" // Binnie's Mods Patched 2.5.1.212
 
     implementation "curse.maven:infinitylib-251396:3317119"
     implementation "curse.maven:spice-of-life-carrot-edition-277616:2959847"
