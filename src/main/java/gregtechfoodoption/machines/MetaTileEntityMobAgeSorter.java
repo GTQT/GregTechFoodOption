@@ -157,10 +157,4 @@ public class MetaTileEntityMobAgeSorter extends TieredMetaTileEntity {
         tooltip.add(I18n.format("gregtech.universal.tooltip.requires_redstone"));
         tooltip.add(I18n.format("gregtech.universal.tooltip.uses_per_tick", getEnergyConsumedPerTick()));
     }
-
-
-    @Override
-    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager) {
-        return null;
-    }
 }

@@ -119,9 +119,4 @@ public class GTFOKitchenRecipeBehaviour implements ItemUIFactory, IItemBehaviour
             lines.add(I18n.format("gregtechfoodoption.kitchen_recipe.final_result", finalItem.getDisplayName()));
         }
     }
-
-    @Override
-    public ModularPanel buildUI(HandGuiData data, PanelSyncManager syncManager) {
-        return null;
-    }
 }

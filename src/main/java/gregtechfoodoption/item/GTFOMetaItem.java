@@ -1308,11 +1308,6 @@ public class GTFOMetaItem extends MetaItem<GTFOMetaItem.GTFOMetaValueItem> imple
         return false;
     }
 
-    @Override
-    public ModularPanel buildUI(HandGuiData data, PanelSyncManager syncManager) {
-        return null;
-    }
-
     public class GTFOMetaValueItem extends MetaItem<?>.MetaValueItem {
 
         private boolean kitchenBlacklisted;

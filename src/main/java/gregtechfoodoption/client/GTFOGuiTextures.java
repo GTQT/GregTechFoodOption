@@ -4,6 +4,8 @@ import com.cleanroommc.modularui.drawable.UITexture;
 import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.mui.GTGuiTextures;
 
+import static gregtech.api.mui.GTGuiTextures.fullImage;
+
 public class GTFOGuiTextures {
     public static final UITexture PROGRESS_BAR_SLICER = progressBar("textures/gui/progress_bar/progress_bar_slicer.png");
     public static final UITexture SLICER_INPUT_OVERLAY = fullImage("textures/gui/overlay/chopping_block_overlay.png");
@@ -27,13 +29,7 @@ public class GTFOGuiTextures {
     public static final TextureArea GTFO_LOGO_ERROR = TextureArea.fullImage("textures/gui/icon/gtfo_logo_error.png");
     public static final TextureArea GTFO_LOGO_WARNING = TextureArea.fullImage("textures/gui/icon/gtfo_logo_warning.png");
     public static final TextureArea GTFO_LOGO_WORKING = TextureArea.fullImage("textures/gui/icon/gtfo_logo_working.png");
-    private static UITexture fullImage(String path) {
-        return fullImage(path, false);
-    }
 
-    private static UITexture fullImage(String path, boolean canApplyTheme) {
-        return UITexture.fullImage("gregtech", path, canApplyTheme);
-    }
     private static UITexture progressBar(String path) {
         return progressBar(path, 20, 40, false);
     }

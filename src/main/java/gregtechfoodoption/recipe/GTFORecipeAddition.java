@@ -2,6 +2,7 @@ package gregtechfoodoption.recipe;
 
 import gregtechfoodoption.GTFOConfig;
 import gregtechfoodoption.GTFOValues;
+import gregtechfoodoption.integration.bop.BiomesOPlentyWoodRecipe;
 import gregtechfoodoption.integration.enderio.GTFOEIORecipeHandler;
 import gregtechfoodoption.recipe.chain.*;
 import gregtechfoodoption.tools.GTFOToolItems;
@@ -13,7 +14,6 @@ public class GTFORecipeAddition {
         CoreChain.init();
         FatChain.init();
         GTFOTree.TREES.forEach(GTFOTree::initRecipes);
-        GreenhouseChain.init();
         MobExtractionChain.init();
         SeedsChain.init();
         CheeseChain.init();
@@ -45,6 +45,9 @@ public class GTFORecipeAddition {
         if (Loader.isModLoaded(GTFOValues.MODID_GCYS)) {
             PopcornChain.init();
             MineralWaterChain.init();
+        }
+        if(Loader.isModLoaded("biomesoplenty")){
+            BiomesOPlentyWoodRecipe.init();
         }
     }
 

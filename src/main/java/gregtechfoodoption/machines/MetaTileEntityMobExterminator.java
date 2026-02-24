@@ -183,9 +183,4 @@ public class MetaTileEntityMobExterminator extends TieredMetaTileEntity {
     public boolean isActive() {
         return isWorking;
     }
-
-    @Override
-    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager) {
-        return null;
-    }
 }

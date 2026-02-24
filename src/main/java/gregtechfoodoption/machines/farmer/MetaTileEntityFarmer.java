@@ -98,7 +98,7 @@ public class MetaTileEntityFarmer extends TieredMetaTileEntity implements IContr
     public void update() {
         super.update();
         if (!getWorld().isRemote) {
-            ((EnergyContainerHandler) this.energyContainer).dischargeOrRechargeEnergyContainers(chargerInventory, 0);
+            ((EnergyContainerHandler) this.energyContainer).dischargeOrRechargeEnergyContainers(chargerInventory.getStackInSlot(0));
         }
         boolean isWorkingNow = energyContainer.getEnergyStored() >= getEnergyConsumedPerTick();
         if (!getWorld().isRemote && isWorkingNow != isWorking) {
@@ -518,10 +518,5 @@ public class MetaTileEntityFarmer extends TieredMetaTileEntity implements IContr
     public void clearMachineInventory(List<ItemStack> itemBuffer) {
         super.clearMachineInventory(itemBuffer);
         clearInventory(itemBuffer, chargerInventory);
-    }
-
-    @Override
-    public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager) {
-        return null;
     }
 }

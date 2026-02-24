@@ -5,6 +5,7 @@ import gregtechfoodoption.block.GTFOMetaBlocks;
 import gregtechfoodoption.entity.GTFOEntities;
 import gregtechfoodoption.integration.appleskin.GTFOMetaHUDOverlay;
 import gregtechfoodoption.integration.appleskin.GTFOMetaTooltipOverlay;
+import gregtechfoodoption.integration.bop.BiomesOPlentyWoodRecipe;
 import gregtechfoodoption.potion.AntiSchizoPotion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
