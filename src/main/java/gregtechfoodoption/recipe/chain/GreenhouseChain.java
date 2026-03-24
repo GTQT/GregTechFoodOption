@@ -19,7 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static gregtech.api.unification.material.Materials.Steel;
+import static gregtech.api.recipes.RecipeMaps.BREWING_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.COMPRESSOR_RECIPES;
+import static gregtech.api.unification.material.Materials.*;
+import static gregtech.common.items.MetaItems.PLANT_BALL;
 import static gregtech.loaders.recipe.WoodRecipeLoader.registerTree;
 import static gregtechfoodoption.recipe.GTFORecipeMaps.GREENHOUSE_RECIPES;
 
@@ -90,6 +93,10 @@ public class GreenhouseChain {
                         ItemStack fruit = products.get(i);
                         if (!fruit.isEmpty()) {
                             fruits.add(fruit);
+                            COMPRESSOR_RECIPES.recipeBuilder().duration(300).EUt(2).inputs(GTUtility.copy(8, fruit))
+                                    .output(PLANT_BALL).buildAndRegister();
+                            BREWING_RECIPES.recipeBuilder().duration(160).EUt(3).inputs(fruit)
+                                    .fluidInputs(Water.getFluid(20)).fluidOutputs(Biomass.getFluid(20)).buildAndRegister();
                         }
                     }
                 }
@@ -122,6 +129,10 @@ public class GreenhouseChain {
                         ItemStack fruit = products.get(i);
                         if (!fruit.isEmpty()) {
                             fruits.add(fruit);
+                            COMPRESSOR_RECIPES.recipeBuilder().duration(300).EUt(2).inputs(GTUtility.copy(8, fruit))
+                                    .output(PLANT_BALL).buildAndRegister();
+                            BREWING_RECIPES.recipeBuilder().duration(160).EUt(3).inputs(fruit)
+                                    .fluidInputs(Water.getFluid(20)).fluidOutputs(Biomass.getFluid(20)).buildAndRegister();
                         }
                     }
                 }
