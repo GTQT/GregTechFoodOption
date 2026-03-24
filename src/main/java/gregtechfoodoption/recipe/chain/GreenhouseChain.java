@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import static gregtech.api.unification.material.Materials.Steel;
+import static gregtech.loaders.recipe.WoodRecipeLoader.registerTree;
 import static gregtechfoodoption.recipe.GTFORecipeMaps.GREENHOUSE_RECIPES;
 
 public class GreenhouseChain {
@@ -101,13 +102,48 @@ public class GreenhouseChain {
         }
     }
 
+    public static void initBinnie() {
+        // 确保林业树数据已生成
+        BinnieTreeHandler.generateBinnieTrees();
+
+        // 为每个林业树注册配方
+        for (Map.Entry<ItemStack, List<ItemStack>> entry : BinnieTreeHandler.products.entrySet()) {
+            ItemStack sapling = entry.getKey();
+            List<ItemStack> products = entry.getValue();
+
+            if (products.size() >= 2) {
+                ItemStack log = products.get(0);  // 第一个是原木
+                ItemStack leaves = products.get(1); // 第二个是树叶
+
+                // 获取果实（从第三个开始）
+                List<ItemStack> fruits = new ArrayList<>();
+                if (products.size() > 2) {
+                    for (int i = 2; i < products.size(); i++) {
+                        ItemStack fruit = products.get(i);
+                        if (!fruit.isEmpty()) {
+                            fruits.add(fruit);
+                        }
+                    }
+                }
+
+                // 注册林业树配方
+                if (!log.isEmpty() && !leaves.isEmpty()) {
+                    registerForestryTreeRecipes(sapling, log, leaves, fruits);
+                }
+            }
+        }
+    }
+
+
     public static void init() {
         initVanilla();
         initGregTech();
         initForestry();
+        initBinnie();
     }
 
     public static void registerTappingRecipes(ItemStack sapling, ItemStack log, ItemStack leaves, Fluid sap) {
+        registerTree(sapling, log, leaves, MetaItems.STICKY_RESIN.getStackForm());
         GREENHOUSE_RECIPES.recipeBuilder().EUt(60).duration(2000)
                 .inputs(sapling)
                 .circuitMeta(1)
@@ -147,6 +183,7 @@ public class GreenhouseChain {
     }
 
     public static void registerVanillaTreeRecipes(ItemStack sapling, ItemStack log, ItemStack leaves, ItemStack crop) {
+        registerTree(sapling, log, leaves, crop);
         GREENHOUSE_RECIPES.recipeBuilder().EUt(60).duration(2000)
                 .inputs(sapling)
                 .circuitMeta(1)
@@ -188,6 +225,7 @@ public class GreenhouseChain {
     }
 
     public static void registerForestryTreeRecipes(ItemStack sapling, ItemStack log, ItemStack leaves, List<ItemStack> fruits) {
+
         // 电路1：基础生长，产出原木和树苗
         RecipeBuilder<SimpleRecipeBuilder> builder1 = GREENHOUSE_RECIPES.recipeBuilder().EUt(60).duration(2000)
                 .inputs(sapling)
@@ -199,6 +237,9 @@ public class GreenhouseChain {
         // 如果有果实，添加果实输出
         if (!fruits.isEmpty()) {
             builder1.outputs(fruits.get(0).copy()); // 只添加第一个果实
+            registerTree(sapling, log, leaves, fruits.get(0).copy());
+        } else {
+            registerTree(sapling, log, leaves, null);
         }
         builder1.buildAndRegister();
 

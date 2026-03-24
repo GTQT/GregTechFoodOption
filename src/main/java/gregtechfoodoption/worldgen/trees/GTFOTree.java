@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Random;
 
 import static gregtech.api.unification.material.Materials.Steel;
+import static gregtech.loaders.recipe.WoodRecipeLoader.registerTree;
 import static gregtech.loaders.recipe.WoodRecipeLoader.registerWoodTypeRecipe;
 import static gregtechfoodoption.recipe.GTFORecipeMaps.GREENHOUSE_RECIPES;
 import static net.minecraft.block.BlockLeaves.CHECK_DECAY;
@@ -200,6 +201,7 @@ public abstract class GTFOTree extends GTFOFeature {
                 .chancedOutput(sapling, 1000, 1000)
                 .outputs(GTUtility.copy(20, leaves))
                 .buildAndRegister();
+
         if (!this.getApple().isEmpty()) {
             GREENHOUSE_RECIPES.recipeBuilder().EUt(60).duration(3000)
                     .inputs(sapling)
@@ -219,6 +221,9 @@ public abstract class GTFOTree extends GTFOFeature {
                     .chancedOutput(sapling, 8000, 200)
                     .outputs(GTUtility.copy(3, getApple()))
                     .buildAndRegister();
+            registerTree(sapling, log, leaves, getApple());
+        } else {
+            registerTree(sapling, log, leaves, null);
         }
         if (this.getSap() != null) {
             GREENHOUSE_RECIPES.recipeBuilder().EUt(90).duration(3000)

@@ -2,6 +2,7 @@ package gregtechfoodoption.recipe.chain;
 
 import forestry.api.arboriculture.*;
 import forestry.arboriculture.ModuleArboriculture;
+import forestry.arboriculture.blocks.BlockRegistryArboriculture;
 import forestry.arboriculture.genetics.TreeDefinition;
 import gregtech.api.util.Mods;
 import net.minecraft.item.ItemStack;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class ForestryTreeHandler {
     public static List<ItemStack> treeist = new ArrayList<>();
@@ -32,8 +34,7 @@ public class ForestryTreeHandler {
             }
 
             // 获取树叶
-            var b = ModuleArboriculture.getBlocks().getDefaultLeaves(speciesUID);
-            ItemStack leaves = new ItemStack(b.getBlock(), 1,tree.getMetadata());
+            var leaves = ModuleArboriculture.getBlocks().getDecorativeLeaves(speciesUID);
 
             treeist.add(sapling);
             treeist.add(log);
