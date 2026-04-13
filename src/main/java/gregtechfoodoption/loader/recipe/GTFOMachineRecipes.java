@@ -1,0 +1,141 @@
+package gregtechfoodoption.loader.recipe;
+
+import gregtech.api.GTValues;
+import gregtech.api.block.VariantBlock;
+import gregtech.api.recipes.ModHandler;
+import gregtech.api.unification.material.MarkerMaterials;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.stack.UnificationEntry;
+import gregtech.common.blocks.BlockMetalCasing;
+import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.items.MetaItems;
+import gregtech.common.metatileentities.MetaTileEntities;
+import gregtechfoodoption.common.block.GTFOBlockCasing;
+import gregtechfoodoption.common.block.GTFOMetaBlocks;
+import gregtechfoodoption.common.block.GTFOMetalCasing;
+import gregtechfoodoption.common.item.GTFOMetaItem;
+import gregtechfoodoption.common.machines.GTFOTileEntities;
+import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.util.IStringSerializable;
+
+import java.util.Arrays;
+
+import static gregtech.api.GTValues.L;
+import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
+import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.ore.OrePrefix.*;
+import static gregtech.common.blocks.BlockWireCoil.CoilType.CUPRONICKEL;
+import static gregtech.loaders.recipe.CraftingComponent.*;
+import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
+
+public class GTFOMachineRecipes {
+    public static void init() {
+
+
+/*
+        registerMachineRecipe(GTFOTileEntities.BIOREACTOR,
+                "RUR", "SHG", "CIP",
+                'R', CIRCUIT,
+                'C', CABLE,
+                'U', PUMP,
+                'P', PLATE,
+                'S', SENSOR,
+                'H', HULL,
+                'G', GLASS,
+                'I', new UnificationEntry(plate, Polytetrafluoroethylene)
+        );
+*/
+        registerMachineRecipe(GTFOTileEntities.SLICER, "PCA", "SHC", "LOA", 'P', PISTON, 'C', CIRCUIT, 'A', CABLE, 'S', SAWBLADE, 'H', HULL, 'L', DENSE_PLATE, 'O', CONVEYOR);
+        registerMachineRecipe(GTFOTileEntities.CUISINE_ASSEMBLER, "AOC", "RHR", "AOC", 'C', CIRCUIT, 'A', CABLE, 'R', ROBOT_ARM, 'H', HULL, 'O', CONVEYOR);
+        registerMachineRecipe(GTFOTileEntities.MICROWAVE, "LAC", "LHE", "LMC", 'H', HULL, 'M', MOTOR, 'E', EMITTER, 'C', CIRCUIT, 'A', CABLE, 'L', new UnificationEntry(OrePrefix.plate, Materials.Lead));
+        registerMachineRecipe(GTFOTileEntities.MOB_AGE_SORTER, "OWS", "OHW", "OCW", 'O', CONVEYOR, 'W', CABLE, 'H', HULL, 'C', CIRCUIT, 'S', SENSOR);
+        registerMachineRecipe(GTFOTileEntities.MOB_EXTERMINATOR, "EIE", "WHW", "CSC", 'E', EMITTER, 'W', CABLE, 'I', WIRE_QUAD, 'H', HULL, 'C', CIRCUIT, 'S', SENSOR);
+        registerMachineRecipe(GTFOTileEntities.MOB_EXTRACTOR, "BCE", "PME", "WCW", 'M', HULL, 'E', PISTON, 'P', PUMP, 'C', CIRCUIT, 'W', CABLE, 'B', SAWBLADE);
+        registerMachineRecipe(GTFOTileEntities.FARMER, "BEP", "WMW", "CWC", 'M', HULL, 'E', EMITTER, 'P', PISTON, 'C', CIRCUIT, 'W', CABLE_QUAD, 'B', SENSOR);
+        registerMachineRecipe(GTFOTileEntities.MULTICOOKER, "CGC", "GHG", "WMW", 'G', GLASS, 'H', HULL, 'C', CIRCUIT, 'W', COIL_HEATING_DOUBLE, 'M', MOTOR);
+        registerMachineRecipe(GTFOTileEntities.ELECTRIC_BAKING_OVEN, "GGG", "CHC", "WMW", 'G', COIL_HEATING, 'H', HULL, 'C', CIRCUIT, 'W', CABLE, 'M', CONVEYOR);
+
+        ModHandler.addShapedRecipe("large_baking_oven", GTFOTileEntities.LARGE_BAKING_OVEN.getStackForm(),
+                "dSS", "RRA", "fSS",
+                'S', new UnificationEntry(screw, Iron),
+                'R', new UnificationEntry(stick, Iron),
+                'A', GTFOMetaBlocks.GTFO_CASING.getItemVariant(GTFOBlockCasing.CasingType.ADOBE_BRICKS));
+
+        ModHandler.addShapedRecipe("steam_baking_oven", GTFOTileEntities.STEAM_BAKING_OVEN.getStackForm(),
+                "dSG", "PAR", "fSG",
+                'S', new UnificationEntry(screw, Steel),
+                'P', GTFOMetaBlocks.GTFO_CASING.getItemVariant(GTFOBlockCasing.CasingType.REINFORCED_ADOBE_BRICKS),
+                'R', new UnificationEntry(pipeSmallFluid, Bronze),
+                'G', new UnificationEntry(gear, Invar),
+                'A', GTFOTileEntities.LARGE_BAKING_OVEN.getStackForm());
+
+        ModHandler.addShapedRecipe("large_electric_baking_oven", GTFOTileEntities.LARGE_ELECTRIC_BAKING_OVEN.getStackForm(),
+                "CPC", "IWI", "CAC",
+                'C', GTFOMetaBlocks.GTFO_METAL_CASING.getItemVariant(GTFOMetalCasing.CasingType.BISMUTH_BRONZE_CASING),
+                'P', MetaItems.ELECTRIC_PUMP_MV,
+                'I', new UnificationEntry(circuit, MarkerMaterials.Tier.MV),
+                'W', new UnificationEntry(wireGtQuadruple, Cupronickel),
+                'A', MetaBlocks.WIRE_COIL.getItemVariant(CUPRONICKEL));
+
+        ModHandler.addShapedRecipe("kitchen", GTFOTileEntities.KITCHEN.getStackForm(),
+                "PIP", "ICI", "RWR",
+                'C', MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.STEEL_SOLID),
+                'R', MetaItems.ROBOT_ARM_MV,
+                'I', new UnificationEntry(circuit, MarkerMaterials.Tier.MV),
+                'W', new UnificationEntry(cableGtQuadruple, AnnealedCopper),
+                'P', new UnificationEntry(plate, BismuthBronze));
+
+        ModHandler.addShapelessRecipe("kitchen_recipe_pencil", GTFOMetaItem.KITCHEN_RECIPE.getStackForm(),
+                Items.PAPER, "dustGraphite");
+
+        ModHandler.addShapelessRecipe("kitchen_recipe_pen", GTFOMetaItem.KITCHEN_RECIPE.getStackForm(),
+                Items.PAPER, MetaItems.DYE_ONLY_ITEMS[EnumDyeColor.BLACK.ordinal()]);
+
+        Arrays.stream(GTFOMetalCasing.CasingType.values()).forEach(casing -> {
+            registerMetalCasingRecipe(casing.getMaterial(), GTFOMetaBlocks.GTFO_METAL_CASING, casing);
+        });
+
+        ASSEMBLER_RECIPES.recipeBuilder().EUt(120).duration(400)
+                .inputs(MetaTileEntities.HULL[GTValues.MV].getStackForm(), MetaItems.ELECTRIC_PUMP_MV.getStackForm(2))
+                .input(circuit, MarkerMaterials.Tier.HV, 4)
+                .inputs(MetaBlocks.FRAMES.get(Steel).getItem(Steel))
+                .input(OrePrefix.plate, SterlingSilver, 6)
+                .circuitMeta(3)
+                .outputs(GTFOTileEntities.GREENHOUSE.getStackForm())
+                .buildAndRegister();
+
+        ASSEMBLER_RECIPES.recipeBuilder().EUt(16).duration(200)
+                .input(plate, Iron)
+                .input(pipeTinyFluid, Steel)
+                .inputs(MetaItems.FLUID_FILTER.getStackForm())
+                .fluidInputs(Tin.getFluid(L))
+                .outputs(GTFOMetaItem.SPRINKLER_COVER.getStackForm())
+                .buildAndRegister();
+        ASSEMBLER_RECIPES.recipeBuilder().EUt(16).duration(200)
+                .input(plate, Iron)
+                .input(pipeTinyFluid, Steel)
+                .inputs(MetaItems.FLUID_FILTER.getStackForm())
+                .fluidInputs(SolderingAlloy.getFluid(L / 2))
+                .outputs(GTFOMetaItem.SPRINKLER_COVER.getStackForm())
+                .buildAndRegister();
+
+    }
+
+    private static <T extends Enum<T> & IStringSerializable> void registerMetalCasingRecipe(Material inputMaterial, VariantBlock<T> outputCasingType, T outputCasing) {
+
+        ModHandler.addShapedRecipe(String.format("metal_casing_%s", inputMaterial), outputCasingType.getItemVariant(outputCasing, 3),
+                "PhP", "PFP", "PwP",
+                'P', new UnificationEntry(plate, inputMaterial),
+                'F', new UnificationEntry(frameGt, inputMaterial));
+
+        ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(16)
+                .input(plate, inputMaterial, 6)
+                .input(frameGt, inputMaterial)
+                .circuitMeta(6)
+                .outputs(outputCasingType.getItemVariant(outputCasing, 3))
+                .buildAndRegister();
+    }
+}

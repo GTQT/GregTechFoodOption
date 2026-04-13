@@ -1,9 +1,9 @@
 package gregtechfoodoption.integration.jei;
 
 import gregtech.api.gui.GuiTextures;
-import gregtechfoodoption.GTFOValues;
+import gregtechfoodoption.api.utils.GTFOValues;
 import gregtechfoodoption.Tags;
-import gregtechfoodoption.item.GTFOMetaItem;
+import gregtechfoodoption.common.item.GTFOMetaItem;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;

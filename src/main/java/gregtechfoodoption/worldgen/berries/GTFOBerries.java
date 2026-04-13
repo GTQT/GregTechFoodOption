@@ -1,6 +1,6 @@
 package gregtechfoodoption.worldgen.berries;
 
-import gregtechfoodoption.block.GTFOCrops;
+import gregtechfoodoption.common.block.GTFOCrops;
 import gregtechfoodoption.worldgen.GTFOFeature;
 import gregtechfoodoption.worldgen.condition.TemperatureRainfallCondition;
 

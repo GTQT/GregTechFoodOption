@@ -6,7 +6,7 @@ import crazypants.enderio.api.farm.IFarmer;
 import crazypants.enderio.api.farm.IHarvestResult;
 import crazypants.enderio.base.farming.farmers.CustomSeedFarmer;
 import crazypants.enderio.base.farming.farmers.HarvestResult;
-import gregtechfoodoption.block.GTFOCrop;
+import gregtechfoodoption.common.block.GTFOCrop;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;

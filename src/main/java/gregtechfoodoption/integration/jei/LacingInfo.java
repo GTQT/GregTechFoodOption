@@ -1,6 +1,6 @@
 package gregtechfoodoption.integration.jei;
 
-import gregtechfoodoption.potion.LacingEntry;
+import gregtechfoodoption.common.potion.LacingEntry;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;

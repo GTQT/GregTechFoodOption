@@ -2,7 +2,7 @@ package gregtechfoodoption.integration.applecore;
 
 import gregtech.api.GTValues;
 import gregtechfoodoption.GTFOConfig;
-import gregtechfoodoption.GTFOValues;
+import gregtechfoodoption.api.utils.GTFOValues;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.entity.player.EntityPlayer;

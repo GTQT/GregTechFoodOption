@@ -2,16 +2,20 @@ package gregtechfoodoption;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.util.Mods;
-import gregtechfoodoption.block.GTFOMetaBlocks;
+import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.utils.GTFOValues;
+import gregtechfoodoption.common.CommonProxy;
+import gregtechfoodoption.common.GTFODropsEventHandler;
+import gregtechfoodoption.common.block.GTFOMetaBlocks;
 import gregtechfoodoption.client.GTFOClientHandler;
-import gregtechfoodoption.covers.GTFOCoverBehaviors;
-import gregtechfoodoption.entity.GTFOEntities;
+import gregtechfoodoption.common.covers.GTFOCoverBehaviors;
+import gregtechfoodoption.common.entity.GTFOEntities;
 import gregtechfoodoption.integration.applecore.GTFOAppleCoreCompat;
 import gregtechfoodoption.integration.top.GTFOTOPCompatibility;
-import gregtechfoodoption.machines.GTFOTileEntities;
-import gregtechfoodoption.machines.farmer.FarmerModeRegistry;
+import gregtechfoodoption.common.machines.GTFOTileEntities;
+import gregtechfoodoption.common.machines.farmer.FarmerModeRegistry;
 import gregtechfoodoption.network.PacketAppleCoreFoodDivisorUpdate;
-import gregtechfoodoption.utils.GTFOConfigOverrider;
+import gregtechfoodoption.api.utils.GTFOConfigOverrider;
 import gregtechfoodoption.worldgen.GTFODungeonLootLoader;
 import gregtechfoodoption.worldgen.GTFOWorldGenerator;
 import net.minecraft.util.ResourceLocation;
@@ -26,7 +30,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = GregTechFoodOption.MODID, name = GregTechFoodOption.NAME, version = GregTechFoodOption.VERSION,
-        dependencies = "required-after:gregtech@[2.8.0-beta,);" + "after:gcy_science;after:" + GTFOValues.MODID_NU)
+        dependencies = "required-after:gregtech@[2.9.0-beta,);" + "after:" + GTFOValues.MODID_NU)
+
 public class GregTechFoodOption {
     public static final String MODID = "gregtechfoodoption";
     public static final String NAME = "GregTech Food Option";
@@ -39,9 +44,8 @@ public class GregTechFoodOption {
         return new ResourceLocation(GregTechFoodOption.MODID, name);
     }
 
-    @SidedProxy(modId = MODID, clientSide = "gregtechfoodoption.ClientProxy", serverSide = "gregtechfoodoption.CommonProxy")
+    @SidedProxy(modId = MODID, clientSide = "gregtechfoodoption.client.ClientProxy", serverSide = "gregtechfoodoption.common.CommonProxy")
     public static CommonProxy proxy;
-
 
     @Mod.EventHandler
     public void onStartup(FMLConstructionEvent event) {

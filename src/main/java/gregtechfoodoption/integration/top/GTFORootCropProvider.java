@@ -1,7 +1,7 @@
 package gregtechfoodoption.integration.top;
 
-import gregtechfoodoption.GTFOValues;
-import gregtechfoodoption.block.GTFORootCrop;
+import gregtechfoodoption.api.utils.GTFOValues;
+import gregtechfoodoption.common.block.GTFORootCrop;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,8 +1,8 @@
 package gregtechfoodoption.worldgen.trees;
 
 import gregtech.api.util.function.TriConsumer;
-import gregtechfoodoption.GTFOValues;
-import gregtechfoodoption.utils.GTFOUtils;
+import gregtechfoodoption.api.utils.GTFOValues;
+import gregtechfoodoption.api.utils.GTFOUtils;
 import gregtechfoodoption.worldgen.condition.BiomeCondition;
 import gregtechfoodoption.worldgen.condition.TemperatureRainfallCondition;
 import net.minecraft.block.state.IBlockState;
@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-import static gregtechfoodoption.item.GTFOMetaItem.APRICOT;
+import static gregtechfoodoption.common.item.GTFOMetaItem.APRICOT;
 
 public class ApricotTree extends GTFOTree {
     public static int LEAVES_COLOR = 0x87A92C;

@@ -3,8 +3,8 @@ package gregtechfoodoption.integration.enderio;
 import crazypants.enderio.base.init.ModObject;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.Materials;
-import gregtechfoodoption.GTFOMaterialHandler;
-import gregtechfoodoption.recipe.GTFORecipeMaps;
+import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.loader.recipe.GTFORecipeMaps;
 import net.minecraft.init.Items;
 import net.minecraft.util.ResourceLocation;
 

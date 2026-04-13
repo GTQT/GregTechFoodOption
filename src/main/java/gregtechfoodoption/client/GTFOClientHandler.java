@@ -2,15 +2,14 @@ package gregtechfoodoption.client;
 
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
-import gregtechfoodoption.GTFOValues;
+import gregtechfoodoption.api.utils.GTFOValues;
 import gregtechfoodoption.GregTechFoodOption;
-import gregtechfoodoption.potion.AntiSchizoPotion;
+import gregtechfoodoption.common.potion.AntiSchizoPotion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = GregTechFoodOption.MODID)

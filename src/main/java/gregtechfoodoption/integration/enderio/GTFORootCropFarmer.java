@@ -3,7 +3,7 @@ package gregtechfoodoption.integration.enderio;
 import crazypants.enderio.api.farm.IFarmer;
 import crazypants.enderio.api.farm.IHarvestResult;
 import crazypants.enderio.base.farming.farmers.CustomSeedFarmer;
-import gregtechfoodoption.block.GTFORootCrop;
+import gregtechfoodoption.common.block.GTFORootCrop;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;

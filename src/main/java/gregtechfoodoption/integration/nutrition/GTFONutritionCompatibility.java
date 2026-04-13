@@ -2,10 +2,10 @@ package gregtechfoodoption.integration.nutrition;
 
 import ca.wescook.nutrition.nutrients.Nutrient;
 import ca.wescook.nutrition.nutrients.NutrientList;
-import gregtechfoodoption.item.GTFOFoodStats;
-import gregtechfoodoption.item.GTFOMetaItem;
-import gregtechfoodoption.item.GTFOMetaItems;
-import gregtechfoodoption.utils.GTFOUtils;
+import gregtechfoodoption.common.item.GTFOFoodStats;
+import gregtechfoodoption.common.item.GTFOMetaItem;
+import gregtechfoodoption.common.item.GTFOMetaItems;
+import gregtechfoodoption.api.utils.GTFOUtils;
 
 public class GTFONutritionCompatibility {
     public static void init() {

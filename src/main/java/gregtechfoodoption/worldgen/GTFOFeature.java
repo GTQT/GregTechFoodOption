@@ -1,7 +1,7 @@
 package gregtechfoodoption.worldgen;
 
 import gregtech.api.util.function.TriConsumer;
-import gregtechfoodoption.utils.GTFOLog;
+import gregtechfoodoption.api.utils.GTFOLog;
 import gregtechfoodoption.worldgen.condition.FeatureCondition;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;

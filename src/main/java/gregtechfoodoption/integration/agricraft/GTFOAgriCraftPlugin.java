@@ -4,7 +4,7 @@ import com.infinityraider.agricraft.api.v1.misc.IAgriRegistry;
 import com.infinityraider.agricraft.api.v1.plant.IAgriPlant;
 import com.infinityraider.agricraft.api.v1.plugin.AgriPlugin;
 import com.infinityraider.agricraft.api.v1.plugin.IAgriPlugin;
-import gregtechfoodoption.block.GTFOCrop;
+import gregtechfoodoption.common.block.GTFOCrop;
 
 import javax.annotation.Nonnull;
 

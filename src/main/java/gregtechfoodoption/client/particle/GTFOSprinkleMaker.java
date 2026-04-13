@@ -1,6 +1,6 @@
 package gregtechfoodoption.client.particle;
 
-import gregtechfoodoption.covers.CoverSprinkler;
+import gregtechfoodoption.common.covers.CoverSprinkler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.world.World;

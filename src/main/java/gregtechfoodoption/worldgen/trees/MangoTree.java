@@ -1,8 +1,8 @@
 package gregtechfoodoption.worldgen.trees;
 
 import gregtech.api.util.function.TriConsumer;
-import gregtechfoodoption.GTFOValues;
-import gregtechfoodoption.utils.GTFOUtils;
+import gregtechfoodoption.api.utils.GTFOValues;
+import gregtechfoodoption.api.utils.GTFOUtils;
 import gregtechfoodoption.worldgen.condition.BiomeCondition;
 import gregtechfoodoption.worldgen.condition.TemperatureRainfallCondition;
 import net.minecraft.block.state.IBlockState;
@@ -16,7 +16,7 @@ import net.minecraft.world.biome.Biome;
 
 import java.util.Random;
 
-import static gregtechfoodoption.item.GTFOMetaItem.MANGO;
+import static gregtechfoodoption.common.item.GTFOMetaItem.MANGO;
 
 public class MangoTree extends GTFOTree {
     public static int LEAVES_COLOR = 0x7D921E;

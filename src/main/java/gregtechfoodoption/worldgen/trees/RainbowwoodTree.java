@@ -1,7 +1,7 @@
 package gregtechfoodoption.worldgen.trees;
 
 import gregtech.api.util.function.TriConsumer;
-import gregtechfoodoption.utils.GTFOUtils;
+import gregtechfoodoption.api.utils.GTFOUtils;
 import gregtechfoodoption.worldgen.condition.BiomeCondition;
 import gregtechfoodoption.worldgen.condition.TemperatureRainfallCondition;
 import net.minecraft.block.state.IBlockState;
@@ -15,7 +15,7 @@ import net.minecraftforge.fluids.Fluid;
 
 import java.util.Random;
 
-import static gregtechfoodoption.GTFOMaterialHandler.RainbowSap;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.RainbowSap;
 
 public class RainbowwoodTree extends GTFOTree {
     public static final int[] RAINBOW_ARRAY = {

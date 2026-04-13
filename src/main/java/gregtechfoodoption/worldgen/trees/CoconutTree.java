@@ -1,8 +1,8 @@
 package gregtechfoodoption.worldgen.trees;
 
 import gregtech.api.util.function.TriConsumer;
-import gregtechfoodoption.GTFOValues;
-import gregtechfoodoption.utils.GTFOUtils;
+import gregtechfoodoption.api.utils.GTFOValues;
+import gregtechfoodoption.api.utils.GTFOUtils;
 import gregtechfoodoption.worldgen.condition.TemperatureRainfallCondition;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-import static gregtechfoodoption.item.GTFOMetaItem.COCONUT;
+import static gregtechfoodoption.common.item.GTFOMetaItem.COCONUT;
 
 public class CoconutTree extends GTFOTree {
     public static int LEAVES_COLOR = 0x657F1C;
