@@ -25,6 +25,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.common.items.MetaItems.PLANT_BALL;
 import static gregtech.loaders.recipe.WoodRecipeLoader.registerTree;
 import static gregtechfoodoption.loader.recipe.GTFORecipeMaps.GREENHOUSE_RECIPES;
+import static net.minecraftforge.fml.common.Loader.isModLoaded;
 
 public class GreenhouseChain {
 
@@ -149,8 +150,10 @@ public class GreenhouseChain {
     public static void init() {
         initVanilla();
         initGregTech();
-        initForestry();
-        initBinnie();
+        if(isModLoaded("forestry")) {
+            initForestry();
+            if(isModLoaded("binnies")) initBinnie();
+        }
     }
 
     public static void registerTappingRecipes(ItemStack sapling, ItemStack log, ItemStack leaves, Fluid sap) {
