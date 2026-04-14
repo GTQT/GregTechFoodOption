@@ -43,11 +43,11 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.34")
 
     implementation rfg.deobf("curse.maven:code-chicken-lib-1-8-242818:2779848")
-    implementation rfg.deobf(files("libs/gregtech-gtqt-1.12.2-2.9.0-190.jar"))
+    implementation rfg.deobf(files("libs/gregtech-gtqt-1.12.2-1.9.0.jar"))
     implementation rfg.deobf("curse.maven:mixin-booter-419286:6344449")
 
-    api("com.cleanroommc:groovyscript:1.2.0-hotfix1") { transitive = false }
-    api("com.cleanroommc:modularui:3.0.7") { transitive = false }
+    api("com.cleanroommc:groovyscript:1.2.4") { transitive = false }
+    api("com.cleanroommc:modularui:3.1.5") { transitive = false }
 
     compileOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.554"
 
