@@ -111,17 +111,8 @@ public class GTFOMachineRecipes {
                 .input(plate, Iron)
                 .input(pipeTinyFluid, Steel)
                 .inputs(MetaItems.FLUID_FILTER.getStackForm())
-                .fluidInputs(Tin.getFluid(L))
                 .outputs(GTFOMetaItem.SPRINKLER_COVER.getStackForm())
                 .buildAndRegister();
-        ASSEMBLER_RECIPES.recipeBuilder().EUt(16).duration(200)
-                .input(plate, Iron)
-                .input(pipeTinyFluid, Steel)
-                .inputs(MetaItems.FLUID_FILTER.getStackForm())
-                .fluidInputs(SolderingAlloy.getFluid(L / 2))
-                .outputs(GTFOMetaItem.SPRINKLER_COVER.getStackForm())
-                .buildAndRegister();
-
     }
 
     private static <T extends Enum<T> & IStringSerializable> void registerMetalCasingRecipe(Material inputMaterial, VariantBlock<T> outputCasingType, T outputCasing) {

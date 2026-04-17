@@ -14,7 +14,7 @@ public class CapletChain {
     public static void init() {
         FLUID_HEATER_RECIPES.recipeBuilder().EUt(120).duration(540)
                 .fluidInputs(Water.getFluid(1000))
-                .circuitMeta(2)
+                .circuitMeta(5)
                 .fluidOutputs(HeatedWater.getFluid(1000))
                 .buildAndRegister();
         MIXER_RECIPES.recipeBuilder().EUt(480).duration(200)
