@@ -21,6 +21,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.ibm.icu.lang.UCharacter.GraphemeClusterBreak.LV;
+import static gregtech.api.GTValues.SECOND;
+import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
@@ -243,7 +246,7 @@ public class CoreChain {
                 .output(dust, Sugar)
                 .buildAndRegister();
 
-        CHEMICAL_RECIPES.recipeBuilder().EUt(30).duration(80)
+        CHEMICAL_RECIPES.recipeBuilder().EUt(VA[LV]).duration(10 * SECOND)
                 .fluidInputs(HydrogenCyanide.getFluid(1000))
                 .input(dust, SodiumHydroxide, 3)
                 .output(dust,SodiumCyanide,3)
