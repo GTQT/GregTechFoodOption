@@ -14,10 +14,10 @@ import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.*;
-import gregtech.api.pattern.BlockPattern;
-import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.pattern.PatternMatchContext;
-import gregtech.api.pattern.TraceabilityPredicate;
+import gregtech.api.pattern.*;
+import gregtech.api.pattern.casing.CasingDefinition;
+import gregtech.api.pattern.casing.DeclarativePatternBuilder;
+import gregtech.api.pattern.casing.GTStructureChannels;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.logic.OCParams;
 import gregtech.api.recipes.logic.OCResult;
@@ -27,9 +27,9 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
-import gregtechfoodoption.common.block.GTFOMetalCasing;
 import gregtechfoodoption.client.GTFOClientHandler;
 import gregtechfoodoption.client.GTFOGuiTextures;
+import gregtechfoodoption.common.block.GTFOMetalCasing;
 import gregtechfoodoption.loader.recipe.GTFORecipeMaps;
 import gregtechfoodoption.loader.recipe.builder.ElectricBakingOvenRecipeBuilder;
 import net.minecraft.block.state.IBlockState;
@@ -56,10 +56,25 @@ import static gregtechfoodoption.common.block.GTFOMetaBlocks.GTFO_METAL_CASING;
 
 public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockController implements IProgressBarMultiblock {
 
-    private static final MultiblockAbility<?>[] ALLOWED_ABILITIES = {
-            MultiblockAbility.IMPORT_ITEMS, MultiblockAbility.EXPORT_ITEMS,
-            MultiblockAbility.INPUT_ENERGY, MultiblockAbility.MAINTENANCE_HATCH
-    };
+    private static final SoftTemplate TEMPLATE = TemplatePool.getInstance().register("gregtechfoodoption:large_electric_baking_oven", () ->
+            DeclarativePatternBuilder.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)
+                    .aisle("XXXX", "YXXX", "XXXX", "####")
+                    .aisleRepeatable(2, 14, "XXXX", "GFFX", "GIOX", "XXXX")
+                    .withAisleChannel(GTStructureChannels.STRUCTURE_LENGTH.getName())
+                    .aisle("XXXX", "XXXX", "XXXX", "####")
+                    .casing('X', CasingDefinition.simple(getCasingState()))
+                    .energyInput(1,2)
+                    .maintenance()
+                    .optionalItemInput(4)
+                    .optionalItemOutput(4)
+                    .where('F', states(getFrameState()))
+                    .where('G', states(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS)))
+                    .where('#', any())
+                    .where('O', air())
+                    .where('I', isIndicatorPredicate())
+                    .where('Y', selfPredicate(MetaTileEntityElectricBakingOven.class))
+                    .buildTemplate()
+    );
     public int size;
     public boolean adaptable = true;
     private int temp;
@@ -91,11 +106,12 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
         return temp <= 300 ? 0 : (int) Math.exp(((double) temp - 100 + (multiSize * 5)) / 100);
     }
 
-    // Is the inverse of the previous function.
-    public static int temperatureForEnergy(int EUt) {
-        if (EUt <= 8)
-            return 300;
-        return (int) (Math.log(EUt) * 100) + 100;
+    protected static IBlockState getCasingState() {
+        return GTFO_METAL_CASING.getState(GTFOMetalCasing.CasingType.BISMUTH_BRONZE_CASING);
+    }
+
+    protected static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(Steel).getBlock(Steel);
     }
 
     @Override
@@ -207,14 +223,6 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
         targetTemp += data.isShiftClick ? 25 : 5;
     }
 
-    protected IBlockState getCasingState() {
-        return GTFO_METAL_CASING.getState(GTFOMetalCasing.CasingType.BISMUTH_BRONZE_CASING);
-    }
-
-    protected IBlockState getFrameState() {
-        return MetaBlocks.FRAMES.get(Steel).getBlock(Steel);
-    }
-
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return GTFOClientHandler.BISMUTH_BRONZE_CASING;
@@ -226,20 +234,8 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
     }
 
     @Override
-    protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)
-                .aisle("XXXX", "YXXX", "XXXX", "####")
-                .aisle("XXXX", "GFFX", "GIOX", "XXXX").setRepeatable(2, 14)
-                .aisle("XXXX", "XXXX", "XXXX", "####")
-                .where('X', states(getCasingState()).setMinGlobalLimited(10).or(autoAbilities()))
-                .where('F', states(getFrameState()))
-                .where('G', states(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS)))
-                .where('#', any())
-                .where('O', air())
-                .where('I', isIndicatorPredicate())
-                .where('Y', selfPredicate())
-                .build();
-
+    protected @NotNull BlockPatternTemplate createStructureTemplate() {
+        return TEMPLATE.get();
     }
 
     @Override

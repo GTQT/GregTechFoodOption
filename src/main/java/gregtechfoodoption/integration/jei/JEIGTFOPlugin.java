@@ -60,7 +60,7 @@ public class JEIGTFOPlugin implements IModPlugin {
         iRecipeTransferRegistry = registry.getRecipeTransferRegistry();
         ModularUIGuiHandler kitchenGuiHandler = new ModularUIGuiHandler(registry.getJeiHelpers().recipeTransferHandlerHelper());
         for (RecipeMap<?> recipeMap : RecipeMap.getRecipeMaps()) {
-            if (!recipeMap.isHidden) {
+            if (recipeMap.getRecipeMapUI().isJEIVisible()) {
                 for (Map.Entry<GTRecipeCategory, List<Recipe>> entry : recipeMap.getRecipesByCategory().entrySet()) {
                     registry.getRecipeTransferRegistry().addRecipeTransferHandler(kitchenGuiHandler, entry.getKey().getUniqueID());
                 }

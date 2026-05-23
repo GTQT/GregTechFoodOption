@@ -18,40 +18,56 @@ import gregtech.api.metatileentity.multiblock.ui.MultiblockUIFactory;
 import gregtech.api.mui.GTGuiTextures;
 import gregtech.api.mui.GTGuiTheme;
 import gregtech.api.mui.widget.RecipeProgressWidget;
-import gregtech.api.pattern.BlockPattern;
-import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.BlockPatternTemplate;
+import gregtech.api.pattern.SoftTemplate;
+import gregtech.api.pattern.TemplatePool;
 import gregtech.api.pattern.TraceabilityPredicate;
+import gregtech.api.pattern.casing.DeclarativePatternBuilder;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.blocks.MetaBlocks;
+import gregtechfoodoption.client.GTFOClientHandler;
 import gregtechfoodoption.common.block.GTFOBlockCasing;
 import gregtechfoodoption.common.block.GTFOMetaBlocks;
-import gregtechfoodoption.client.GTFOClientHandler;
 import gregtechfoodoption.loader.recipe.GTFORecipeMaps;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 import static gregtech.api.unification.material.Materials.Bronze;
 import static gregtech.api.unification.material.Materials.Iron;
 
 public class MetaTileEntityBakingOven extends RecipeMapPrimitiveMultiblockController {
 
+    private static final SoftTemplate TEMPLATE = TemplatePool.getInstance().register("gregtechfoodoption:large_baking_oven", () ->
+            DeclarativePatternBuilder.start()
+                    .aisle("XXX", "XXX")
+                    .aisle("XFX", "X#X")
+                    .aisle("XYX", "XXX")
+                    .where('X', states(getCasingState()))
+                    .where('F', getFrameState())
+                    .where('#', air())
+                    .where(' ', any())
+                    .where('Y', selfPredicate(MetaTileEntityBakingOven.class))
+                    .buildTemplate()
+    );
+
     public MetaTileEntityBakingOven(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTFORecipeMaps.BAKING_OVEN_RECIPES);
+    }
+
+    protected static IBlockState getCasingState() {
+        return GTFOMetaBlocks.GTFO_CASING.getState(GTFOBlockCasing.CasingType.ADOBE_BRICKS);
+    }
+
+    protected static TraceabilityPredicate getFrameState() {
+        return states(MetaBlocks.FRAMES.get(Iron).getBlock(Iron),
+                MetaBlocks.FRAMES.get(Bronze).getBlock(Bronze));
     }
 
     @Override
     public int getActualLightValue() {
         return recipeMapWorkable.isActive() ? 15 : 0;
-    }
-
-    protected IBlockState getCasingState() {
-        return GTFOMetaBlocks.GTFO_CASING.getState(GTFOBlockCasing.CasingType.ADOBE_BRICKS);
-    }
-
-    protected TraceabilityPredicate getFrameState() {
-        return states(MetaBlocks.FRAMES.get(Iron).getBlock(Iron),
-                MetaBlocks.FRAMES.get(Bronze).getBlock(Bronze));
     }
 
     @Override
@@ -63,7 +79,6 @@ public class MetaTileEntityBakingOven extends RecipeMapPrimitiveMultiblockContro
     protected ICubeRenderer getFrontOverlay() {
         return GTFOClientHandler.BAKING_OVEN_OVERLAY;
     }
-
 
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
@@ -79,17 +94,8 @@ public class MetaTileEntityBakingOven extends RecipeMapPrimitiveMultiblockContro
     }
 
     @Override
-    protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("XXX", "XXX")
-                .aisle("XFX", "X#X")
-                .aisle("XYX", "XXX")
-                .where('X', states(getCasingState()))
-                .where('F', getFrameState())
-                .where('#', air())
-                .where(' ', any())
-                .where('Y', selfPredicate())
-                .build();
+    protected @NotNull BlockPatternTemplate createStructureTemplate() {
+        return TEMPLATE.get();
     }
 
     @Override

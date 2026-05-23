@@ -6,10 +6,14 @@ import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.ParallelLogicType;
 import gregtech.api.metatileentity.multiblock.RecipeMapSteamMultiblockController;
-import gregtech.api.pattern.BlockPattern;
-import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.BlockPatternTemplate;
+import gregtech.api.pattern.SoftTemplate;
+import gregtech.api.pattern.TemplatePool;
+import gregtech.api.pattern.casing.CasingDefinition;
+import gregtech.api.pattern.casing.DeclarativePatternBuilder;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.logic.OCParams;
 import gregtech.api.recipes.logic.OCResult;
@@ -17,10 +21,10 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtechfoodoption.common.block.GTFOBlockCasing;
-import gregtechfoodoption.common.block.GTFOMetaBlocks;
 import gregtechfoodoption.client.GTFOClientHandler;
 import gregtechfoodoption.client.GTFOGuiTextures;
+import gregtechfoodoption.common.block.GTFOBlockCasing;
+import gregtechfoodoption.common.block.GTFOMetaBlocks;
 import gregtechfoodoption.loader.recipe.GTFORecipeMaps;
 import gregtechfoodoption.loader.recipe.builder.ElectricBakingOvenRecipeBuilder;
 import net.minecraft.block.state.IBlockState;
@@ -34,35 +38,41 @@ import javax.annotation.Nonnull;
 import static gregtech.api.unification.material.Materials.Steel;
 
 public class MetaTileEntitySteamBakingOven extends RecipeMapSteamMultiblockController {
+    private static final SoftTemplate TEMPLATE = TemplatePool.getInstance().register("gregtechfoodoption:steam_baking_oven", () ->
+            DeclarativePatternBuilder.start()
+                    .aisle("XXXX", "XGGX", "XXXX")
+                    .aisle("XXXX", "GFFG", "XFFX")
+                    .aisle("XXXX", "GFFG", "XFFX")
+                    .aisle("XXXX", "YGGX", "XXXX")
+                    .casing('X', CasingDefinition.simple(getCasingState()))
+                    .hatch(MultiblockAbility.STEAM, 1)
+                    .hatch(MultiblockAbility.STEAM_IMPORT_ITEMS, 1, 4)
+                    .hatch(MultiblockAbility.STEAM_EXPORT_ITEMS, 1, 4)
+                    .where('F', states(getFrameState()))
+                    .where('#', air())
+                    .where(' ', any())
+                    .where('Y', selfPredicate(MetaTileEntitySteamBakingOven.class))
+                    .where('G', states(getCasingState())
+                            .or(states(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS))))
+                    .buildTemplate()
+    );
+
     public MetaTileEntitySteamBakingOven(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTFORecipeMaps.ELECTRIC_BAKING_OVEN_RECIPES, 10, ParallelLogicType.MULTIPLY);
         this.recipeMapWorkable.setParallelLimit(1);
     }
 
-    protected IBlockState getCasingState() {
+    protected static IBlockState getCasingState() {
         return GTFOMetaBlocks.GTFO_CASING.getState(GTFOBlockCasing.CasingType.REINFORCED_ADOBE_BRICKS);
     }
 
-    protected IBlockState getFrameState() {
+    protected static IBlockState getFrameState() {
         return MetaBlocks.FRAMES.get(Steel).getBlock(Steel);
     }
 
     @Override
-    protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("XXXX", "XGGX", "XXXX")
-                .aisle("XXXX", "GFFG", "XFFX")
-                .aisle("XXXX", "GFFG", "XFFX")
-                .aisle("XXXX", "YGGX", "XXXX")
-                .where('X', states(getCasingState())
-                        .or(this.autoAbilities(true, false, true, true,false,false, false)))
-                .where('F', states(getFrameState()))
-                .where('#', air())
-                .where(' ', any())
-                .where('Y', selfPredicate())
-                .where('G', states(getCasingState())
-                        .or(states(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS))))
-                .build();
+    protected @NotNull BlockPatternTemplate createStructureTemplate() {
+        return TEMPLATE.get();
     }
 
     @Override

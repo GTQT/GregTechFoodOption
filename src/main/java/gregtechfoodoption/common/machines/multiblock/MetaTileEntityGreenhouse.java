@@ -7,8 +7,11 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
-import gregtech.api.pattern.BlockPattern;
-import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.BlockPatternTemplate;
+import gregtech.api.pattern.SoftTemplate;
+import gregtech.api.pattern.TemplatePool;
+import gregtech.api.pattern.casing.CasingDefinition;
+import gregtech.api.pattern.casing.DeclarativePatternBuilder;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
@@ -17,10 +20,10 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtechfoodoption.GTFOConfig;
+import gregtechfoodoption.api.utils.GTFOLog;
+import gregtechfoodoption.client.GTFOGuiTextures;
 import gregtechfoodoption.common.block.GTFOGlassCasing;
 import gregtechfoodoption.common.block.GTFOMetaBlocks;
-import gregtechfoodoption.client.GTFOGuiTextures;
-import gregtechfoodoption.api.utils.GTFOLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -50,6 +53,31 @@ import static gregtech.api.unification.material.Materials.Steel;
 
 public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
     protected static IBlockState[] GRASSES;
+    private static final SoftTemplate TEMPLATE = TemplatePool.getInstance().register("gregtechfoodoption:greenhouse", () ->
+            DeclarativePatternBuilder.start()
+                    .aisle("CCCCCCC", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "   F   ")
+                    .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
+                    .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
+                    .aisle("CDDDDDC", "F#####F", "F#####F", "F#####F", "F#####F", "F#####F", "F#####F", "F#####F", "FFFFFFF")
+                    .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
+                    .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
+                    .aisle("CCCYCCC", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "   F   ")
+                    .where('X', states(getCasingState()))
+                    .where('F', states(getFrameState()))
+                    .where('D', states(Blocks.DIRT.getDefaultState(), Blocks.GRASS.getDefaultState()).or(states(GRASSES)))
+                    .casing('C', CasingDefinition.simple(getCasingState2()))
+                    .maintenance()
+                    .muffler()
+                    .energyInput(1,2)
+                    .optionalItemInput(4)
+                    .optionalItemOutput(4)
+                    .optionalFluidInput(2)
+                    .optionalFluidOutput(2)
+                    .where('#', air())
+                    .where(' ', any())
+                    .where('Y', selfPredicate(MetaTileEntityGreenhouse.class))
+                    .buildTemplate()
+    );
 
     public MetaTileEntityGreenhouse(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMap.getByName("greenhouse")); // Use Nomi Labs recipes if the mod is installed
@@ -101,38 +129,22 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
             throw new IllegalArgumentException("One or more errors were found with the Greenhouse Blocks configuration for GTFO. Check log above.");
     }
 
-    @Override
-    protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("CCCCCCC", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "   F   ")
-                .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
-                .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
-                .aisle("CDDDDDC", "F#####F", "F#####F", "F#####F", "F#####F", "F#####F", "F#####F", "F#####F", "FFFFFFF")
-                .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
-                .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
-                .aisle("CCCYCCC", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "   F   ")
-                .where('X', states(getCasingState()))
-                .where('F', states(getFrameState()))
-                .where('D', states(Blocks.DIRT.getDefaultState(), Blocks.GRASS.getDefaultState()).or(states(GRASSES)))
-                .where('C', states(getCasingState2()).setMinGlobalLimited(10).or(autoAbilities()))
-                .where('#', air())
-                .where(' ', any())
-                .where('Y', selfPredicate())
-                .build();
-    }
-
-    protected IBlockState getCasingState() {
+    protected static IBlockState getCasingState() {
         return GTFOMetaBlocks.GTFO_GLASS_CASING.getState(GTFOGlassCasing.CasingType.GREENHOUSE_GLASS);
     }
 
-    protected IBlockState getCasingState2() {
+    protected static IBlockState getCasingState2() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
     }
 
-    protected IBlockState getFrameState() {
+    protected static IBlockState getFrameState() {
         return MetaBlocks.FRAMES.get(Steel).getBlock(Steel);
     }
 
+    @Override
+    protected @NotNull BlockPatternTemplate createStructureTemplate() {
+        return TEMPLATE.get();
+    }
 
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {

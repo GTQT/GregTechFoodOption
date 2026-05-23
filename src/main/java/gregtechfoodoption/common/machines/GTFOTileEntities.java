@@ -16,13 +16,12 @@ import gregtechfoodoption.loader.recipe.GTFORecipeMaps;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtechfoodoption.GregTechFoodOption.location;
 
-/* Takes up IDs 8500 - 8599 */
 public class GTFOTileEntities {
     public static final MetaTileEntityMobAgeSorter[] MOB_AGE_SORTER = new MetaTileEntityMobAgeSorter[4];
     public static final MetaTileEntityMobExterminator[] MOB_EXTERMINATOR = new MetaTileEntityMobExterminator[4];
     public static final MetaTileEntityMobExtractor[] MOB_EXTRACTOR = new MetaTileEntityMobExtractor[GTValues.UV];
     public static final MetaTileEntityFarmer[] FARMER = new MetaTileEntityFarmer[4];
-    //public static MetaTileEntityBioReactor[] BIOREACTOR = new MetaTileEntityBioReactor[GTValues.V.length];
+
     public static SimpleMachineMetaTileEntity[] SLICER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static SimpleMachineMetaTileEntity[] CUISINE_ASSEMBLER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static SimpleMachineMetaTileEntity[] ELECTRIC_BAKING_OVEN = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
@@ -37,12 +36,6 @@ public class GTFOTileEntities {
     public static MetaTileEntityKitchen KITCHEN;
 
     public static void init() {
-/*
-        BIOREACTOR[2] = MetaTileEntities.registerMetaTileEntity(00, new MetaTileEntityBioReactor(location("bioreactor.hv"), 3));
-        BIOREACTOR[3] = MetaTileEntities.registerMetaTileEntity(01, new MetaTileEntityBioReactor(location("bioreactor.ev"), 4));
-        BIOREACTOR[4] = MetaTileEntities.registerMetaTileEntity(02, new MetaTileEntityBioReactor(location("bioreactor.iv"), 5));
-*/
-
         registerSimpleMetaTileEntity(SLICER, 0, "slicer", GTFORecipeMaps.SLICER_RECIPES, GTFOClientHandler.SLICER_OVERLAY, true, GregTechFoodOption::location, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(CUISINE_ASSEMBLER, 15, "cuisine_assembler", GTFORecipeMaps.CUISINE_ASSEMBLER_RECIPES, GTFOClientHandler.CUISINE_ASSEMBLER_OVERLAY, true, GregTechFoodOption::location, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(MULTICOOKER, 30, "multicooker", GTFORecipeMaps.MULTICOOKER_RECIPES, GTFOClientHandler.MULTICOOKER_OVERLAY, true, GregTechFoodOption::location, GTUtility.hvCappedTankSizeFunction);
