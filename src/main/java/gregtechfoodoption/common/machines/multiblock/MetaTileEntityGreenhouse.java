@@ -7,11 +7,9 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
-import gregtech.api.pattern.BlockPatternTemplate;
-import gregtech.api.pattern.SoftTemplate;
-import gregtech.api.pattern.TemplatePool;
 import gregtech.api.pattern.casing.CasingDefinition;
 import gregtech.api.pattern.casing.DeclarativePatternBuilder;
+import gregtech.api.pattern.element.StructureDefinition;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
@@ -53,30 +51,31 @@ import static gregtech.api.unification.material.Materials.Steel;
 
 public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
     protected static IBlockState[] GRASSES;
-    private static final SoftTemplate TEMPLATE = TemplatePool.getInstance().register("gregtechfoodoption:greenhouse", () ->
-            DeclarativePatternBuilder.start()
-                    .aisle("CCCCCCC", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "   F   ")
-                    .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
-                    .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
-                    .aisle("CDDDDDC", "F#####F", "F#####F", "F#####F", "F#####F", "F#####F", "F#####F", "F#####F", "FFFFFFF")
-                    .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
-                    .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
-                    .aisle("CCCYCCC", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "   F   ")
-                    .where('X', states(getCasingState()))
-                    .where('F', states(getFrameState()))
-                    .where('D', states(Blocks.DIRT.getDefaultState(), Blocks.GRASS.getDefaultState()).or(states(GRASSES)))
-                    .casing('C', CasingDefinition.simple(getCasingState2()))
-                    .maintenance()
-                    .muffler()
-                    .energyInput(1,2)
-                    .optionalItemInput(4)
-                    .optionalItemOutput(4)
-                    .optionalFluidInput(2)
-                    .optionalFluidOutput(2)
-                    .where('#', air())
-                    .where(' ', any())
-                    .where('Y', selfPredicate(MetaTileEntityGreenhouse.class))
-                    .buildTemplate()
+    private static final StructureDefinition<?> STRUCTURE_DEFINITION = StructureDefinition.getOrBuild(
+            "gregtechfoodoption:greenhouse", () ->
+                    DeclarativePatternBuilder.start()
+                            .aisle("CCCCCCC", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "   F   ")
+                            .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
+                            .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
+                            .aisle("CDDDDDC", "F#####F", "F#####F", "F#####F", "F#####F", "F#####F", "F#####F", "F#####F", "FFFFFFF")
+                            .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
+                            .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
+                            .aisle("CCCYCCC", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "   F   ")
+                            .block('X', getCasingState())
+                            .block('F', getFrameState())
+                            .blocks('D', getSoilStates())
+                            .casing('C', CasingDefinition.simple(getCasingState2()))
+                            .maintenance()
+                            .muffler()
+                            .energyInput(1, 2)
+                            .optionalItemInput(4)
+                            .optionalItemOutput(4)
+                            .optionalFluidInput(2)
+                            .optionalFluidOutput(2)
+                            .air('#')
+                            .any(' ')
+                            .self('Y', MetaTileEntityGreenhouse.class)
+                            .buildStructureDefinition()
     );
 
     public MetaTileEntityGreenhouse(ResourceLocation metaTileEntityId) {
@@ -141,9 +140,20 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
         return MetaBlocks.FRAMES.get(Steel).getBlock(Steel);
     }
 
+    private static IBlockState[] getSoilStates() {
+        int configuredStateCount = GRASSES == null ? 0 : GRASSES.length;
+        IBlockState[] states = new IBlockState[configuredStateCount + 2];
+        states[0] = Blocks.DIRT.getDefaultState();
+        states[1] = Blocks.GRASS.getDefaultState();
+        if (configuredStateCount > 0) {
+            System.arraycopy(GRASSES, 0, states, 2, configuredStateCount);
+        }
+        return states;
+    }
+
     @Override
-    protected @NotNull BlockPatternTemplate createStructureTemplate() {
-        return TEMPLATE.get();
+    protected @NotNull StructureDefinition<?> createStructureDefinition() {
+        return STRUCTURE_DEFINITION;
     }
 
     @Override

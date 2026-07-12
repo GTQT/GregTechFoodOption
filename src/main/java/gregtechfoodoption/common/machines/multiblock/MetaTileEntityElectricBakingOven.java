@@ -14,10 +14,12 @@ import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.*;
-import gregtech.api.pattern.*;
+import gregtech.api.pattern.FormedStructureView;
+import gregtech.api.pattern.StructurePieceKey;
 import gregtech.api.pattern.casing.CasingDefinition;
 import gregtech.api.pattern.casing.DeclarativePatternBuilder;
 import gregtech.api.pattern.casing.GTStructureChannels;
+import gregtech.api.pattern.element.StructureDefinition;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.logic.OCParams;
 import gregtech.api.recipes.logic.OCResult;
@@ -56,24 +58,30 @@ import static gregtechfoodoption.common.block.GTFOMetaBlocks.GTFO_METAL_CASING;
 
 public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockController implements IProgressBarMultiblock {
 
-    private static final SoftTemplate TEMPLATE = TemplatePool.getInstance().register("gregtechfoodoption:large_electric_baking_oven", () ->
-            DeclarativePatternBuilder.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)
-                    .aisle("XXXX", "YXXX", "XXXX", "####")
-                    .aisleRepeatable(2, 14, "XXXX", "GFFX", "GIOX", "XXXX")
-                    .withAisleChannel(GTStructureChannels.STRUCTURE_LENGTH.getName())
-                    .aisle("XXXX", "XXXX", "XXXX", "####")
-                    .casing('X', CasingDefinition.simple(getCasingState()))
-                    .energyInput(1,2)
-                    .maintenance()
-                    .optionalItemInput(4)
-                    .optionalItemOutput(4)
-                    .where('F', states(getFrameState()))
-                    .where('G', states(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS)))
-                    .where('#', any())
-                    .where('O', air())
-                    .where('I', isIndicatorPredicate())
-                    .where('Y', selfPredicate(MetaTileEntityElectricBakingOven.class))
-                    .buildTemplate()
+    private static final String PIECE_BODY = "body";
+    private static final StructurePieceKey BODY_PIECE = StructurePieceKey.of(PIECE_BODY);
+    private static final StructureDefinition<?> STRUCTURE_DEFINITION = StructureDefinition.getOrBuild(
+            "gregtechfoodoption:large_electric_baking_oven", () ->
+                    DeclarativePatternBuilder.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)
+                            .piece("front")
+                            .aisle("XXXX", "YXXX", "XXXX", "####")
+                            .repeatablePiece(PIECE_BODY, 2, 14)
+                            .aisle("XXXX", "GFFX", "GIOX", "XXXX")
+                            .withAisleChannel(GTStructureChannels.STRUCTURE_LENGTH.getName())
+                            .piece("back")
+                            .aisle("XXXX", "XXXX", "XXXX", "####")
+                            .casing('X', CasingDefinition.simple(getCasingState()))
+                            .energyInput(1, 2)
+                            .maintenance()
+                            .optionalItemInput(4)
+                            .optionalItemOutput(4)
+                            .block('F', getFrameState())
+                            .block('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.TEMPERED_GLASS))
+                            .any('#')
+                            .air('O')
+                            .air('I')
+                            .self('Y', MetaTileEntityElectricBakingOven.class)
+                            .buildStructureDefinition()
     );
     public int size;
     public boolean adaptable = true;
@@ -89,17 +97,6 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
 
         temp = 300;
         targetTemp = 300;
-    }
-
-    // This function is highly useful for detecting the length of this multiblock.
-    public static TraceabilityPredicate isIndicatorPredicate() {
-        return new TraceabilityPredicate((blockWorldState) -> {
-            if (air().test(blockWorldState)) {
-                blockWorldState.getMatchContext().increment("bakingOvenLength", 1);
-                return true;
-            } else
-                return false;
-        });
     }
 
     public static int temperatureEnergyCost(int temp, int multiSize) {
@@ -234,8 +231,8 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
     }
 
     @Override
-    protected @NotNull BlockPatternTemplate createStructureTemplate() {
-        return TEMPLATE.get();
+    protected @NotNull StructureDefinition<?> createStructureDefinition() {
+        return STRUCTURE_DEFINITION;
     }
 
     @Override
@@ -245,9 +242,9 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
     }
 
     @Override
-    protected void formStructure(PatternMatchContext context) {
-        super.formStructure(context);
-        this.size = context.getOrDefault("bakingOvenLength", 1) - 1;
+    protected void formStructure(@NotNull FormedStructureView formed) {
+        super.formStructure(formed);
+        this.size = Math.max(0, formed.getPieceRepeat(BODY_PIECE, 0) - 1);
     }
 
     @Override

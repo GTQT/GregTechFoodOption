@@ -18,11 +18,8 @@ import gregtech.api.metatileentity.multiblock.ui.MultiblockUIFactory;
 import gregtech.api.mui.GTGuiTextures;
 import gregtech.api.mui.GTGuiTheme;
 import gregtech.api.mui.widget.RecipeProgressWidget;
-import gregtech.api.pattern.BlockPatternTemplate;
-import gregtech.api.pattern.SoftTemplate;
-import gregtech.api.pattern.TemplatePool;
-import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.pattern.casing.DeclarativePatternBuilder;
+import gregtech.api.pattern.element.StructureDefinition;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.blocks.MetaBlocks;
 import gregtechfoodoption.client.GTFOClientHandler;
@@ -39,17 +36,18 @@ import static gregtech.api.unification.material.Materials.Iron;
 
 public class MetaTileEntityBakingOven extends RecipeMapPrimitiveMultiblockController {
 
-    private static final SoftTemplate TEMPLATE = TemplatePool.getInstance().register("gregtechfoodoption:large_baking_oven", () ->
-            DeclarativePatternBuilder.start()
-                    .aisle("XXX", "XXX")
-                    .aisle("XFX", "X#X")
-                    .aisle("XYX", "XXX")
-                    .where('X', states(getCasingState()))
-                    .where('F', getFrameState())
-                    .where('#', air())
-                    .where(' ', any())
-                    .where('Y', selfPredicate(MetaTileEntityBakingOven.class))
-                    .buildTemplate()
+    private static final StructureDefinition<?> STRUCTURE_DEFINITION = StructureDefinition.getOrBuild(
+            "gregtechfoodoption:large_baking_oven", () ->
+                    DeclarativePatternBuilder.start()
+                            .aisle("XXX", "XXX")
+                            .aisle("XFX", "X#X")
+                            .aisle("XYX", "XXX")
+                            .block('X', getCasingState())
+                            .blocks('F', getFrameStates())
+                            .air('#')
+                            .any(' ')
+                            .self('Y', MetaTileEntityBakingOven.class)
+                            .buildStructureDefinition()
     );
 
     public MetaTileEntityBakingOven(ResourceLocation metaTileEntityId) {
@@ -60,9 +58,9 @@ public class MetaTileEntityBakingOven extends RecipeMapPrimitiveMultiblockContro
         return GTFOMetaBlocks.GTFO_CASING.getState(GTFOBlockCasing.CasingType.ADOBE_BRICKS);
     }
 
-    protected static TraceabilityPredicate getFrameState() {
-        return states(MetaBlocks.FRAMES.get(Iron).getBlock(Iron),
-                MetaBlocks.FRAMES.get(Bronze).getBlock(Bronze));
+    protected static IBlockState[] getFrameStates() {
+        return new IBlockState[]{MetaBlocks.FRAMES.get(Iron).getBlock(Iron),
+                MetaBlocks.FRAMES.get(Bronze).getBlock(Bronze)};
     }
 
     @Override
@@ -94,8 +92,8 @@ public class MetaTileEntityBakingOven extends RecipeMapPrimitiveMultiblockContro
     }
 
     @Override
-    protected @NotNull BlockPatternTemplate createStructureTemplate() {
-        return TEMPLATE.get();
+    protected @NotNull StructureDefinition<?> createStructureDefinition() {
+        return STRUCTURE_DEFINITION;
     }
 
     @Override
