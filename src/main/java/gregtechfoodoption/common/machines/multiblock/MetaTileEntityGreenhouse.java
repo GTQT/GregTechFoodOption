@@ -128,7 +128,7 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
             throw new IllegalArgumentException("One or more errors were found with the Greenhouse Blocks configuration for GTFO. Check log above.");
     }
 
-    protected static IBlockState getCasingState() {
+    public static IBlockState getCasingState() {
         return GTFOMetaBlocks.GTFO_GLASS_CASING.getState(GTFOGlassCasing.CasingType.GREENHOUSE_GLASS);
     }
 

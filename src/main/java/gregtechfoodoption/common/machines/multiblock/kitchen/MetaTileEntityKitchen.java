@@ -26,19 +26,7 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
-import gregtech.api.pattern.FormedStructureView;
-import gregtech.api.pattern.MultiblockShapeInfo;
-import gregtech.api.pattern.PieceTemplate;
-import gregtech.api.pattern.StructureContributionKey;
-import gregtech.api.pattern.StructureDependency;
-import gregtech.api.pattern.StructureElementPreviewEntry;
-import gregtech.api.pattern.StructureEvaluationContext;
-import gregtech.api.pattern.StructureHintResult;
-import gregtech.api.pattern.StructureIncrementalSupport;
-import gregtech.api.pattern.StructureOperationRequest;
-import gregtech.api.pattern.StructurePreviewResult;
-import gregtech.api.pattern.StructureRuntime;
-import gregtech.api.pattern.StructureRuntimeDetectionContext;
+import gregtech.api.pattern.*;
 import gregtech.api.pattern.element.Elements;
 import gregtech.api.pattern.element.IStructureElement;
 import gregtech.api.pattern.element.ITypedStructureElement;
@@ -55,9 +43,9 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtechfoodoption.api.utils.GTFOValues;
+import gregtechfoodoption.client.GTFOGuiTextures;
 import gregtechfoodoption.common.block.GTFOBlockCasing;
 import gregtechfoodoption.common.block.GTFOMetaBlocks;
-import gregtechfoodoption.client.GTFOGuiTextures;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -80,26 +68,12 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class MetaTileEntityKitchen extends MultiblockWithDisplayBase {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
     public static final int MIN_RADIUS = 2;
     private static final int MIN_BODY_LENGTH = MIN_RADIUS * 2;
-    private static final int MAX_RADIUS = 8;
-    private static final int MAX_BODY_LENGTH = 14;
     private static final String RUNTIME_PIECE = "runtime";
-    private static final StructureContributionKey<KitchenDimensions, KitchenDimensions> KITCHEN_DIMENSIONS_KEY =
-            StructureContributionKey.uniform("gregtechfoodoption:kitchen/dimensions");
-    private static final StructureContributionKey<WorkableTieredMetaTileEntity, Set<WorkableTieredMetaTileEntity>>
-            KITCHEN_MACHINES_KEY = StructureContributionKey.setUnion("gregtechfoodoption:kitchen/machines");
     private static final StructureDefinition<MetaTileEntityKitchen> STRUCTURE_DEFINITION =
             StructureDefinition.getOrBuild("gregtechfoodoption:kitchen", () ->
                     StructureDefinition.<MetaTileEntityKitchen>builder(
@@ -112,6 +86,12 @@ public class MetaTileEntityKitchen extends MultiblockWithDisplayBase {
                                     ConfigHolder.machines.enableMaintenance ? 1 : 0, 1)
                             .runtimeDetector(MetaTileEntityKitchen::detectRuntimeStructure)
                             .build());
+    private static final int MAX_RADIUS = 8;
+    private static final int MAX_BODY_LENGTH = 14;
+    private static final StructureContributionKey<KitchenDimensions, KitchenDimensions> KITCHEN_DIMENSIONS_KEY =
+            StructureContributionKey.uniform("gregtechfoodoption:kitchen/dimensions");
+    private static final StructureContributionKey<WorkableTieredMetaTileEntity, Set<WorkableTieredMetaTileEntity>>
+            KITCHEN_MACHINES_KEY = StructureContributionKey.setUnion("gregtechfoodoption:kitchen/machines");
     private final KitchenLogic kitchenLogic;
     protected IItemHandlerModifiable inputInventory;
     protected IItemHandlerModifiable outputInventory;
@@ -131,9 +111,7 @@ public class MetaTileEntityKitchen extends MultiblockWithDisplayBase {
             return IntCircuitIngredient.getIntegratedCircuit(slot);
         }
     };
-
     protected int orderSize = 64;
-
     private int sDist = 0;
     private int bDist = 0;
 
@@ -141,6 +119,80 @@ public class MetaTileEntityKitchen extends MultiblockWithDisplayBase {
         super(metaTileEntityId);
         kitchenLogic = new KitchenLogic(this);
         resetTileAbilities();
+    }
+
+    private static boolean detectRuntimeStructure(
+            @NotNull StructureRuntimeDetectionContext<MetaTileEntityKitchen> context) {
+        MetaTileEntityKitchen controller = context.getController();
+        KitchenDimensions dimensions = controller.scanStructureDimensions();
+        if (dimensions == null) {
+            return context.fail(context.getControllerPos(), "valid kitchen shell", "kitchen boundary not found");
+        }
+
+        context.emit(KITCHEN_DIMENSIONS_KEY, dimensions);
+        KitchenRuntimeElements elements = controller.createRuntimeCellElements();
+        int totalLength = dimensions.getTotalLength();
+        for (int aisle = 0; aisle < totalLength; aisle++) {
+            for (int row = 0; row < 2; row++) {
+                for (int column = 0; column < dimensions.getWidth(); column++) {
+                    KitchenCellType cellType = classifyCell(column, row, aisle, dimensions);
+                    BlockPos pos = context.localPos(
+                            column - dimensions.radius,
+                            row,
+                            aisle - (totalLength - 1),
+                            RelativeDirection.LEFT,
+                            RelativeDirection.UP,
+                            RelativeDirection.FRONT);
+                    if (!context.match(pos, elements.get(cellType))) {
+                        return context.fail(
+                                pos,
+                                cellType.expected,
+                                String.valueOf(context.getWorld().getBlockState(pos)));
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    @NotNull
+    private static KitchenCellType classifyCell(int column, int row, int aisle,
+                                                @NotNull KitchenDimensions dimensions) {
+        int totalLength = dimensions.getTotalLength();
+        if (row == 0 && aisle == totalLength - 1 && column == dimensions.radius) {
+            return KitchenCellType.CONTROLLER;
+        }
+        if (row == 0) {
+            if (aisle == 0 || aisle == totalLength - 1 ||
+                    column == 0 || column == dimensions.getWidth() - 1) {
+                return KitchenCellType.BASE;
+            }
+            return KitchenCellType.FLOOR;
+        }
+        if (aisle > 0 && aisle < totalLength - 1 &&
+                column > 0 && column < dimensions.getWidth() - 1) {
+            return KitchenCellType.INTERIOR;
+        }
+        return KitchenCellType.ANY;
+    }
+
+    @NotNull
+    private static int[] getToolingRepetitions(@NotNull KitchenDimensions dimensions) {
+        int[] repetitions = new int[dimensions.getTotalLength()];
+        for (int i = 0; i < repetitions.length; i++) {
+            repetitions[i] = 1;
+        }
+        return repetitions;
+    }
+
+    @Nonnull
+    public static IBlockState getCasingState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
+    }
+
+    @Override
+    public boolean usesMui2() {
+        return false;
     }
 
     protected void initializeAbilities() {
@@ -211,40 +263,6 @@ public class MetaTileEntityKitchen extends MultiblockWithDisplayBase {
         return STRUCTURE_DEFINITION;
     }
 
-    private static boolean detectRuntimeStructure(
-            @NotNull StructureRuntimeDetectionContext<MetaTileEntityKitchen> context) {
-        MetaTileEntityKitchen controller = context.getController();
-        KitchenDimensions dimensions = controller.scanStructureDimensions();
-        if (dimensions == null) {
-            return context.fail(context.getControllerPos(), "valid kitchen shell", "kitchen boundary not found");
-        }
-
-        context.emit(KITCHEN_DIMENSIONS_KEY, dimensions);
-        KitchenRuntimeElements elements = controller.createRuntimeCellElements();
-        int totalLength = dimensions.getTotalLength();
-        for (int aisle = 0; aisle < totalLength; aisle++) {
-            for (int row = 0; row < 2; row++) {
-                for (int column = 0; column < dimensions.getWidth(); column++) {
-                    KitchenCellType cellType = classifyCell(column, row, aisle, dimensions);
-                    BlockPos pos = context.localPos(
-                            column - dimensions.radius,
-                            row,
-                            aisle - (totalLength - 1),
-                            RelativeDirection.LEFT,
-                            RelativeDirection.UP,
-                            RelativeDirection.FRONT);
-                    if (!context.match(pos, elements.get(cellType))) {
-                        return context.fail(
-                                pos,
-                                cellType.expected,
-                                String.valueOf(context.getWorld().getBlockState(pos)));
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
     @NotNull
     private KitchenRuntimeElements createRuntimeCellElements() {
         List<IStructureElement<?>> baseAlternatives = new ArrayList<>();
@@ -274,7 +292,6 @@ public class MetaTileEntityKitchen extends MultiblockWithDisplayBase {
             tooltip.add(I18n.format("gregtechfoodoption.machine.kitchen.tooltip." + i));
         }
     }
-
 
     @Override
     public boolean allowsExtendedFacing() {
@@ -333,27 +350,6 @@ public class MetaTileEntityKitchen extends MultiblockWithDisplayBase {
             buf.writeInt(this.sDist);
             buf.writeInt(this.bDist);
         });
-    }
-
-    @NotNull
-    private static KitchenCellType classifyCell(int column, int row, int aisle,
-                                                @NotNull KitchenDimensions dimensions) {
-        int totalLength = dimensions.getTotalLength();
-        if (row == 0 && aisle == totalLength - 1 && column == dimensions.radius) {
-            return KitchenCellType.CONTROLLER;
-        }
-        if (row == 0) {
-            if (aisle == 0 || aisle == totalLength - 1 ||
-                    column == 0 || column == dimensions.getWidth() - 1) {
-                return KitchenCellType.BASE;
-            }
-            return KitchenCellType.FLOOR;
-        }
-        if (aisle > 0 && aisle < totalLength - 1 &&
-                column > 0 && column < dimensions.getWidth() - 1) {
-            return KitchenCellType.INTERIOR;
-        }
-        return KitchenCellType.ANY;
     }
 
     @Override
@@ -468,15 +464,6 @@ public class MetaTileEntityKitchen extends MultiblockWithDisplayBase {
                 Math.max(MIN_BODY_LENGTH, Math.min(MAX_BODY_LENGTH, bDist)));
     }
 
-    @NotNull
-    private static int[] getToolingRepetitions(@NotNull KitchenDimensions dimensions) {
-        int[] repetitions = new int[dimensions.getTotalLength()];
-        for (int i = 0; i < repetitions.length; i++) {
-            repetitions[i] = 1;
-        }
-        return repetitions;
-    }
-
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
@@ -547,11 +534,6 @@ public class MetaTileEntityKitchen extends MultiblockWithDisplayBase {
 
     public boolean isBlockEdge(@Nonnull World world, @Nonnull BlockPos.MutableBlockPos pos, @Nonnull EnumFacing direction) {
         return world.getBlockState(pos.move(direction)) == getCasingState() || world.getTileEntity(pos) instanceof MetaTileEntityHolder;
-    }
-
-    @Nonnull
-    protected IBlockState getCasingState() {
-        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
     }
 
     @Nonnull
@@ -771,63 +753,51 @@ public class MetaTileEntityKitchen extends MultiblockWithDisplayBase {
         }
     }
 
-    private static final class KitchenDimensions {
-
-        private final int radius;
-        private final int bodyLength;
-
-        private KitchenDimensions(int radius, int bodyLength) {
-            this.radius = radius;
-            this.bodyLength = bodyLength;
-        }
+    private record KitchenDimensions(int radius, int bodyLength) {
 
         private int getWidth() {
-            return radius * 2 + 1;
-        }
+                return radius * 2 + 1;
+            }
 
-        private int getTotalLength() {
-            return bodyLength + 2;
-        }
-    }
-
-    private static final class KitchenRuntimeElements {
-
-        private final IStructureElement<?> controller;
-        private final IStructureElement<?> base;
-        private final IStructureElement<?> floor;
-        private final IStructureElement<?> interior;
-        private final IStructureElement<?> any;
-
-        private KitchenRuntimeElements(@NotNull IStructureElement<?> controller,
-                                       @NotNull IStructureElement<?> base,
-                                       @NotNull IStructureElement<?> floor,
-                                       @NotNull IStructureElement<?> interior,
-                                       @NotNull IStructureElement<?> any) {
-            this.controller = controller.compile();
-            this.base = base.compile();
-            this.floor = floor.compile();
-            this.interior = interior.compile();
-            this.any = any.compile();
-        }
-
-        @NotNull
-        private IStructureElement<?> get(@NotNull KitchenCellType cellType) {
-            switch (cellType) {
-                case CONTROLLER:
-                    return controller;
-                case BASE:
-                    return base;
-                case FLOOR:
-                    return floor;
-                case INTERIOR:
-                    return interior;
-                case ANY:
-                    return any;
-                default:
-                    throw new IllegalStateException("Unknown kitchen cell type: " + cellType);
+            private int getTotalLength() {
+                return bodyLength + 2;
             }
         }
-    }
+
+    private record KitchenRuntimeElements(IStructureElement<?> controller, IStructureElement<?> base,
+                                          IStructureElement<?> floor, IStructureElement<?> interior,
+                                          IStructureElement<?> any) {
+
+            private KitchenRuntimeElements(@NotNull IStructureElement<?> controller,
+                                           @NotNull IStructureElement<?> base,
+                                           @NotNull IStructureElement<?> floor,
+                                           @NotNull IStructureElement<?> interior,
+                                           @NotNull IStructureElement<?> any) {
+                this.controller = controller.compile();
+                this.base = base.compile();
+                this.floor = floor.compile();
+                this.interior = interior.compile();
+                this.any = any.compile();
+            }
+
+            @NotNull
+            private IStructureElement<?> get(@NotNull KitchenCellType cellType) {
+                switch (cellType) {
+                    case CONTROLLER:
+                        return controller;
+                    case BASE:
+                        return base;
+                    case FLOOR:
+                        return floor;
+                    case INTERIOR:
+                        return interior;
+                    case ANY:
+                        return any;
+                    default:
+                        throw new IllegalStateException("Unknown kitchen cell type: " + cellType);
+                }
+            }
+        }
 
     private static final class KitchenInnerElement implements ITypedStructureElement<Object> {
 

@@ -1,6 +1,6 @@
 package gregtechfoodoption.common.entity;
 
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,7 +54,7 @@ public class EntityItalianBuffalo extends EntityCow {
         ItemStack itemstack = player.getHeldItem(hand);
         if (itemstack.getItem() == Items.BUCKET && this.getGrowingAge() >= 0 && !player.capabilities.isCreativeMode) {
             itemstack.shrink(1);
-            ItemStack bucket = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, GTFOMaterialHandler.ItalianBuffaloMilk.getFluid());
+            ItemStack bucket = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, GTFOMaterials.ItalianBuffaloMilk.getFluid());
             if (itemstack.isEmpty()) {
                 player.setHeldItem(hand, bucket);
             } else if (!player.inventory.addItemStackToInventory(bucket)) {

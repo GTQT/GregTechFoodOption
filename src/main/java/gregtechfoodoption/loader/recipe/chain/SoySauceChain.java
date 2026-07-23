@@ -9,7 +9,7 @@ import static gregtech.api.GTValues.LV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.Sugar;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.*;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.*;
 import static gregtechfoodoption.common.item.GTFOMetaItem.*;
 import static net.minecraft.init.Items.WHEAT;
 

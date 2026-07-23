@@ -17,7 +17,7 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
 import gregtech.common.ConfigHolder;
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
 import gregtechfoodoption.api.utils.GTFOValues;
 import gregtechfoodoption.api.unification.materials.CleanerProperty;
 import gregtechfoodoption.api.utils.GTFOLog;
@@ -205,7 +205,7 @@ public class KitchenLogic extends MTETrait implements IControllable {
             }
             Material mat = GregTechAPI.materialManager.getMaterial(fluid.getFluid().getName());
             if (mat != null) {
-                CleanerProperty property = mat.getProperty(GTFOMaterialHandler.CLEANER);
+                CleanerProperty property = mat.getProperty(GTFOMaterials.CLEANER);
                 if (property != null) {
                     tank.drain(1, true);
                     dirtiness -= property.getCleaningPower();

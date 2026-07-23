@@ -15,7 +15,7 @@ import net.minecraftforge.fluids.Fluid;
 
 import java.util.Random;
 
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.RainbowSap;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.RainbowSap;
 
 public class RainbowwoodTree extends GTFOTree {
     public static final int[] RAINBOW_ARRAY = {

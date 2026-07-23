@@ -7,7 +7,7 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.dustSmall;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.*;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.*;
 import static gregtechfoodoption.common.item.GTFOMetaItem.*;
 
 public class CapletChain {

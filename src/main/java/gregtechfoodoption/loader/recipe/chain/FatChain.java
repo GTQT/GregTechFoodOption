@@ -19,7 +19,8 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.CARBON_MESH;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.*;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.*;
+import static gregtechfoodoption.api.unification.materials.GTFOOreDictItems.*;
 import static gregtechfoodoption.common.item.GTFOMetaItem.SCRAP_MEAT;
 
 public class FatChain {

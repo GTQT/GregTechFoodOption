@@ -11,7 +11,7 @@ import gregtech.api.cover.CoverBase;
 import gregtech.api.cover.CoverDefinition;
 import gregtech.api.cover.CoverableView;
 import gregtech.api.unification.material.Material;
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
 import gregtechfoodoption.client.GTFOClientHandler;
 import gregtechfoodoption.client.particle.GTFOSprinkleMaker;
 import gregtechfoodoption.api.unification.materials.FertilizerProperty;
@@ -106,7 +106,7 @@ public class CoverSprinkler extends CoverBase implements ITickable {
                     sprinkleColor = color;
                     syncAllData();
                 }
-                FertilizerProperty property = mat.getProperty(GTFOMaterialHandler.FERTILIZER);
+                FertilizerProperty property = mat.getProperty(GTFOMaterials.FERTILIZER);
                 if (property != null) {
                     percentageChance = property.getBoostPercentage();
                 }

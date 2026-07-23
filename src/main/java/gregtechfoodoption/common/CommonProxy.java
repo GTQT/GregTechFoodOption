@@ -20,7 +20,6 @@ import gregtechfoodoption.common.block.GTFORootCrop;
 import gregtechfoodoption.common.potion.*;
 import gregtechfoodoption.integration.enderio.GTFOBerryFarmer;
 import gregtechfoodoption.integration.enderio.GTFORootCropFarmer;
-import gregtechfoodoption.integration.nutrition.GTFONutritionCompatibility;
 import gregtechfoodoption.common.item.GTFOMetaItem;
 import gregtechfoodoption.common.item.GTFOMetaItems;
 import gregtechfoodoption.common.item.GTFOSpecialVariantItemBlock;
@@ -41,7 +40,6 @@ import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -52,8 +50,8 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.function.Function;
 
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.LithiumCarbonate;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.SodiumCyanide;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.LithiumCarbonate;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.SodiumCyanide;
 import static gregtechfoodoption.common.block.GTFOCrop.CROP_BLOCKS;
 
 @Mod.EventBusSubscriber(modid = GregTechFoodOption.MODID)
@@ -140,7 +138,6 @@ public class CommonProxy {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void registerRecipesLowest(RegistryEvent.Register<IRecipe> event) {
         GTFOLog.logger.info("Registering recipe very low...");
-
         GTFORecipeAddition.compatInit();
     }
 
@@ -196,10 +193,6 @@ public class CommonProxy {
                 new PotionEffect(LungCancerPotion.INSTANCE, 99999999, 0),
                 "17aaqe0i1q/1/2/3/7/10/"));
 
-
-        if (Loader.isModLoaded(GTFOValues.MODID_NUGT) && GTFOConfig.gtfoOtherFoodModConfig.enableGTFONutrition) {
-            GTFONutritionCompatibility.init();
-        }
 
         GreenhouseChain.init();
 

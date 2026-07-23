@@ -7,7 +7,8 @@ import static gregtech.api.unification.material.Materials.Milk;
 import static gregtech.api.unification.material.Materials.Sugar;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.common.items.MetaItems.SHAPE_MOLD_BALL;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.*;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.*;
+import static gregtechfoodoption.api.unification.materials.GTFOOreDictItems.*;
 
 public class IceCreamChain {
     public static void init() {

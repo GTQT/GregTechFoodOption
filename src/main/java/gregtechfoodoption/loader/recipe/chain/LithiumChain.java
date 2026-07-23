@@ -5,8 +5,8 @@ import gregtech.api.unification.material.Materials;
 import gregtechfoodoption.api.utils.GTFOUtils;
 
 import static gregtech.api.unification.ore.OrePrefix.dust;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.LithiumCarbonate;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.LithiumOxide;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.LithiumCarbonate;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.LithiumOxide;
 
 
 public class LithiumChain {

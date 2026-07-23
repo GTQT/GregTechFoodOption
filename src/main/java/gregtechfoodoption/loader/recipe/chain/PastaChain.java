@@ -2,7 +2,7 @@ package gregtechfoodoption.loader.recipe.chain;
 
 import gregtech.api.recipes.ModHandler;
 import gregtechfoodoption.GTFOConfig;
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
 import gregtechfoodoption.loader.recipe.GTFORecipeMaps;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -11,8 +11,8 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.plate;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.Nutmeg;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.ShreddedParmesan;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.Nutmeg;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.ShreddedParmesan;
 import static gregtechfoodoption.common.item.GTFOMetaItem.*;
 
 public class PastaChain {
@@ -25,7 +25,7 @@ public class PastaChain {
                 .buildAndRegister();
         MIXER_RECIPES.recipeBuilder().EUt(120).duration(600)
                 .inputs(PREMIXED_PASTA_DOUGH.getStackForm())
-                .fluidInputs(GTFOMaterialHandler.Egg.getFluid(400))
+                .fluidInputs(GTFOMaterials.Egg.getFluid(400))
                 .fluidInputs(Air.getFluid(600))
                 .circuitMeta(1)
                 .outputs(EGG_PASTA_DOUGH.getStackForm(2))
@@ -40,7 +40,7 @@ public class PastaChain {
         if (!GTFOConfig.gtfoChainsConfig.makeChainsHarder) {
             MIXER_RECIPES.recipeBuilder().EUt(30).duration(1200)
                     .input(dust, Wheat, 2)
-                    .fluidInputs(GTFOMaterialHandler.Egg.getFluid(400))
+                    .fluidInputs(GTFOMaterials.Egg.getFluid(400))
                     .fluidInputs(Air.getFluid(600))
                     .circuitMeta(2)
                     .outputs(EGG_PASTA_DOUGH.getStackForm())
@@ -135,17 +135,17 @@ public class PastaChain {
         if (!GTFOConfig.gtfoChainsConfig.makeChainsHarder) {
             CHEMICAL_BATH_RECIPES.recipeBuilder().EUt(24).duration(1500)
                     .inputs(RAW_TAGLIATELLE.getStackForm())
-                    .fluidInputs(GTFOMaterialHandler.HeatedWater.getFluid(1000))
+                    .fluidInputs(GTFOMaterials.HeatedWater.getFluid(1000))
                     .outputs(TAGLIATELLE.getStackForm())
                     .buildAndRegister();
             CHEMICAL_BATH_RECIPES.recipeBuilder().EUt(24).duration(1500)
                     .inputs(RAW_SPAGHETTI.getStackForm())
-                    .fluidInputs(GTFOMaterialHandler.HeatedWater.getFluid(1000))
+                    .fluidInputs(GTFOMaterials.HeatedWater.getFluid(1000))
                     .outputs(SPAGHETTI.getStackForm())
                     .buildAndRegister();
             CHEMICAL_BATH_RECIPES.recipeBuilder().EUt(24).duration(1500)
                     .inputs(RAW_RIGATONI.getStackForm())
-                    .fluidInputs(GTFOMaterialHandler.HeatedWater.getFluid(1000))
+                    .fluidInputs(GTFOMaterials.HeatedWater.getFluid(1000))
                     .outputs(RIGATONI.getStackForm())
                     .buildAndRegister();
             CHEMICAL_BATH_RECIPES.recipeBuilder().EUt(24).duration(1500)
@@ -166,12 +166,12 @@ public class PastaChain {
                 .input(Items.CHICKEN, 1)
                 .fluidInputs(Water.getFluid(8000))
                 .output(Items.COOKED_CHICKEN, 1)
-                .fluidOutputs(GTFOMaterialHandler.ChickenBroth.getFluid(8000))
+                .fluidOutputs(GTFOMaterials.ChickenBroth.getFluid(8000))
                 .buildAndRegister();
         GTFORecipeMaps.MULTICOOKER_RECIPES.recipeBuilder().EUt(24).duration(5000)
                 .notConsumable(new ItemStack(Items.COOKED_CHICKEN))
                 .fluidInputs(Water.getFluid(8000))
-                .fluidOutputs(GTFOMaterialHandler.ChickenBroth.getFluid(8000))
+                .fluidOutputs(GTFOMaterials.ChickenBroth.getFluid(8000))
                 .buildAndRegister();
     }
 }

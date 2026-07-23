@@ -8,7 +8,8 @@ import gregtech.api.util.GregFakePlayer;
 import gregtechfoodoption.GTFOConfig;
 import gregtechfoodoption.api.utils.GTFOValues;
 import gregtechfoodoption.GregTechFoodOption;
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
+import gregtechfoodoption.api.unification.materials.GTFOOreDictItems;
 import gregtechfoodoption.common.block.GTFOBerryBush;
 import gregtechfoodoption.common.entity.EntityStrongSnowman;
 import gregtechfoodoption.common.potion.*;
@@ -63,8 +64,8 @@ public class GTFOEventHandler {
 
     @SubscribeEvent
     public static void onMaterialsInit(MaterialEvent event) { // Must be called during construction to be registered in time for MaterialEvents.
-        GTFOMaterialHandler gtfoMaterials = new GTFOMaterialHandler();
-        GTFOMaterialHandler.onMaterialsInit();
+        GTFOMaterials.register();
+        GTFOOreDictItems.init(); // Must be called during MaterialEvent so OreDict items exist before recipe registration
         if (Loader.isModLoaded(GTFOValues.MODID_GCYS)) {
             GTFOGAMaterialHandler gtfogaMaterials = new GTFOGAMaterialHandler();
             GTFOGAMaterialHandler.onMaterialsInit();

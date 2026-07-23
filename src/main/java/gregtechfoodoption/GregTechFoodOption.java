@@ -2,20 +2,19 @@ package gregtechfoodoption;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.util.Mods;
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
-import gregtechfoodoption.api.utils.GTFOValues;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
+import gregtechfoodoption.api.utils.GTFOConfigOverrider;
+import gregtechfoodoption.client.GTFOClientHandler;
 import gregtechfoodoption.common.CommonProxy;
 import gregtechfoodoption.common.GTFODropsEventHandler;
 import gregtechfoodoption.common.block.GTFOMetaBlocks;
-import gregtechfoodoption.client.GTFOClientHandler;
 import gregtechfoodoption.common.covers.GTFOCoverBehaviors;
 import gregtechfoodoption.common.entity.GTFOEntities;
-import gregtechfoodoption.integration.applecore.GTFOAppleCoreCompat;
-import gregtechfoodoption.integration.top.GTFOTOPCompatibility;
 import gregtechfoodoption.common.machines.GTFOTileEntities;
 import gregtechfoodoption.common.machines.farmer.FarmerModeRegistry;
+import gregtechfoodoption.integration.applecore.GTFOAppleCoreCompat;
+import gregtechfoodoption.integration.top.GTFOTOPCompatibility;
 import gregtechfoodoption.network.PacketAppleCoreFoodDivisorUpdate;
-import gregtechfoodoption.api.utils.GTFOConfigOverrider;
 import gregtechfoodoption.worldgen.GTFODungeonLootLoader;
 import gregtechfoodoption.worldgen.GTFOWorldGenerator;
 import net.minecraft.util.ResourceLocation;
@@ -30,7 +29,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = GregTechFoodOption.MODID, name = GregTechFoodOption.NAME, version = GregTechFoodOption.VERSION,
-        dependencies = "required-after:gregtech@[1.9.0,);" + "after:" + GTFOValues.MODID_NU)
+        dependencies = "required-after:gregtech@[1.9.0,);")
 
 public class GregTechFoodOption {
     public static final String MODID = "gregtechfoodoption";
@@ -39,13 +38,12 @@ public class GregTechFoodOption {
 
     @Mod.Instance
     public static GregTechFoodOption instance;
+    @SidedProxy(modId = MODID, clientSide = "gregtechfoodoption.client.ClientProxy", serverSide = "gregtechfoodoption.common.CommonProxy")
+    public static CommonProxy proxy;
 
     public static ResourceLocation location(String name) {
         return new ResourceLocation(GregTechFoodOption.MODID, name);
     }
-
-    @SidedProxy(modId = MODID, clientSide = "gregtechfoodoption.client.ClientProxy", serverSide = "gregtechfoodoption.common.CommonProxy")
-    public static CommonProxy proxy;
 
     @Mod.EventHandler
     public void onStartup(FMLConstructionEvent event) {
@@ -84,7 +82,7 @@ public class GregTechFoodOption {
         }
         GTFOCoverBehaviors.init();
         GameRegistry.registerWorldGenerator(GTFOWorldGenerator.INSTANCE, 1);
-        GTFOMaterialHandler.registerPropertyTooltips();
+        GTFOMaterials.registerPropertyTooltips();
 
         GTFODungeonLootLoader.init();
     }

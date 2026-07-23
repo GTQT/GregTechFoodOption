@@ -6,7 +6,7 @@ import gregtechfoodoption.common.item.GTFOMetaItem;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.*;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.*;
 
 public class BananaProcessingChain {
     public static void init() {

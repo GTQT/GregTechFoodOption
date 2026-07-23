@@ -9,7 +9,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
 import gregtechfoodoption.GTFOConfig;
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
 import gregtechfoodoption.api.utils.GTFOValues;
 import gregtechfoodoption.integration.applecore.GTFOAppleCoreCompat;
 import gregtechfoodoption.common.item.GTFOMetaItem;
@@ -20,8 +20,8 @@ import net.minecraft.item.ItemStack;
 
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.ChloroauricAcid;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.MashedPotato;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.ChloroauricAcid;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.MashedPotato;
 
 public class VanillaOverrideChain {
     public static void init() {
@@ -95,11 +95,11 @@ public class VanillaOverrideChain {
                 .input(Blocks.RED_MUSHROOM)
                 .input(dust, Wheat)
                 .fluidInputs(Milk.getFluid(200))
-                .fluidOutputs(GTFOMaterialHandler.MushroomSoup.getFluid(200))
+                .fluidOutputs(GTFOMaterials.MushroomSoup.getFluid(200))
                 .buildAndRegister();
 
         RecipeMaps.CANNER_RECIPES.recipeBuilder().EUt(8).duration(10)
-                .fluidInputs(GTFOMaterialHandler.MushroomSoup.getFluid(50))
+                .fluidInputs(GTFOMaterials.MushroomSoup.getFluid(50))
                 .input(Items.BOWL)
                 .output(Items.MUSHROOM_STEW)
                 .buildAndRegister();
@@ -108,11 +108,11 @@ public class VanillaOverrideChain {
                 .input(Items.BEETROOT, 2)
                 .input(dust, Wheat)
                 .fluidInputs(Water.getFluid(200))
-                .fluidOutputs(GTFOMaterialHandler.BeetrootSoup.getFluid(200))
+                .fluidOutputs(GTFOMaterials.BeetrootSoup.getFluid(200))
                 .buildAndRegister();
 
         RecipeMaps.CANNER_RECIPES.recipeBuilder().EUt(8).duration(10)
-                .fluidInputs(GTFOMaterialHandler.BeetrootSoup.getFluid(50))
+                .fluidInputs(GTFOMaterials.BeetrootSoup.getFluid(50))
                 .input(Items.BOWL)
                 .output(Items.BEETROOT_SOUP)
                 .buildAndRegister();
@@ -124,11 +124,11 @@ public class VanillaOverrideChain {
                 .input(dust,MashedPotato)
                 .input(dust, Wheat)
                 .fluidInputs(Water.getFluid(50))
-                .fluidOutputs(GTFOMaterialHandler.RabbitStew.getFluid(500))
+                .fluidOutputs(GTFOMaterials.RabbitStew.getFluid(500))
                 .buildAndRegister();
 
         RecipeMaps.CANNER_RECIPES.recipeBuilder().EUt(8).duration(10)
-                .fluidInputs(GTFOMaterialHandler.RabbitStew.getFluid(50))
+                .fluidInputs(GTFOMaterials.RabbitStew.getFluid(50))
                 .input(Items.BOWL)
                 .output(Items.RABBIT_STEW)
                 .buildAndRegister();

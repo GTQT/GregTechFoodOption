@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.*;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.*;
 import static gregtechfoodoption.common.item.GTFOMetaItem.*;
 
 public class SeedsChain {
@@ -23,7 +23,7 @@ public class SeedsChain {
         /*
         RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().EUt(6).duration(20)
                 .inputs(MetaItems.PLANT_BALL.getStackForm())
-                .chancedOutput(GTFOMaterialHandler.PopcornKernel.getItemStack(), 2000, 250)
+                .chancedOutput(GTFOMaterials.PopcornKernel.getItemStack(), 2000, 250)
                 .buildAndRegister();*/
 
         ItemStack[] crops = new ItemStack[]{

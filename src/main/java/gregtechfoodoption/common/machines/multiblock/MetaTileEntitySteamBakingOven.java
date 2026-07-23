@@ -61,7 +61,7 @@ public class MetaTileEntitySteamBakingOven extends RecipeMapSteamMultiblockContr
         this.recipeMapWorkable.setParallelLimit(1);
     }
 
-    protected static IBlockState getCasingState() {
+    public static IBlockState getCasingState() {
         return GTFOMetaBlocks.GTFO_CASING.getState(GTFOBlockCasing.CasingType.REINFORCED_ADOBE_BRICKS);
     }
 

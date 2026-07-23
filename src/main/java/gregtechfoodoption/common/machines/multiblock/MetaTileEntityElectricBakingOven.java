@@ -13,7 +13,10 @@ import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.*;
+import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
+import gregtech.api.metatileentity.multiblock.ParallelLogicType;
+import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.FormedStructureView;
 import gregtech.api.pattern.StructurePieceKey;
 import gregtech.api.pattern.casing.CasingDefinition;
@@ -23,7 +26,6 @@ import gregtech.api.pattern.element.StructureDefinition;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.logic.OCParams;
 import gregtech.api.recipes.logic.OCResult;
-import gregtech.api.util.RelativeDirection;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.blocks.BlockGlassCasing;
@@ -40,6 +42,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
@@ -54,6 +57,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static gregtech.api.unification.material.Materials.Steel;
+import static gregtech.api.util.RelativeDirection.*;
 import static gregtechfoodoption.common.block.GTFOMetaBlocks.GTFO_METAL_CASING;
 
 public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockController implements IProgressBarMultiblock {
@@ -62,7 +66,7 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
     private static final StructurePieceKey BODY_PIECE = StructurePieceKey.of(PIECE_BODY);
     private static final StructureDefinition<?> STRUCTURE_DEFINITION = StructureDefinition.getOrBuild(
             "gregtechfoodoption:large_electric_baking_oven", () ->
-                    DeclarativePatternBuilder.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)
+                    DeclarativePatternBuilder.start(BACK, UP, RIGHT)
                             .piece("front")
                             .aisle("XXXX", "YXXX", "XXXX", "####")
                             .repeatablePiece(PIECE_BODY, 2, 14)
@@ -103,12 +107,18 @@ public class MetaTileEntityElectricBakingOven extends RecipeMapMultiblockControl
         return temp <= 300 ? 0 : (int) Math.exp(((double) temp - 100 + (multiSize * 5)) / 100);
     }
 
-    protected static IBlockState getCasingState() {
+    public static IBlockState getCasingState() {
         return GTFO_METAL_CASING.getState(GTFOMetalCasing.CasingType.BISMUTH_BRONZE_CASING);
     }
 
     protected static IBlockState getFrameState() {
         return MetaBlocks.FRAMES.get(Steel).getBlock(Steel);
+    }
+
+    @Override
+    @NotNull
+    public EnumFacing getPreviewFrontFacing() {
+        return EnumFacing.SOUTH;
     }
 
     @Override

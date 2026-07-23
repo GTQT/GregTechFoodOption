@@ -2,14 +2,15 @@ package gregtechfoodoption.loader.recipe.chain;
 
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
 import gregtechfoodoption.common.block.GTFOGlassCasing;
 import gregtechfoodoption.common.block.GTFOMetaBlocks;
 
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.*;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.*;
+import static gregtechfoodoption.api.unification.materials.GTFOOreDictItems.*;
 
 // It's alive...
 public class DyeChain {
@@ -30,7 +31,7 @@ public class DyeChain {
         // $stoik NaAsO2 (+ 1/2H2O) + CuSO4 + NaOH -> CuAsHO3 + Na2SO4 (+ 1/2H2O)
         CHEMICAL_RECIPES.recipeBuilder().EUt(24).duration(80)
                 .input(dust, SodiumHydroxide, 3)
-                .fluidInputs(SodiumArseniteSolution.getFluid(1000), GTFOMaterialHandler.BlueVitriol.getFluid(1000))
+                .fluidInputs(SodiumArseniteSolution.getFluid(1000), GTFOMaterials.BlueVitriol.getFluid(1000))
                 .outputs(CupricHydrogenArsenite.getItemStack(6))
                 .output(dust, SodiumSulfate, 7)
                 .fluidOutputs(Water.getFluid(500))
@@ -40,7 +41,7 @@ public class DyeChain {
         CHEMICAL_RECIPES.recipeBuilder().EUt(16).duration(160)
                 .input(dust, Copper)
                 .fluidInputs(SulfuricAcid.getFluid(1000))
-                .fluidOutputs(GTFOMaterialHandler.BlueVitriol.getFluid(1000), Hydrogen.getFluid(2000))
+                .fluidOutputs(GTFOMaterials.BlueVitriol.getFluid(1000), Hydrogen.getFluid(2000))
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder().EUt(24).duration(60)

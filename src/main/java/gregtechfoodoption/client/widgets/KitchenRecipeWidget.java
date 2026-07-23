@@ -12,7 +12,7 @@ import gregtech.api.recipes.category.GTRecipeCategory;
 import gregtech.api.util.Position;
 import gregtech.api.util.Size;
 import gregtech.integration.jei.recipe.GTRecipeWrapper;
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
 import gregtechfoodoption.api.utils.GTFOValues;
 import gregtechfoodoption.client.GTFOGuiTextures;
 import gregtechfoodoption.integration.applecore.GTFOAppleCoreCompat;
@@ -308,7 +308,7 @@ public class KitchenRecipeWidget extends AbstractWidgetGroup implements IRecipeT
     private boolean isAcceptableFluid(FluidStack stack) {
         Fluid fluid = stack.getFluid();
         if (fluid instanceof GTFluid.GTMaterialFluid) {
-            return GTFOMaterialHandler.isFoodRelated(((GTFluid.GTMaterialFluid) fluid).getMaterial());
+            return GTFOMaterials.isFoodRelated(((GTFluid.GTMaterialFluid) fluid).getMaterial());
         } else {
             return false;
         }

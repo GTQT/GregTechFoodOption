@@ -81,9 +81,6 @@ public class GTFOConfig {
         @Config.Comment("If the above is false, you can set this to divide all vanilla food items by some value.")
         public int constantFoodStatsDivisor = 1;
 
-        @Config.Comment("Turn on default GTFO compat for Nutrition: Unofficial Extended Life?")
-        public boolean enableGTFONutrition = true;
-
         public void setAllToFalse() {
             appleCoreCompat = false;
             reduceForeignFoodStats = false;

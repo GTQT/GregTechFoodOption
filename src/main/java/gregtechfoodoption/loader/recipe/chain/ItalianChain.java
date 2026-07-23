@@ -5,7 +5,8 @@ import gregtech.api.unification.material.Materials;
 import gregtech.common.blocks.BlockCleanroomCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
+import gregtechfoodoption.api.unification.materials.GTFOOreDictItems;
 import gregtechfoodoption.common.item.GTFOMetaItem;
 import gregtechfoodoption.api.utils.GTFOUtils;
 import net.minecraft.init.Items;
@@ -13,7 +14,8 @@ import net.minecraft.init.Items;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.*;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.*;
+import static gregtechfoodoption.api.unification.materials.GTFOOreDictItems.*;
 import static gregtechfoodoption.common.item.GTFOMetaItem.*;
 import static gregtechfoodoption.loader.recipe.GTFORecipeMaps.*;
 
@@ -23,38 +25,38 @@ public class ItalianChain {
                 .input(dust,ShreddedParmesan)
                 .inputs( GTFOMetaItem.BASIL.getStackForm(3), GTFOMetaItem.GARLIC_CLOVE.getStackForm())
                 .input(dustTiny, Salt)
-                .fluidInputs(GTFOMaterialHandler.OliveOil.getFluid(500))
-                .fluidOutputs(GTFOMaterialHandler.Pesto.getFluid(500))
+                .fluidInputs(GTFOMaterials.OliveOil.getFluid(500))
+                .fluidOutputs(GTFOMaterials.Pesto.getFluid(500))
                 .buildAndRegister();
         MULTICOOKER_RECIPES.recipeBuilder().EUt(24).duration(100)
                 .input(dust,Nutmeg)
                 .input(dust, Wheat)
-                .fluidInputs(GTFOMaterialHandler.Butter.getFluid(50), Materials.Milk.getFluid(450))
-                .fluidOutputs(GTFOMaterialHandler.BechamelSauce.getFluid(500))
+                .fluidInputs(GTFOMaterials.Butter.getFluid(50), Materials.Milk.getFluid(450))
+                .fluidOutputs(GTFOMaterials.BechamelSauce.getFluid(500))
                 .buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder().EUt(8).duration(300)
                 .input(dust, Materials.Sugar)
                 .fluidInputs(AceticAcid.getFluid(1000))
-                .fluidOutputs(GTFOMaterialHandler.Agrodolce.getFluid(1000))
+                .fluidOutputs(GTFOMaterials.Agrodolce.getFluid(1000))
                 .buildAndRegister();
 
 
         CHEMICAL_BATH_RECIPES.recipeBuilder().EUt(16).duration(400)
-                .inputs(GTFOMaterialHandler.BareCornKernel.getItemStack(10))
-                .fluidInputs(GTFOMaterialHandler.HeatedWater.getFluid(250))
-                .fluidOutputs(GTFOMaterialHandler.Polenta.getFluid(250))
+                .inputs(GTFOOreDictItems.BareCornKernel.getItemStack(10))
+                .fluidInputs(GTFOMaterials.HeatedWater.getFluid(250))
+                .fluidOutputs(GTFOMaterials.Polenta.getFluid(250))
                 .buildAndRegister();
         CANNER_RECIPES.recipeBuilder().EUt(16).duration(40)
                 .inputs(GTFOMetaItem.CERAMIC_BOWL.getStackForm())
-                .fluidInputs(GTFOMaterialHandler.Polenta.getFluid(250))
+                .fluidInputs(GTFOMaterials.Polenta.getFluid(250))
                 .outputs(GTFOMetaItem.POLENTA.getStackForm())
                 .buildAndRegister();
 
         CUISINE_ASSEMBLER_RECIPES.recipeBuilder().EUt(24).duration(300)
                 .circuitMeta(1)
                 .inputs(GTFOMetaItem.CERAMIC_BOWL.getStackForm(), GTFOMetaItem.CARROT_SLICE.getStackForm(3), GTFOMetaItem.OLIVE_SLICE.getStackForm(3), GTFOMetaItem.EGGPLANT_SLICE.getStackForm(3))
-                .fluidInputs(GTFOMaterialHandler.Agrodolce.getFluid(250), GTFOMaterialHandler.OliveOil.getFluid(250))
+                .fluidInputs(GTFOMaterials.Agrodolce.getFluid(250), GTFOMaterials.OliveOil.getFluid(250))
                 .outputs(GTFOMetaItem.CAPONATA.getStackForm())
                 .buildAndRegister();
 
@@ -62,7 +64,7 @@ public class ItalianChain {
                 .circuitMeta(1)
                 .inputs(GTFOMetaItem.TOMATO_SLICE.getStackForm(3), GTFOMetaItem.BUN.getStackForm(1), GTFOMetaItem.GARLIC_CLOVE.getStackForm(1))
                 .input(dustSmall, Salt)
-                .fluidInputs(GTFOMaterialHandler.OliveOil.getFluid(250))
+                .fluidInputs(GTFOMaterials.OliveOil.getFluid(250))
                 .outputs(GTFOMetaItem.BRUSCHETTA.getStackForm())
                 .buildAndRegister();
 
@@ -116,7 +118,7 @@ public class ItalianChain {
         CUISINE_ASSEMBLER_RECIPES.recipeBuilder().EUt(16).duration(400)
                 .inputs(GTFOMetaItem.RAW_LASAGNA.getStackForm(4), GTFOMetaItem.BAKING_TRAY.getStackForm(), GTFOMetaItem.MOZZARELLA_BALL.getStackForm(1))
                 .input(dust, Meat, 2)
-                .fluidInputs(GTFOMaterialHandler.Pesto.getFluid(250), GTFOMaterialHandler.BechamelSauce.getFluid(250))
+                .fluidInputs(GTFOMaterials.Pesto.getFluid(250), GTFOMaterials.BechamelSauce.getFluid(250))
                 .outputs(GTFOMetaItem.LASAGNA_PESTO_RAW.getStackForm())
                 .buildAndRegister();
         CUISINE_ASSEMBLER_RECIPES.recipeBuilder().EUt(16).duration(400)
@@ -144,22 +146,22 @@ public class ItalianChain {
 
         MULTICOOKER_RECIPES.recipeBuilder().EUt(16).duration(1000)
                 .inputs(TORTELLINI.getStackForm(6), CERAMIC_BOWL.getStackForm())
-                .fluidInputs(GTFOMaterialHandler.ChickenBroth.getFluid(1000))
+                .fluidInputs(GTFOMaterials.ChickenBroth.getFluid(1000))
                 .outputs(TORTELLINI_IN_BRODO.getStackForm())
                 .buildAndRegister();
 
         MULTICOOKER_RECIPES.recipeBuilder().EUt(24).duration(2000)
                 .input(Items.FISH)
                 .inputs(GARLIC_CLOVE.getStackForm(), ONION_SLICE.getStackForm())
-                .fluidInputs(GTFOMaterialHandler.WhiteWine.getFluid(20))
-                .fluidOutputs(GTFOMaterialHandler.VitelloTonnatoFlavorant.getFluid(200))
+                .fluidInputs(GTFOMaterials.WhiteWine.getFluid(20))
+                .fluidOutputs(GTFOMaterials.VitelloTonnatoFlavorant.getFluid(200))
                 .buildAndRegister();
         MIXER_RECIPES.recipeBuilder().EUt(16).duration(100)
-                .fluidInputs(GTFOMaterialHandler.VitelloTonnatoFlavorant.getFluid(200), GTFOMaterialHandler.OliveOil.getFluid(200))
-                .fluidOutputs(GTFOMaterialHandler.VitelloTonnatoSauce.getFluid(400))
+                .fluidInputs(GTFOMaterials.VitelloTonnatoFlavorant.getFluid(200), GTFOMaterials.OliveOil.getFluid(200))
+                .fluidOutputs(GTFOMaterials.VitelloTonnatoSauce.getFluid(400))
                 .buildAndRegister();
         CUISINE_ASSEMBLER_RECIPES.recipeBuilder().EUt(16).duration(100)
-                .fluidInputs(GTFOMaterialHandler.VitelloTonnatoSauce.getFluid(100), GTFOMaterialHandler.Yolk.getFluid(100))
+                .fluidInputs(GTFOMaterials.VitelloTonnatoSauce.getFluid(100), GTFOMaterials.Yolk.getFluid(100))
                 .input(Items.COOKED_BEEF)
                 .inputs(PLATE.getStackForm())
                 .outputs(VITELLO_TONNATO.getStackForm())
@@ -168,37 +170,37 @@ public class ItalianChain {
         MULTICOOKER_RECIPES.recipeBuilder().EUt(24).duration(2000)
                 .input(dust,MashedPotato,4)
                 .input(dust,GratedHorseradishRoot)
-                .fluidInputs(GTFOMaterialHandler.Egg.getFluid(600), GTFOMaterialHandler.OliveOil.getFluid(200))
-                .fluidOutputs(GTFOMaterialHandler.RafanataMixture.getFluid(800))
+                .fluidInputs(GTFOMaterials.Egg.getFluid(600), GTFOMaterials.OliveOil.getFluid(200))
+                .fluidOutputs(GTFOMaterials.RafanataMixture.getFluid(800))
                 .buildAndRegister();
         MULTICOOKER_RECIPES.recipeBuilder().EUt(64).duration(500)
                 .inputs(PLATE.getStackForm())
-                .fluidInputs(GTFOMaterialHandler.RafanataMixture.getFluid(200))
+                .fluidInputs(GTFOMaterials.RafanataMixture.getFluid(200))
                 .outputs(RAFANATA.getStackForm())
                 .buildAndRegister();
 
         CUISINE_ASSEMBLER_RECIPES.recipeBuilder().EUt(24).duration(300)
                 .input(dust,ShreddedParmesan)
                 .inputs(TAGLIATELLE.getStackForm(), PLATE.getStackForm())
-                .fluidInputs(GTFOMaterialHandler.Butter.getFluid(200))
+                .fluidInputs(GTFOMaterials.Butter.getFluid(200))
                 .outputs(FETTUCCINE_ALFREDO.getStackForm())
                 .buildAndRegister();
 
         MULTICOOKER_RECIPES.recipeBuilder().EUt(24).duration(1000)
                 .input(dust,ShreddedParmesan)
                 .inputs(RICE.getStackForm(3), GTFOMetaItem.ONION_SLICE.getStackForm(), CERAMIC_BOWL.getStackForm())
-                .fluidInputs(GTFOMaterialHandler.ChickenBroth.getFluid(700), GTFOMaterialHandler.Butter.getFluid(200), GTFOMaterialHandler.WhiteWine.getFluid(5))
+                .fluidInputs(GTFOMaterials.ChickenBroth.getFluid(700), GTFOMaterials.Butter.getFluid(200), GTFOMaterials.WhiteWine.getFluid(5))
                 .outputs(RISOTTO.getStackForm())
                 .buildAndRegister();
 
         MULTICOOKER_RECIPES.recipeBuilder().EUt(24).duration(2000)
                 .input(dust,ShreddedParmesan)
-                .fluidInputs(GTFOMaterialHandler.Egg.getFluid(500))
-                .fluidOutputs(GTFOMaterialHandler.CarbonaraSauce.getFluid(500))
+                .fluidInputs(GTFOMaterials.Egg.getFluid(500))
+                .fluidOutputs(GTFOMaterials.CarbonaraSauce.getFluid(500))
                 .buildAndRegister();
         CUISINE_ASSEMBLER_RECIPES.recipeBuilder().EUt(16).duration(100)
                 .inputs(PLATE.getStackForm(), SPAGHETTI.getStackForm(), BACON.getStackForm())
-                .fluidInputs(GTFOMaterialHandler.CarbonaraSauce.getFluid(200))
+                .fluidInputs(GTFOMaterials.CarbonaraSauce.getFluid(200))
                 .outputs(CARBONARA.getStackForm())
                 .buildAndRegister();
 
@@ -210,38 +212,38 @@ public class ItalianChain {
 
         MULTICOOKER_RECIPES.recipeBuilder().EUt(24).duration(1000)
                 .inputs(CARROT_SLICE.getStackForm(4), GARLIC_CLOVE.getStackForm(2), ONION_SLICE.getStackForm(3))
-                .fluidInputs(GTFOMaterialHandler.ChickenBroth.getFluid(500), GTFOMaterialHandler.OliveOil.getFluid(100), Water.getFluid(1400))
-                .fluidOutputs(GTFOMaterialHandler.PastaEFagioliBase.getFluid(2000))
+                .fluidInputs(GTFOMaterials.ChickenBroth.getFluid(500), GTFOMaterials.OliveOil.getFluid(100), Water.getFluid(1400))
+                .fluidOutputs(GTFOMaterials.PastaEFagioliBase.getFluid(2000))
                 .buildAndRegister();
         MIXER_RECIPES.recipeBuilder().EUt(16).duration(100)
                 .inputs(RAW_DITALINI.getStackForm(), BEANS.getStackForm())
-                .fluidInputs(GTFOMaterialHandler.PastaEFagioliBase.getFluid(500))
-                .fluidOutputs(GTFOMaterialHandler.MixedPastaEFagioli.getFluid(500))
+                .fluidInputs(GTFOMaterials.PastaEFagioliBase.getFluid(500))
+                .fluidOutputs(GTFOMaterials.MixedPastaEFagioli.getFluid(500))
                 .buildAndRegister();
         MIXER_RECIPES.recipeBuilder().EUt(16).duration(100)
                 .inputs(DRIED_DITALINI.getStackForm(), BEANS.getStackForm())
-                .fluidInputs(GTFOMaterialHandler.PastaEFagioliBase.getFluid(500))
-                .fluidOutputs(GTFOMaterialHandler.MixedPastaEFagioli.getFluid(500))
+                .fluidInputs(GTFOMaterials.PastaEFagioliBase.getFluid(500))
+                .fluidOutputs(GTFOMaterials.MixedPastaEFagioli.getFluid(500))
                 .buildAndRegister();
         MULTICOOKER_RECIPES.recipeBuilder().EUt(24).duration(300)
                 .inputs(CERAMIC_BOWL.getStackForm())
-                .fluidInputs(GTFOMaterialHandler.MixedPastaEFagioli.getFluid(250))
+                .fluidInputs(GTFOMaterials.MixedPastaEFagioli.getFluid(250))
                 .outputs(PASTA_E_FAGIOLI.getStackForm())
                 .buildAndRegister();
 
         MULTICOOKER_RECIPES.recipeBuilder().EUt(16).duration(1500)
                 .input(dust, Meat, 2)
                 .inputs(CARROT_SLICE.getStackForm(4), ONION_SLICE.getStackForm(2))
-                .fluidInputs(GTFOMaterialHandler.ChickenBroth.getFluid(800), GTFOMaterialHandler.OliveOil.getFluid(200))
-                .fluidOutputs(GTFOMaterialHandler.BologneseSauce.getFluid(1000))
+                .fluidInputs(GTFOMaterials.ChickenBroth.getFluid(800), GTFOMaterials.OliveOil.getFluid(200))
+                .fluidOutputs(GTFOMaterials.BologneseSauce.getFluid(1000))
                 .buildAndRegister();
         MULTICOOKER_RECIPES.recipeBuilder().EUt(24).duration(500)
-                .fluidInputs(GTFOMaterialHandler.BologneseSauce.getFluid(100), GTFOMaterialHandler.RedWine.getFluid(10), TomatoSauce.getFluid(100))
-                .fluidOutputs(GTFOMaterialHandler.TomatoBologneseSauce.getFluid(200))
+                .fluidInputs(GTFOMaterials.BologneseSauce.getFluid(100), GTFOMaterials.RedWine.getFluid(10), TomatoSauce.getFluid(100))
+                .fluidOutputs(GTFOMaterials.TomatoBologneseSauce.getFluid(200))
                 .buildAndRegister();
         MULTICOOKER_RECIPES.recipeBuilder().EUt(24).duration(500)
                 .inputs(TAGLIATELLE.getStackForm(), PLATE.getStackForm())
-                .fluidInputs(GTFOMaterialHandler.TomatoBologneseSauce.getFluid(350), Milk.getFluid(50))
+                .fluidInputs(GTFOMaterials.TomatoBologneseSauce.getFluid(350), Milk.getFluid(50))
                 .outputs(TAGLIATELLE_AL_RAGU.getStackForm())
                 .buildAndRegister();
         MULTICOOKER_RECIPES.recipeBuilder().EUt(64).duration(1000)

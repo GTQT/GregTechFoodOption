@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 
 import static gregtech.api.unification.material.Materials.Glue;
 import static gregtech.api.unification.material.Materials.Milk;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.*;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.*;
 import static gregtechfoodoption.loader.recipe.GTFORecipeMaps.MOB_EXTRACTOR_RECIPES;
 
 public class MobExtractionChain {

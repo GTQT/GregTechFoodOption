@@ -4,7 +4,8 @@ import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.stack.UnificationEntry;
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
+import gregtechfoodoption.api.unification.materials.GTFOOreDictItems;
 import gregtechfoodoption.api.utils.GTFOValues;
 import gregtechfoodoption.api.utils.GTFOUtils;
 import net.minecraft.init.Items;
@@ -14,7 +15,8 @@ import static gregtech.api.recipes.RecipeMaps.LATHE_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.MIXER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.*;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.*;
+import static gregtechfoodoption.api.unification.materials.GTFOOreDictItems.*;
 import static gregtechfoodoption.common.item.GTFOMetaItem.*;
 import static gregtechfoodoption.loader.recipe.GTFORecipeMaps.CUISINE_ASSEMBLER_RECIPES;
 
@@ -158,23 +160,23 @@ public class KebabChain {
 
         MIXER_RECIPES.recipeBuilder().EUt(30).duration(90)
                 .input(dust, Meat, 4)
-                .inputs(ONION_SLICE.getStackForm(4), MUSHROOM_SLICE.getStackForm(3), GTFOMaterialHandler.Fat.getItemStack(1))
-                .fluidInputs(GTFOMaterialHandler.TomatoSauce.getFluid(400))
+                .inputs(ONION_SLICE.getStackForm(4), MUSHROOM_SLICE.getStackForm(3), GTFOOreDictItems.Fat.getItemStack(1))
+                .fluidInputs(GTFOMaterials.TomatoSauce.getFluid(400))
                 .output(dust,KubideMeat,5)
                 .notConsumable(new IntCircuitIngredient(3))
                 .buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder().EUt(30).duration(120)
                 .input(dust, Meat, 4)
-                .inputs(ONION_SLICE.getStackForm(4), MUSHROOM_SLICE.getStackForm(4), Zest.getItemStack(4), GTFOMaterialHandler.Fat.getItemStack(1))
-                .fluidInputs(GTFOMaterialHandler.TomatoSauce.getFluid(400))
+                .inputs(ONION_SLICE.getStackForm(4), MUSHROOM_SLICE.getStackForm(4), Zest.getItemStack(4), GTFOOreDictItems.Fat.getItemStack(1))
+                .fluidInputs(GTFOMaterials.TomatoSauce.getFluid(400))
                 .output(dust,KubideMeat,15)
                 .notConsumable(new IntCircuitIngredient(1))
                 .buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder().EUt(30).duration(120)
-                .inputs(CHUM.getStackForm(8), ONION_SLICE.getStackForm(4), Zest.getItemStack(4), GTFOMaterialHandler.Fat.getItemStack(2))
-                .fluidInputs(GTFOMaterialHandler.TomatoSauce.getFluid(400))
+                .inputs(CHUM.getStackForm(8), ONION_SLICE.getStackForm(4), Zest.getItemStack(4), GTFOOreDictItems.Fat.getItemStack(2))
+                .fluidInputs(GTFOMaterials.TomatoSauce.getFluid(400))
                 .output(dust,KubideMeat,30)
                 .notConsumable(new IntCircuitIngredient(2))
                 .buildAndRegister();

@@ -34,7 +34,7 @@ import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 
 import static gregtech.api.unification.material.Materials.*;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.BareCornKernel;
+import static gregtechfoodoption.api.unification.materials.GTFOOreDictItems.BareCornKernel;
 import static net.minecraft.potion.Potion.getPotionById;
 
 

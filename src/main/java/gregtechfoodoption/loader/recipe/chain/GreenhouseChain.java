@@ -8,7 +8,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.util.GTUtility;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -65,10 +65,10 @@ public class GreenhouseChain {
 
     public static void initGregTech(){
         registerTappingRecipes(new ItemStack(MetaBlocks.RUBBER_SAPLING, 1, 0), new ItemStack(MetaBlocks.RUBBER_LOG, 1, 0),
-                new ItemStack(MetaBlocks.RUBBER_LEAVES, 1, 0), GTFOMaterialHandler.RubberSap.getFluid());
+                new ItemStack(MetaBlocks.RUBBER_LEAVES, 1, 0), GTFOMaterials.RubberSap.getFluid());
         // Sap processing
         RecipeMaps.FLUID_SOLIDFICATION_RECIPES.recipeBuilder().EUt(8).duration(160)
-                .fluidInputs(GTFOMaterialHandler.RubberSap.getFluid(100))
+                .fluidInputs(GTFOMaterials.RubberSap.getFluid(100))
                 .notConsumable(MetaItems.SHAPE_MOLD_BALL)
                 .output(MetaItems.STICKY_RESIN)
                 .buildAndRegister();

@@ -38,8 +38,8 @@ import java.util.List;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.gem;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.FryingOil;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.OliveOil;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.FryingOil;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.OliveOil;
 import static gregtechfoodoption.common.item.GTFOMetaItem.SKEWER;
 import static gregtechfoodoption.loader.recipe.GTFORecipeMaps.BAKING_OVEN_RECIPES;
 

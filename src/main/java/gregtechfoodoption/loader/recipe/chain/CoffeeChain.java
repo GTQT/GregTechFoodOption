@@ -2,7 +2,8 @@ package gregtechfoodoption.loader.recipe.chain;
 
 import gregtech.api.unification.material.Materials;
 import gregtech.common.items.MetaItems;
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
+import gregtechfoodoption.api.unification.materials.GTFOOreDictItems;
 import gregtechfoodoption.common.item.GTFOMetaItem;
 import gregtechfoodoption.api.utils.GTFOUtils;
 import net.minecraft.init.Items;
@@ -36,7 +37,7 @@ public class CoffeeChain {
                 .buildAndRegister();
 
         CANNER_RECIPES.recipeBuilder()
-                .fluidInputs(GTFOMaterialHandler.Coffee.getFluid(100))
+                .fluidInputs(GTFOMaterials.Coffee.getFluid(100))
                 .inputs(emptyCoffeeCup)
                 .outputs(GTFOMetaItem.COFFEE_CUP.getStackForm())
                 .EUt(40)
@@ -44,7 +45,7 @@ public class CoffeeChain {
                 .buildAndRegister();
 
         CANNER_RECIPES.recipeBuilder()
-                .fluidInputs(GTFOMaterialHandler.EnergizedCoffee.getFluid(100))
+                .fluidInputs(GTFOMaterials.EnergizedCoffee.getFluid(100))
                 .inputs(emptyCoffeeCup)
                 .outputs(GTFOMetaItem.ENERGIZING_COFFEE_CUP.getStackForm())
                 .EUt(40)
@@ -52,19 +53,19 @@ public class CoffeeChain {
                 .buildAndRegister();
 
         BREWING_RECIPES.recipeBuilder()
-                .fluidInputs(GTFOMaterialHandler.Coffee.getFluid(10))
+                .fluidInputs(GTFOMaterials.Coffee.getFluid(10))
                 .input(Items.SUGAR)
-                .fluidOutputs(GTFOMaterialHandler.EnergizedCoffee.getFluid(10))
+                .fluidOutputs(GTFOMaterials.EnergizedCoffee.getFluid(10))
                 .EUt(120)
                 .duration(100)
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
-                .inputs(GTFOMaterialHandler.COFFEE_GROUNDS.getItemStack())
+                .inputs(GTFOOreDictItems.COFFEE_GROUNDS.getItemStack())
                 .inputs(coffeeFilter) // This is a paper cone, or a coffee filter, if you like.
                 .fluidInputs(Materials.Steam.getFluid(1000))
                 .output(dust, Paper, 1)
-                .fluidOutputs(GTFOMaterialHandler.Coffee.getFluid(15))
+                .fluidOutputs(GTFOMaterials.Coffee.getFluid(15))
                 .EUt(120)
                 .duration(30)
                 .buildAndRegister();
@@ -78,93 +79,93 @@ public class CoffeeChain {
                 .buildAndRegister();
 
         MACERATOR_RECIPES.recipeBuilder()
-                .inputs(GTFOMaterialHandler.LARGE_ROASTED_COFFEE.getItemStack())
-                .outputs(GTFOMaterialHandler.COFFEE_GROUNDS.getItemStack(2))
+                .inputs(GTFOOreDictItems.LARGE_ROASTED_COFFEE.getItemStack())
+                .outputs(GTFOOreDictItems.COFFEE_GROUNDS.getItemStack(2))
                 .EUt(20)
                 .duration(40)
                 .buildAndRegister();
 
         MACERATOR_RECIPES.recipeBuilder()
-                .inputs(GTFOMaterialHandler.SMALL_ROASTED_COFFEE.getItemStack())
-                .outputs(GTFOMaterialHandler.COFFEE_GROUNDS.getItemStack())
+                .inputs(GTFOOreDictItems.SMALL_ROASTED_COFFEE.getItemStack())
+                .outputs(GTFOOreDictItems.COFFEE_GROUNDS.getItemStack())
                 .EUt(20)
                 .duration(20)
                 .buildAndRegister();
 
         PYROLYSE_RECIPES.recipeBuilder()
-                .inputs(GTFOMaterialHandler.LARGE_GRADED_COFFEE.getItemStack())
+                .inputs(GTFOOreDictItems.LARGE_GRADED_COFFEE.getItemStack())
                 .circuitMeta(1)
-                .outputs(GTFOMaterialHandler.LARGE_ROASTED_COFFEE.getItemStack())
+                .outputs(GTFOOreDictItems.LARGE_ROASTED_COFFEE.getItemStack())
                 .fluidOutputs(Water.getFluid(200))
                 .EUt(120)
                 .duration(80)
                 .buildAndRegister();
 
         PYROLYSE_RECIPES.recipeBuilder()
-                .inputs(GTFOMaterialHandler.SMALL_GRADED_COFFEE.getItemStack())
+                .inputs(GTFOOreDictItems.SMALL_GRADED_COFFEE.getItemStack())
                 .circuitMeta(1)
-                .outputs(GTFOMaterialHandler.SMALL_ROASTED_COFFEE.getItemStack())
+                .outputs(GTFOOreDictItems.SMALL_ROASTED_COFFEE.getItemStack())
                 .fluidOutputs(Water.getFluid(100))
                 .EUt(120)
                 .duration(40)
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .inputs(GTFOMaterialHandler.LARGE_HULLED_COFFEE.getItemStack())
+                .inputs(GTFOOreDictItems.LARGE_HULLED_COFFEE.getItemStack())
                 .notConsumable(MetaItems.SENSOR_LV)
-                .chancedOutput(GTFOMaterialHandler.LARGE_GRADED_COFFEE.getItemStack(), 5000, 10)
+                .chancedOutput(GTFOOreDictItems.LARGE_GRADED_COFFEE.getItemStack(), 5000, 10)
                 .EUt(60)
                 .duration(20)
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .inputs(GTFOMaterialHandler.SMALL_HULLED_COFFEE.getItemStack())
+                .inputs(GTFOOreDictItems.SMALL_HULLED_COFFEE.getItemStack())
                 .notConsumable(MetaItems.SENSOR_LV)
-                .chancedOutput(GTFOMaterialHandler.SMALL_GRADED_COFFEE.getItemStack(), 5000, 10)
+                .chancedOutput(GTFOOreDictItems.SMALL_GRADED_COFFEE.getItemStack(), 5000, 10)
                 .EUt(60)
                 .duration(10)
                 .buildAndRegister();
         LATHE_RECIPES.recipeBuilder()
-                .inputs(GTFOMaterialHandler.SMALL_DRIED_COFFEE.getItemStack())
-                .outputs(GTFOMaterialHandler.SMALL_HULLED_COFFEE.getItemStack())
+                .inputs(GTFOOreDictItems.SMALL_DRIED_COFFEE.getItemStack())
+                .outputs(GTFOOreDictItems.SMALL_HULLED_COFFEE.getItemStack())
                 .EUt(30)
                 .duration(10)
                 .buildAndRegister();
         LATHE_RECIPES.recipeBuilder()
-                .inputs(GTFOMaterialHandler.LARGE_DRIED_COFFEE.getItemStack())
-                .outputs(GTFOMaterialHandler.LARGE_HULLED_COFFEE.getItemStack())
+                .inputs(GTFOOreDictItems.LARGE_DRIED_COFFEE.getItemStack())
+                .outputs(GTFOOreDictItems.LARGE_HULLED_COFFEE.getItemStack())
                 .EUt(30)
                 .duration(10)
                 .buildAndRegister();
 
 
         GTFOUtils.chemicalDehydratorProxy().recipeBuilder()
-                .inputs(GTFOMaterialHandler.LARGE_WET_COFFEE.getItemStack(32))
-                .outputs(GTFOMaterialHandler.LARGE_DRIED_COFFEE.getItemStack(32))
+                .inputs(GTFOOreDictItems.LARGE_WET_COFFEE.getItemStack(32))
+                .outputs(GTFOOreDictItems.LARGE_DRIED_COFFEE.getItemStack(32))
                 .fluidOutputs(Water.getFluid(16000))
                 .EUt(30)
                 .duration(3600)
                 .buildAndRegister();
 
         GTFOUtils.chemicalDehydratorProxy().recipeBuilder()
-                .inputs(GTFOMaterialHandler.SMALL_WET_COFFEE.getItemStack(64))
-                .outputs(GTFOMaterialHandler.SMALL_DRIED_COFFEE.getItemStack(64))
+                .inputs(GTFOOreDictItems.SMALL_WET_COFFEE.getItemStack(64))
+                .outputs(GTFOOreDictItems.SMALL_DRIED_COFFEE.getItemStack(64))
                 .fluidOutputs(Water.getFluid(16000))
                 .EUt(30)
                 .duration(1800)
                 .buildAndRegister();
 
         CHEMICAL_BATH_RECIPES.recipeBuilder()
-                .inputs(GTFOMaterialHandler.LARGE_BASIC_COFFEE.getItemStack(32))
-                .outputs(GTFOMaterialHandler.LARGE_WET_COFFEE.getItemStack(32))
+                .inputs(GTFOOreDictItems.LARGE_BASIC_COFFEE.getItemStack(32))
+                .outputs(GTFOOreDictItems.LARGE_WET_COFFEE.getItemStack(32))
                 .fluidInputs(Water.getFluid(16000))
                 .EUt(60)
                 .duration(3600)
                 .buildAndRegister();
 
         CHEMICAL_BATH_RECIPES.recipeBuilder()
-                .inputs(GTFOMaterialHandler.SMALL_BASIC_COFFEE.getItemStack(64))
-                .outputs(GTFOMaterialHandler.SMALL_WET_COFFEE.getItemStack(64))
+                .inputs(GTFOOreDictItems.SMALL_BASIC_COFFEE.getItemStack(64))
+                .outputs(GTFOOreDictItems.SMALL_WET_COFFEE.getItemStack(64))
                 .fluidInputs(Water.getFluid(16000))
                 .EUt(60)
                 .duration(3600)
@@ -172,20 +173,20 @@ public class CoffeeChain {
 
         CENTRIFUGE_RECIPES.recipeBuilder()
                 .inputs(COFFEE_SEED.getStackForm(30))
-                .outputs(GTFOMaterialHandler.LARGE_BASIC_COFFEE.getItemStack(9))
-                .chancedOutput(GTFOMaterialHandler.LARGE_BASIC_COFFEE.getItemStack(), 5000, 200)
-                .outputs(GTFOMaterialHandler.SMALL_BASIC_COFFEE.getItemStack(19))
-                .chancedOutput(GTFOMaterialHandler.SMALL_BASIC_COFFEE.getItemStack(), 5000, 200)
+                .outputs(GTFOOreDictItems.LARGE_BASIC_COFFEE.getItemStack(9))
+                .chancedOutput(GTFOOreDictItems.LARGE_BASIC_COFFEE.getItemStack(), 5000, 200)
+                .outputs(GTFOOreDictItems.SMALL_BASIC_COFFEE.getItemStack(19))
+                .chancedOutput(GTFOOreDictItems.SMALL_BASIC_COFFEE.getItemStack(), 5000, 200)
                 .EUt(20)
                 .duration(600)
                 .buildAndRegister();
 
         CENTRIFUGE_RECIPES.recipeBuilder()
-                .inputs(GTFOMaterialHandler.UNSORTED_BASIC_COFFEE.getItemStack(30))
-                .outputs(GTFOMaterialHandler.LARGE_BASIC_COFFEE.getItemStack(9))
-                .chancedOutput(GTFOMaterialHandler.LARGE_BASIC_COFFEE.getItemStack(), 5000, 200)
-                .outputs(GTFOMaterialHandler.SMALL_BASIC_COFFEE.getItemStack(19))
-                .chancedOutput(GTFOMaterialHandler.SMALL_BASIC_COFFEE.getItemStack(), 5000, 200)
+                .inputs(GTFOOreDictItems.UNSORTED_BASIC_COFFEE.getItemStack(30))
+                .outputs(GTFOOreDictItems.LARGE_BASIC_COFFEE.getItemStack(9))
+                .chancedOutput(GTFOOreDictItems.LARGE_BASIC_COFFEE.getItemStack(), 5000, 200)
+                .outputs(GTFOOreDictItems.SMALL_BASIC_COFFEE.getItemStack(19))
+                .chancedOutput(GTFOOreDictItems.SMALL_BASIC_COFFEE.getItemStack(), 5000, 200)
                 .EUt(20)
                 .duration(600)
                 .buildAndRegister();

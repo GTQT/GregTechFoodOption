@@ -5,15 +5,15 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
 import gregtechfoodoption.common.item.GTFOMetaItem;
 import gregtechfoodoption.loader.recipe.GTFORecipeMaps;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import static gregtech.api.unification.ore.OrePrefix.dust;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.BlackPepper;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.GratedHorseradishRoot;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.BlackPepper;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.GratedHorseradishRoot;
 
 public class RussianChain {
     public static void init() {
@@ -38,21 +38,21 @@ public class RussianChain {
         RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().EUt(16).duration(400)
                 .fluidInputs(Materials.Milk.getFluid(8000))
                 .circuitMeta(2)
-                .fluidOutputs(GTFOMaterialHandler.LacticAcidBacteria.getFluid(2))
+                .fluidOutputs(GTFOMaterials.LacticAcidBacteria.getFluid(2))
                 .buildAndRegister();
 
 
         RecipeMaps.MIXER_RECIPES.recipeBuilder().EUt(4).duration(3000)
-                .fluidInputs(GTFOMaterialHandler.PasteurizedMilk.getFluid(8000))
-                .notConsumable(GTFOMaterialHandler.LacticAcidBacteria.getFluid(8))
-                .fluidOutputs(GTFOMaterialHandler.SourCream.getFluid(8000))
+                .fluidInputs(GTFOMaterials.PasteurizedMilk.getFluid(8000))
+                .notConsumable(GTFOMaterials.LacticAcidBacteria.getFluid(8))
+                .fluidOutputs(GTFOMaterials.SourCream.getFluid(8000))
                 .buildAndRegister();
 
         GTFORecipeMaps.CUISINE_ASSEMBLER_RECIPES.recipeBuilder().EUt(24).duration(100)
                 .input(dust,BlackPepper)
                 .input(dust,GratedHorseradishRoot)
                 .inputs(GTFOMetaItem.UNCOOKED_PELMENI.getStackForm())
-                .fluidInputs(GTFOMaterialHandler.SourCream.getFluid(100))
+                .fluidInputs(GTFOMaterials.SourCream.getFluid(100))
                 .outputs(GTFOMetaItem.UNCOOKED_SEASONED_PELMENI.getStackForm())
                 .buildAndRegister();
 

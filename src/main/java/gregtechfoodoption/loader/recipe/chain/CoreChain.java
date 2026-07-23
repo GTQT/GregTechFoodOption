@@ -8,7 +8,8 @@ import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
-import gregtechfoodoption.api.unification.materials.GTFOMaterialHandler;
+import gregtechfoodoption.api.unification.materials.GTFOMaterials;
+import gregtechfoodoption.api.unification.materials.GTFOOreDictItems;
 import gregtechfoodoption.common.block.GTFOMetaBlocks;
 import gregtechfoodoption.api.utils.GTFOUtils;
 import net.minecraft.init.Blocks;
@@ -29,7 +30,8 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.BOTTLE_PURPLE_DRINK;
 import static gregtech.common.items.MetaItems.PLANT_BALL;
-import static gregtechfoodoption.api.unification.materials.GTFOMaterialHandler.*;
+import static gregtechfoodoption.api.unification.materials.GTFOMaterials.*;
+import static gregtechfoodoption.api.unification.materials.GTFOOreDictItems.*;
 import static gregtechfoodoption.common.block.GTFOBlockCasing.CasingType.ADOBE_BRICKS;
 import static gregtechfoodoption.common.block.GTFOBlockCasing.CasingType.REINFORCED_ADOBE_BRICKS;
 import static gregtechfoodoption.common.item.GTFOMetaItem.*;
@@ -56,36 +58,36 @@ public class CoreChain {
     public static void zest() {
         EXTRACTOR_RECIPES.recipeBuilder()
                 .inputs(LEMON.getStackForm())
-                .outputs(GTFOMaterialHandler.Zest.getItemStack(1))
-                .fluidOutputs(GTFOMaterialHandler.LemonExtract.getFluid(100))
+                .outputs(GTFOOreDictItems.Zest.getItemStack(1))
+                .fluidOutputs(GTFOMaterials.LemonExtract.getFluid(100))
                 .EUt(5)
                 .duration(100)
                 .buildAndRegister();
         EXTRACTOR_RECIPES.recipeBuilder()
                 .inputs(LIME.getStackForm())
-                .outputs(GTFOMaterialHandler.Zest.getItemStack(1))
-                .fluidOutputs(GTFOMaterialHandler.LimeExtract.getFluid(100))
+                .outputs(GTFOOreDictItems.Zest.getItemStack(1))
+                .fluidOutputs(GTFOMaterials.LimeExtract.getFluid(100))
                 .EUt(5)
                 .duration(100)
                 .buildAndRegister();
         EXTRACTOR_RECIPES.recipeBuilder()
                 .inputs(ORANGE.getStackForm())
-                .outputs(GTFOMaterialHandler.Zest.getItemStack(1))
-                .fluidOutputs(GTFOMaterialHandler.OrangeExtract.getFluid(100))
+                .outputs(GTFOOreDictItems.Zest.getItemStack(1))
+                .fluidOutputs(GTFOMaterials.OrangeExtract.getFluid(100))
                 .EUt(5)
                 .duration(100)
                 .buildAndRegister();
         //Hand recipe for early game (veeeery inefficient) P.S: I don't think anyone should use this tbh but i don't want people to feel forced, so have a crappy yield recipe :D
-        ModHandler.addShapelessRecipe("gtfo_hand_zest1", GTFOMaterialHandler.Zest.getItemStack(), LEMON, LEMON, LEMON, LEMON, OreDictUnifier.get("craftingToolMortar"));
-        ModHandler.addShapelessRecipe("gtfo_hand_zest2", GTFOMaterialHandler.Zest.getItemStack(), LIME, LIME, LIME, LIME, OreDictUnifier.get("craftingToolMortar"));
-        ModHandler.addShapelessRecipe("gtfo_hand_zest3", GTFOMaterialHandler.Zest.getItemStack(), ORANGE, ORANGE, ORANGE, ORANGE, OreDictUnifier.get("craftingToolMortar"));
+        ModHandler.addShapelessRecipe("gtfo_hand_zest1", GTFOOreDictItems.Zest.getItemStack(), LEMON, LEMON, LEMON, LEMON, OreDictUnifier.get("craftingToolMortar"));
+        ModHandler.addShapelessRecipe("gtfo_hand_zest2", GTFOOreDictItems.Zest.getItemStack(), LIME, LIME, LIME, LIME, OreDictUnifier.get("craftingToolMortar"));
+        ModHandler.addShapelessRecipe("gtfo_hand_zest3", GTFOOreDictItems.Zest.getItemStack(), ORANGE, ORANGE, ORANGE, ORANGE, OreDictUnifier.get("craftingToolMortar"));
     }
 
     public static void caneSyrup() {
         FLUID_HEATER_RECIPES.recipeBuilder()
-                .fluidInputs(GTFOMaterialHandler.UnheatedCaneSyrup.getFluid(1000))
+                .fluidInputs(GTFOMaterials.UnheatedCaneSyrup.getFluid(1000))
                 .circuitMeta(1)
-                .fluidOutputs(GTFOMaterialHandler.CaneSyrup.getFluid(1000))
+                .fluidOutputs(GTFOMaterials.CaneSyrup.getFluid(1000))
                 .EUt(120)
                 .duration(80)
                 .buildAndRegister();
@@ -94,7 +96,7 @@ public class CoreChain {
                 .input(OrePrefix.dust, Sugar, 24)
                 .fluidInputs(Water.getFluid(2000))
                 .circuitMeta(2)
-                .fluidOutputs(GTFOMaterialHandler.UnheatedCaneSyrup.getFluid(2000))
+                .fluidOutputs(GTFOMaterials.UnheatedCaneSyrup.getFluid(2000))
                 .EUt(80)
                 .duration(260)
                 .buildAndRegister();
@@ -104,13 +106,13 @@ public class CoreChain {
         CHEMICAL_RECIPES.recipeBuilder().EUt(30).duration(200)
                 .fluidInputs(HydrochloricAcid.getFluid(1000))
                 .fluidInputs(Propene.getFluid(1000))
-                .fluidOutputs(GTFOMaterialHandler.IsopropylChloride.getFluid(1000))
+                .fluidOutputs(GTFOMaterials.IsopropylChloride.getFluid(1000))
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder().duration(300).EUt(480)
                 .input(dust, Gold, 2)
                 .fluidInputs(HydrochloricAcid.getFluid(8000))
-                .fluidOutputs(GTFOMaterialHandler.ChloroauricAcid.getFluid(2000), Hydrogen.getFluid(3000))
+                .fluidOutputs(GTFOMaterials.ChloroauricAcid.getFluid(2000), Hydrogen.getFluid(3000))
                 .buildAndRegister();
     }
 
@@ -138,7 +140,7 @@ public class CoreChain {
 
         FLUID_HEATER_RECIPES.recipeBuilder()
                 .fluidInputs(SeedOil.getFluid(16))
-                .fluidOutputs(GTFOMaterialHandler.FryingOil.getFluid(16))
+                .fluidOutputs(GTFOMaterials.FryingOil.getFluid(16))
                 .circuitMeta(1)
                 .EUt(12)
                 .duration(10)
@@ -146,15 +148,15 @@ public class CoreChain {
 
         FLUID_HEATER_RECIPES.recipeBuilder()
                 .fluidInputs(SeedOil.getFluid(16))
-                .fluidOutputs(GTFOMaterialHandler.HotFryingOil.getFluid(16))
+                .fluidOutputs(GTFOMaterials.HotFryingOil.getFluid(16))
                 .circuitMeta(2)
                 .EUt(60)
                 .duration(25)
                 .buildAndRegister();
 
         FLUID_HEATER_RECIPES.recipeBuilder()
-                .fluidInputs(GTFOMaterialHandler.FryingOil.getFluid(16))
-                .fluidOutputs(GTFOMaterialHandler.HotFryingOil.getFluid(16))
+                .fluidInputs(GTFOMaterials.FryingOil.getFluid(16))
+                .fluidOutputs(GTFOMaterials.HotFryingOil.getFluid(16))
                 .circuitMeta(1)
                 .EUt(18)
                 .duration(15)
@@ -162,12 +164,12 @@ public class CoreChain {
 
         EXTRACTOR_RECIPES.recipeBuilder().EUt(2).duration(10)
                 .inputs(TOMATO_SLICE.getStackForm())
-                .fluidOutputs(GTFOMaterialHandler.TomatoSauce.getFluid(100))
+                .fluidOutputs(GTFOMaterials.TomatoSauce.getFluid(100))
                 .buildAndRegister();
 
         EXTRACTOR_RECIPES.recipeBuilder().EUt(27).duration(60)
                 .inputs(OLIVE.getStackForm())
-                .fluidOutputs(GTFOMaterialHandler.OliveOil.getFluid(100))
+                .fluidOutputs(GTFOMaterials.OliveOil.getFluid(100))
                 .buildAndRegister();
 
         EXTRACTOR_RECIPES.recipeBuilder().EUt(2).duration(10)
@@ -417,26 +419,26 @@ public class CoreChain {
         MIXER_RECIPES.recipeBuilder().duration(60).EUt(8)
                 .fluidInputs(Air.getFluid(900))
                 .fluidInputs(Steam.getFluid(10))
-                .fluidOutputs(GTFOMaterialHandler.MoistAir.getFluid(1000))
+                .fluidOutputs(GTFOMaterials.MoistAir.getFluid(1000))
                 .buildAndRegister();
 
         VACUUM_RECIPES.recipeBuilder().duration(110).EUt(8)
-                .fluidInputs(GTFOMaterialHandler.MoistAir.getFluid(4000))
-                .fluidOutputs(GTFOMaterialHandler.ColdMoistAir.getFluid(4000))
+                .fluidInputs(GTFOMaterials.MoistAir.getFluid(4000))
+                .fluidOutputs(GTFOMaterials.ColdMoistAir.getFluid(4000))
                 .buildAndRegister();
     }
 
     // Chum
     public static void chum() {
         MIXER_RECIPES.recipeBuilder().duration(100).EUt(24)
-                .fluidInputs(GTFOMaterialHandler.Sludge.getFluid(100))
+                .fluidInputs(GTFOMaterials.Sludge.getFluid(100))
                 .inputs(ROTTEN_FISH.getStackForm(1))
                 .inputs(new ItemStack(Blocks.RED_MUSHROOM, 1), new ItemStack(Items.POISONOUS_POTATO, 1), new ItemStack(Items.FERMENTED_SPIDER_EYE, 1))
                 .outputs(CHUM.getStackForm(3))
                 .buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder().duration(100).EUt(24)
-                .fluidInputs(GTFOMaterialHandler.Sludge.getFluid(100))
+                .fluidInputs(GTFOMaterials.Sludge.getFluid(100))
                 .fluidInputs(PurpleDrink.getFluid(100))
                 .inputs(ROTTEN_FISH.getStackForm(1))
                 .inputs(new ItemStack(Blocks.RED_MUSHROOM, 1), new ItemStack(Items.POISONOUS_POTATO, 1), new ItemStack(Items.FERMENTED_SPIDER_EYE, 1))
@@ -444,14 +446,14 @@ public class CoreChain {
                 .buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder().duration(100).EUt(24)
-                .fluidInputs(GTFOMaterialHandler.Sludge.getFluid(100))
+                .fluidInputs(GTFOMaterials.Sludge.getFluid(100))
                 .inputs(ROTTEN_MEAT.getStackForm(1))
                 .inputs(new ItemStack(Blocks.RED_MUSHROOM, 1), new ItemStack(Items.POISONOUS_POTATO, 1), new ItemStack(Items.FERMENTED_SPIDER_EYE, 1))
                 .outputs(CHUM.getStackForm(3))
                 .buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder().duration(100).EUt(24)
-                .fluidInputs(GTFOMaterialHandler.Sludge.getFluid(100))
+                .fluidInputs(GTFOMaterials.Sludge.getFluid(100))
                 .fluidInputs(PurpleDrink.getFluid(100))
                 .inputs(ROTTEN_MEAT.getStackForm(1))
                 .inputs(new ItemStack(Blocks.RED_MUSHROOM, 1), new ItemStack(Items.POISONOUS_POTATO, 1), new ItemStack(Items.FERMENTED_SPIDER_EYE, 1))
@@ -481,17 +483,17 @@ public class CoreChain {
             MIXER_RECIPES.recipeBuilder().duration(500).EUt(16)
                     .inputs(stack)
                     .fluidInputs(Water.getFluid(400))
-                    .fluidOutputs(GTFOMaterialHandler.Sludge.getFluid(100))
+                    .fluidOutputs(GTFOMaterials.Sludge.getFluid(100))
                     .buildAndRegister();
             MIXER_RECIPES.recipeBuilder().duration(250).EUt(16)
                     .inputs(stack)
                     .fluidInputs(SulfuricAcid.getFluid(200))
-                    .fluidOutputs(GTFOMaterialHandler.Sludge.getFluid(200))
+                    .fluidOutputs(GTFOMaterials.Sludge.getFluid(200))
                     .buildAndRegister();
             /*MIXER_RECIPES.recipeBuilder().duration(125).EUt(16) TODO
                     .inputs(stack)
                     .fluidInputs(PiranhaSolution.getFluid(100))
-                    .fluidOutputs(GTFOMaterialHandler.Sludge.getFluid(400))
+                    .fluidOutputs(GTFOMaterials.Sludge.getFluid(400))
                     .buildAndRegister();*/
         }
 
@@ -516,15 +518,15 @@ public class CoreChain {
 
         FERMENTING_RECIPES.recipeBuilder()
                 .fluidInputs(Milk.getFluid(10000))
-                .fluidOutputs(GTFOMaterialHandler.Butter.getFluid(9000))
+                .fluidOutputs(GTFOMaterials.Butter.getFluid(9000))
                 .EUt(15)
                 .duration(1200)
                 .buildAndRegister();
 
         CENTRIFUGE_RECIPES.recipeBuilder()
                 .input(Items.EGG)
-                .fluidOutputs(GTFOMaterialHandler.Albumen.getFluid(100))
-                .fluidOutputs(GTFOMaterialHandler.Yolk.getFluid(100))
+                .fluidOutputs(GTFOMaterials.Albumen.getFluid(100))
+                .fluidOutputs(GTFOMaterials.Yolk.getFluid(100))
                 .EUt(45)
                 .duration(60)
                 .buildAndRegister();
@@ -535,8 +537,8 @@ public class CoreChain {
 
         CENTRIFUGE_RECIPES.recipeBuilder()
                 .fluidInputs(Egg.getFluid(200))
-                .fluidOutputs(GTFOMaterialHandler.Albumen.getFluid(100))
-                .fluidOutputs(GTFOMaterialHandler.Yolk.getFluid(100))
+                .fluidOutputs(GTFOMaterials.Albumen.getFluid(100))
+                .fluidOutputs(GTFOMaterials.Yolk.getFluid(100))
                 .EUt(16)
                 .duration(60)
                 .buildAndRegister();
@@ -554,12 +556,12 @@ public class CoreChain {
                 .output(dust,ToughMeat,2)
                 .buildAndRegister();
 
-        GTFOUtils.addBakingOvenRecipes(OreDictUnifier.get(dust,ToughMeat), GTFOMaterialHandler.MeatIngot.getItemStack(), 200, 400, 1);
+        GTFOUtils.addBakingOvenRecipes(OreDictUnifier.get(dust,ToughMeat), GTFOOreDictItems.MeatIngot.getItemStack(), 200, 400, 1);
 
         EXTRUDER_RECIPES.recipeBuilder().EUt(28).duration(20)
                 .input(dust, Meat)
                 .notConsumable(MetaItems.SHAPE_EXTRUDER_INGOT)
-                .outputs(GTFOMaterialHandler.MeatIngot.getItemStack())
+                .outputs(GTFOOreDictItems.MeatIngot.getItemStack())
                 .buildAndRegister();
 
         GTFOUtils.addBakingOvenRecipes(OreDictUnifier.get(dust, Meat),OreDictUnifier.get(dust, CookedMinceMeat), 200, 400, 1);
