@@ -42,7 +42,7 @@ public class LungCancerPotion extends GTFOPotion {
             if (attr.getBaseValue() <= 0) {
                 entity.onDeath(GTFODamageSources.LUNG_CANCER);
             }
-            entity.setHealth((float) attr.getBaseValue());
+            entity.setHealth(Math.min((float) attr.getBaseValue(), entity.getHealth()));
         }
     }
 

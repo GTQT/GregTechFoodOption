@@ -753,51 +753,76 @@ public class MetaTileEntityKitchen extends MultiblockWithDisplayBase {
         }
     }
 
-    private record KitchenDimensions(int radius, int bodyLength) {
+    private static final class KitchenDimensions {
+
+        final int radius;
+        final int bodyLength;
+
+        KitchenDimensions(int radius, int bodyLength) {
+            this.radius = radius;
+            this.bodyLength = bodyLength;
+        }
 
         private int getWidth() {
-                return radius * 2 + 1;
-            }
-
-            private int getTotalLength() {
-                return bodyLength + 2;
-            }
+            return radius * 2 + 1;
         }
 
-    private record KitchenRuntimeElements(IStructureElement<?> controller, IStructureElement<?> base,
-                                          IStructureElement<?> floor, IStructureElement<?> interior,
-                                          IStructureElement<?> any) {
+        private int getTotalLength() {
+            return bodyLength + 2;
+        }
 
-            private KitchenRuntimeElements(@NotNull IStructureElement<?> controller,
-                                           @NotNull IStructureElement<?> base,
-                                           @NotNull IStructureElement<?> floor,
-                                           @NotNull IStructureElement<?> interior,
-                                           @NotNull IStructureElement<?> any) {
-                this.controller = controller.compile();
-                this.base = base.compile();
-                this.floor = floor.compile();
-                this.interior = interior.compile();
-                this.any = any.compile();
-            }
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof KitchenDimensions)) return false;
+            KitchenDimensions that = (KitchenDimensions) o;
+            return radius == that.radius && bodyLength == that.bodyLength;
+        }
 
-            @NotNull
-            private IStructureElement<?> get(@NotNull KitchenCellType cellType) {
-                switch (cellType) {
-                    case CONTROLLER:
-                        return controller;
-                    case BASE:
-                        return base;
-                    case FLOOR:
-                        return floor;
-                    case INTERIOR:
-                        return interior;
-                    case ANY:
-                        return any;
-                    default:
-                        throw new IllegalStateException("Unknown kitchen cell type: " + cellType);
-                }
+        @Override
+        public int hashCode() {
+            return 31 * radius + bodyLength;
+        }
+    }
+
+    private static final class KitchenRuntimeElements {
+
+        private final IStructureElement<?> controller;
+        private final IStructureElement<?> base;
+        private final IStructureElement<?> floor;
+        private final IStructureElement<?> interior;
+        private final IStructureElement<?> any;
+
+        KitchenRuntimeElements(@NotNull IStructureElement<?> controller,
+                               @NotNull IStructureElement<?> base,
+                               @NotNull IStructureElement<?> floor,
+                               @NotNull IStructureElement<?> interior,
+                               @NotNull IStructureElement<?> any) {
+            this.controller = controller.compile();
+            this.base = base.compile();
+            this.floor = floor.compile();
+            this.interior = interior.compile();
+            this.any = any.compile();
+        }
+
+        @NotNull
+        private IStructureElement<?> get(@NotNull KitchenCellType cellType) {
+            switch (cellType) {
+                case CONTROLLER:
+                    return controller;
+                case BASE:
+                    return base;
+                case FLOOR:
+                    return floor;
+                case INTERIOR:
+                    return interior;
+                case ANY:
+                    return any;
+                default:
+                    throw new IllegalStateException("Unknown kitchen cell type: " + cellType);
             }
         }
+    }
 
     private static final class KitchenInnerElement implements ITypedStructureElement<Object> {
 
