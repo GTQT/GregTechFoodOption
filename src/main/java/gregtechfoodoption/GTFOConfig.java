@@ -41,15 +41,6 @@ public class GTFOConfig {
     public static GTFOMiscConfig gtfoMiscConfig = new GTFOMiscConfig();
 
     public static class GTFOChainsConfig {
-/*        @Config.Comment("Add Popcorn Chain?")
-        public boolean popcornChain = true;
-
-        @Config.Comment("Add Mineral Water Chain?")
-        public boolean mineralWaterChain = true;
-
-        @Config.Comment("Add Purple Drink Chain? (Note: also adds Etirps and Apple Hard Candy as sideproducts.)")
-        public boolean purpleDrinkChain = true;*/
-
         @Config.Comment("Delete vanilla bread recipe?")
         public boolean deleteBreadRecipe = false;
 
@@ -196,10 +187,6 @@ public class GTFOConfig {
         @Config.Comment("Create methane centrifuging recipes for GTFO seeds?")
         @Config.RequiresMcRestart
         public boolean centrifugeSeeds = true;
-
-        @Config.Comment("Greenhouse replacements for dirt (use block names like minecraft:dirt or blockstates like minecraft:dirt[snowy=true])")
-        @Config.RequiresMcRestart
-        public String[] greenhouseDirts = new String[0];
 
         @Config.Comment("Add furnace recipes for each baking oven recipe?")
         @Config.RequiresMcRestart

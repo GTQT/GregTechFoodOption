@@ -7,7 +7,6 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
-import gregtech.api.pattern.casing.CasingDefinition;
 import gregtech.api.pattern.casing.DeclarativePatternBuilder;
 import gregtech.api.pattern.element.StructureDefinition;
 import gregtech.api.recipes.Recipe;
@@ -17,17 +16,11 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtechfoodoption.GTFOConfig;
-import gregtechfoodoption.api.utils.GTFOLog;
 import gregtechfoodoption.client.GTFOGuiTextures;
 import gregtechfoodoption.common.block.GTFOGlassCasing;
 import gregtechfoodoption.common.block.GTFOMetaBlocks;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.InvalidBlockStateException;
-import net.minecraft.command.NumberInvalidException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -39,8 +32,6 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -50,7 +41,7 @@ import java.util.List;
 import static gregtech.api.unification.material.Materials.Steel;
 
 public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
-    protected static IBlockState[] GRASSES;
+
     private static final StructureDefinition<?> STRUCTURE_DEFINITION = StructureDefinition.getOrBuild(
             "gregtechfoodoption:greenhouse", () ->
                     DeclarativePatternBuilder.start()
@@ -61,10 +52,10 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
                             .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
                             .aisle("CDDDDDC", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", "X#####X", " XXFXX ")
                             .aisle("CCCYCCC", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "XXXFXXX", "   F   ")
-                            .block('X', getCasingState())
+                            .block('X', getGlassState())
                             .block('F', getFrameState())
                             .blocks('D', getSoilStates())
-                            .casing('C', CasingDefinition.simple(getCasingState2()))
+                            .casing('C', getCasingState())
                             .maintenance()
                             .muffler()
                             .energyInput(1, 2)
@@ -77,62 +68,18 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
                             .self('Y', MetaTileEntityGreenhouse.class)
                             .buildStructureDefinition()
     );
+    protected static IBlockState[] GRASSES;
 
     public MetaTileEntityGreenhouse(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMap.getByName("greenhouse")); // Use Nomi Labs recipes if the mod is installed
         this.recipeMapWorkable = new GreenhouseWorkable(this);
     }
 
-    public static void addGrasses() {
-        GRASSES = new IBlockState[GTFOConfig.gtfoMiscConfig.greenhouseDirts.length];
-        boolean errorsFound = false;
-        for (int i = 0; i < GTFOConfig.gtfoMiscConfig.greenhouseDirts.length; i++) {
-            String blockStateString = GTFOConfig.gtfoMiscConfig.greenhouseDirts[i];
-            try {
-                IBlockState state;
-                final String[] splitBlockStateString = StringUtils.split(blockStateString, "[");
-                final String blockString = splitBlockStateString[0];
-                final String stateString;
-                if (splitBlockStateString.length == 1) {
-                    stateString = "default";
-                } else if (splitBlockStateString.length == 2) {
-                    stateString = StringUtils.reverse(StringUtils.reverse(StringUtils.split(blockStateString, "[")[1]).replaceFirst("]", ""));
-                } else {
-                    GTFOLog.logger.error("Block/BlockState Parsing error for \"" + blockStateString + "\"");
-                    errorsFound = true;
-                    continue;
-                }
-
-                final Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockString));
-                if (block == null) {
-                    GTFOLog.logger.error("Block Parsing error for \"" + blockString + "\". Block does not exist!");
-                    errorsFound = true;
-                    continue;
-                }
-                try {
-                    state = CommandBase.convertArgToBlockState(block, stateString);
-                    GRASSES[i] = state;
-                } catch (NumberInvalidException e) {
-                    GTFOLog.logger.error("BlockState Parsing error " + e + " for \"" + stateString + "\". Invalid Number!");
-                    errorsFound = true;
-                } catch (InvalidBlockStateException e) {
-                    GTFOLog.logger.error("BlockState Parsing error " + e + " for \"" + stateString + "\". Invalid BlockState!");
-                    errorsFound = true;
-                }
-            } catch (Exception e) {
-                GTFOLog.logger.error("Smoothable BlockState Parsing error " + e + " for \"" + blockStateString + "\"");
-                errorsFound = true;
-            }
-        }
-        if (errorsFound)
-            throw new IllegalArgumentException("One or more errors were found with the Greenhouse Blocks configuration for GTFO. Check log above.");
-    }
-
-    public static IBlockState getCasingState() {
+    public static IBlockState getGlassState() {
         return GTFOMetaBlocks.GTFO_GLASS_CASING.getState(GTFOGlassCasing.CasingType.GREENHOUSE_GLASS);
     }
 
-    protected static IBlockState getCasingState2() {
+    protected static IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
     }
 
@@ -140,15 +87,8 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
         return MetaBlocks.FRAMES.get(Steel).getBlock(Steel);
     }
 
-    private static IBlockState[] getSoilStates() {
-        int configuredStateCount = GRASSES == null ? 0 : GRASSES.length;
-        IBlockState[] states = new IBlockState[configuredStateCount + 2];
-        states[0] = Blocks.DIRT.getDefaultState();
-        states[1] = Blocks.GRASS.getDefaultState();
-        if (configuredStateCount > 0) {
-            System.arraycopy(GRASSES, 0, states, 2, configuredStateCount);
-        }
-        return states;
+    private static IBlockState getSoilStates() {
+        return Blocks.DIRT.getDefaultState();
     }
 
     @Override
@@ -179,7 +119,7 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, @Nullable World player, @NotNull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtechfoodoption.machine.greenhouse.tooltip.1"));
         tooltip.add(I18n.format("gregtechfoodoption.machine.greenhouse.tooltip.2"));
@@ -241,7 +181,7 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
         }
 
         @Override
-        protected void setupRecipe(Recipe recipe) {
+        protected void setupRecipe(@NotNull Recipe recipe) {
             super.setupRecipe(recipe);
             this.hasSun = ((MetaTileEntityGreenhouse) metaTileEntity).checkNaturalLighting();
         }
@@ -257,7 +197,7 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
                 if (this.hasSun)
                     this.progressTime++;
                 else
-                    this.progressTime += Math.random() * 2;
+                    this.progressTime += (int) (Math.random() * 2);
 
                 if (this.progressTime > this.maxProgressTime) {
                     this.completeRecipe();
@@ -279,7 +219,7 @@ public class MetaTileEntityGreenhouse extends RecipeMapMultiblockController {
         }
 
         @Override
-        public NBTTagCompound serializeNBT() {
+        public @NotNull NBTTagCompound serializeNBT() {
             NBTTagCompound tag = super.serializeNBT();
             tag.setBoolean("hasSun", hasSun);
             return tag;
