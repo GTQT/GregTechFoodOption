@@ -23,7 +23,6 @@ import gregtechfoodoption.integration.enderio.GTFORootCropFarmer;
 import gregtechfoodoption.common.item.GTFOMetaItem;
 import gregtechfoodoption.common.item.GTFOMetaItems;
 import gregtechfoodoption.common.item.GTFOSpecialVariantItemBlock;
-import gregtechfoodoption.common.machines.multiblock.MetaTileEntityGreenhouse;
 import gregtechfoodoption.loader.recipe.GTFOOreDictRegistration;
 import gregtechfoodoption.loader.recipe.GTFORecipeAddition;
 import gregtechfoodoption.loader.recipe.GTFORecipeHandler;
@@ -85,8 +84,6 @@ public class CommonProxy {
         GTFOMetaBlocks.GTFO_LOGS.forEach(registry::register);
         GTFOMetaBlocks.GTFO_PLANKS.forEach(registry::register);
         GTFOMetaBlocks.GTFO_SAPLINGS.forEach(registry::register);
-
-        MetaTileEntityGreenhouse.addGrasses();
     }
 
     @SubscribeEvent
