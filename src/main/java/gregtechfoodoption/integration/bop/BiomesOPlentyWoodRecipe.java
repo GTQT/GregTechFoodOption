@@ -38,7 +38,7 @@ public class BiomesOPlentyWoodRecipe {
             for (int i = 0; i < SPECIES.length; i++) {
                 String wood = SPECIES[i];
                 entries.add(new WoodTypeEntry.Builder(mcModId, wood)
-                        .log(bopItem("log_" + (i / 4), (i % 4) * 4))
+                        .log(bopItem("log_" + (i / 4), 4 + (i % 4)))
                         .removeCharcoalRecipe()
                         .planks(bopItem("planks_0", i), wood + "_planks")
                         .slab(bopItem("wood_slab_" + (i / 8), i % 8), wood + "_wooden_slab")
@@ -64,7 +64,7 @@ public class BiomesOPlentyWoodRecipe {
         }
 
         // Remove Dead Wood Smelting
-        removeCharcoalRecipe(bopItem("log_4", 4));
+        removeCharcoalRecipe(bopItem("log_4", 5));
     }
     public static void removePlankRecipe(boolean removeSawRecipes, @NotNull WoodTypeEntry entry) {
         removePlankRecipe(removeSawRecipes, entry, entry.modid);
