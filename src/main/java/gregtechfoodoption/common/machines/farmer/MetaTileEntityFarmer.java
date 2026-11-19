@@ -428,6 +428,26 @@ public class MetaTileEntityFarmer extends TieredMetaTileEntity implements IContr
         return outputFacing == null ? frontFacing.getOpposite() : outputFacing;
     }
 
+    @Override
+    public EnumFacing getOutputFacingItems() {
+        return getOutputFacing();
+    }
+
+    @Override
+    public EnumFacing getOutputFacingFluids() {
+        return getOutputFacing();
+    }
+
+    @Override
+    public void setOutputFacingItems(EnumFacing facing) {
+        setOutputFacing(facing);
+    }
+
+    @Override
+    public void setOutputFacingFluids(EnumFacing facing) {
+        setOutputFacing(facing);
+    }
+
     public void setOutputFacing(EnumFacing outputFacing) {
         this.outputFacing = outputFacing;
         if (!getWorld().isRemote) {
